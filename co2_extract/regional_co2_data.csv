@@ -1,0 +1,1783 @@
+Timestamp,Region,Intensity Forecast,Intensity Index,Fuel,Fuel Percentage
+2025-04-07 13:08:29,North Scotland,218,high,biomass,3.1
+2025-04-07 13:08:29,North Scotland,218,high,coal,0
+2025-04-07 13:08:29,North Scotland,218,high,imports,3.7
+2025-04-07 13:08:29,North Scotland,218,high,gas,54.3
+2025-04-07 13:08:29,North Scotland,218,high,nuclear,14.9
+2025-04-07 13:08:29,North Scotland,218,high,other,0
+2025-04-07 13:08:29,North Scotland,218,high,hydro,0
+2025-04-07 13:08:29,North Scotland,218,high,solar,7.2
+2025-04-07 13:08:29,North Scotland,218,high,wind,16.8
+2025-04-07 13:08:29,South Scotland,22,very low,biomass,9.6
+2025-04-07 13:08:29,South Scotland,22,very low,coal,0
+2025-04-07 13:08:29,South Scotland,22,very low,imports,11.6
+2025-04-07 13:08:29,South Scotland,22,very low,gas,2.6
+2025-04-07 13:08:29,South Scotland,22,very low,nuclear,48.6
+2025-04-07 13:08:29,South Scotland,22,very low,other,0
+2025-04-07 13:08:29,South Scotland,22,very low,hydro,0
+2025-04-07 13:08:29,South Scotland,22,very low,solar,22.3
+2025-04-07 13:08:29,South Scotland,22,very low,wind,5.3
+2025-04-07 13:08:29,North West England,76,low,biomass,12.2
+2025-04-07 13:08:29,North West England,76,low,coal,0
+2025-04-07 13:08:29,North West England,76,low,imports,6.9
+2025-04-07 13:08:29,North West England,76,low,gas,15.5
+2025-04-07 13:08:29,North West England,76,low,nuclear,49.4
+2025-04-07 13:08:29,North West England,76,low,other,0
+2025-04-07 13:08:29,North West England,76,low,hydro,0
+2025-04-07 13:08:29,North West England,76,low,solar,11.5
+2025-04-07 13:08:29,North West England,76,low,wind,4.5
+2025-04-07 13:08:29,North East England,30,low,biomass,17.7
+2025-04-07 13:08:29,North East England,30,low,coal,0
+2025-04-07 13:08:29,North East England,30,low,imports,38.8
+2025-04-07 13:08:29,North East England,30,low,gas,1.9
+2025-04-07 13:08:29,North East England,30,low,nuclear,25.8
+2025-04-07 13:08:29,North East England,30,low,other,0
+2025-04-07 13:08:29,North East England,30,low,hydro,0
+2025-04-07 13:08:29,North East England,30,low,solar,14
+2025-04-07 13:08:29,North East England,30,low,wind,1.7
+2025-04-07 13:08:29,Yorkshire,167,moderate,biomass,52.2
+2025-04-07 13:08:29,Yorkshire,167,moderate,coal,0
+2025-04-07 13:08:29,Yorkshire,167,moderate,imports,0.5
+2025-04-07 13:08:29,Yorkshire,167,moderate,gas,26.1
+2025-04-07 13:08:29,Yorkshire,167,moderate,nuclear,0.4
+2025-04-07 13:08:29,Yorkshire,167,moderate,other,0
+2025-04-07 13:08:29,Yorkshire,167,moderate,hydro,0
+2025-04-07 13:08:29,Yorkshire,167,moderate,solar,17.6
+2025-04-07 13:08:29,Yorkshire,167,moderate,wind,3.3
+2025-04-07 13:08:29,North Wales & Merseyside,60,low,biomass,2.9
+2025-04-07 13:08:29,North Wales & Merseyside,60,low,coal,0
+2025-04-07 13:08:29,North Wales & Merseyside,60,low,imports,2.4
+2025-04-07 13:08:29,North Wales & Merseyside,60,low,gas,14.1
+2025-04-07 13:08:29,North Wales & Merseyside,60,low,nuclear,12.2
+2025-04-07 13:08:29,North Wales & Merseyside,60,low,other,0
+2025-04-07 13:08:29,North Wales & Merseyside,60,low,hydro,0
+2025-04-07 13:08:29,North Wales & Merseyside,60,low,solar,49.2
+2025-04-07 13:08:29,North Wales & Merseyside,60,low,wind,19.3
+2025-04-07 13:08:29,South Wales,248,high,biomass,0
+2025-04-07 13:08:29,South Wales,248,high,coal,0
+2025-04-07 13:08:29,South Wales,248,high,imports,0
+2025-04-07 13:08:29,South Wales,248,high,gas,62.8
+2025-04-07 13:08:29,South Wales,248,high,nuclear,0
+2025-04-07 13:08:29,South Wales,248,high,other,0
+2025-04-07 13:08:29,South Wales,248,high,hydro,0
+2025-04-07 13:08:29,South Wales,248,high,solar,33.2
+2025-04-07 13:08:29,South Wales,248,high,wind,3.9
+2025-04-07 13:08:29,West Midlands,143,moderate,biomass,0.9
+2025-04-07 13:08:29,West Midlands,143,moderate,coal,0
+2025-04-07 13:08:29,West Midlands,143,moderate,imports,12.4
+2025-04-07 13:08:29,West Midlands,143,moderate,gas,32.6
+2025-04-07 13:08:29,West Midlands,143,moderate,nuclear,5.7
+2025-04-07 13:08:29,West Midlands,143,moderate,other,0
+2025-04-07 13:08:29,West Midlands,143,moderate,hydro,0
+2025-04-07 13:08:29,West Midlands,143,moderate,solar,45.6
+2025-04-07 13:08:29,West Midlands,143,moderate,wind,2.6
+2025-04-07 13:08:29,East Midlands,188,high,biomass,0
+2025-04-07 13:08:29,East Midlands,188,high,coal,0
+2025-04-07 13:08:29,East Midlands,188,high,imports,5.9
+2025-04-07 13:08:29,East Midlands,188,high,gas,43
+2025-04-07 13:08:29,East Midlands,188,high,nuclear,5
+2025-04-07 13:08:29,East Midlands,188,high,other,0
+2025-04-07 13:08:29,East Midlands,188,high,hydro,0
+2025-04-07 13:08:29,East Midlands,188,high,solar,42.8
+2025-04-07 13:08:29,East Midlands,188,high,wind,3.2
+2025-04-07 13:08:29,East England,141,moderate,biomass,0
+2025-04-07 13:08:29,East England,141,moderate,coal,0
+2025-04-07 13:08:29,East England,141,moderate,imports,20.9
+2025-04-07 13:08:29,East England,141,moderate,gas,14.2
+2025-04-07 13:08:29,East England,141,moderate,nuclear,22.9
+2025-04-07 13:08:29,East England,141,moderate,other,0
+2025-04-07 13:08:29,East England,141,moderate,hydro,0
+2025-04-07 13:08:29,East England,141,moderate,solar,35.5
+2025-04-07 13:08:29,East England,141,moderate,wind,6.4
+2025-04-07 13:08:29,South West England,81,low,biomass,0
+2025-04-07 13:08:29,South West England,81,low,coal,0
+2025-04-07 13:08:29,South West England,81,low,imports,0
+2025-04-07 13:08:29,South West England,81,low,gas,20.6
+2025-04-07 13:08:29,South West England,81,low,nuclear,0
+2025-04-07 13:08:29,South West England,81,low,other,0
+2025-04-07 13:08:29,South West England,81,low,hydro,0
+2025-04-07 13:08:29,South West England,81,low,solar,78
+2025-04-07 13:08:29,South West England,81,low,wind,1.4
+2025-04-07 13:08:29,South England,98,low,biomass,0
+2025-04-07 13:08:29,South England,98,low,coal,0
+2025-04-07 13:08:29,South England,98,low,imports,28.5
+2025-04-07 13:08:29,South England,98,low,gas,20.2
+2025-04-07 13:08:29,South England,98,low,nuclear,0
+2025-04-07 13:08:29,South England,98,low,other,0
+2025-04-07 13:08:29,South England,98,low,hydro,0.1
+2025-04-07 13:08:29,South England,98,low,solar,49.7
+2025-04-07 13:08:29,South England,98,low,wind,1.6
+2025-04-07 13:08:29,London,129,moderate,biomass,0
+2025-04-07 13:08:29,London,129,moderate,coal,0
+2025-04-07 13:08:29,London,129,moderate,imports,40.9
+2025-04-07 13:08:29,London,129,moderate,gas,18.8
+2025-04-07 13:08:29,London,129,moderate,nuclear,6.1
+2025-04-07 13:08:29,London,129,moderate,other,0
+2025-04-07 13:08:29,London,129,moderate,hydro,0.2
+2025-04-07 13:08:29,London,129,moderate,solar,26.7
+2025-04-07 13:08:29,London,129,moderate,wind,7.2
+2025-04-07 13:08:29,South East England,126,moderate,biomass,0
+2025-04-07 13:08:29,South East England,126,moderate,coal,0
+2025-04-07 13:08:29,South East England,126,moderate,imports,48.6
+2025-04-07 13:08:29,South East England,126,moderate,gas,20.5
+2025-04-07 13:08:29,South East England,126,moderate,nuclear,0
+2025-04-07 13:08:29,South East England,126,moderate,other,0
+2025-04-07 13:08:29,South East England,126,moderate,hydro,0.3
+2025-04-07 13:08:29,South East England,126,moderate,solar,23
+2025-04-07 13:08:29,South East England,126,moderate,wind,7.7
+2025-04-07 13:08:29,England,116,moderate,biomass,8.5
+2025-04-07 13:08:29,England,116,moderate,coal,0
+2025-04-07 13:08:29,England,116,moderate,imports,17.6
+2025-04-07 13:08:29,England,116,moderate,gas,20.3
+2025-04-07 13:08:29,England,116,moderate,nuclear,13.5
+2025-04-07 13:08:29,England,116,moderate,other,0
+2025-04-07 13:08:29,England,116,moderate,hydro,0
+2025-04-07 13:08:29,England,116,moderate,solar,36
+2025-04-07 13:08:29,England,116,moderate,wind,4.1
+2025-04-07 13:08:29,Scotland,89,low,biomass,4.3
+2025-04-07 13:08:29,Scotland,89,low,coal,0
+2025-04-07 13:08:29,Scotland,89,low,imports,4.9
+2025-04-07 13:08:29,Scotland,89,low,gas,19.4
+2025-04-07 13:08:29,Scotland,89,low,nuclear,28.4
+2025-04-07 13:08:29,Scotland,89,low,other,0
+2025-04-07 13:08:29,Scotland,89,low,hydro,0
+2025-04-07 13:08:29,Scotland,89,low,solar,32
+2025-04-07 13:08:29,Scotland,89,low,wind,11
+2025-04-07 13:08:29,Wales,191,high,biomass,0.4
+2025-04-07 13:08:29,Wales,191,high,coal,0
+2025-04-07 13:08:29,Wales,191,high,imports,0.8
+2025-04-07 13:08:29,Wales,191,high,gas,47.9
+2025-04-07 13:08:29,Wales,191,high,nuclear,0.8
+2025-04-07 13:08:29,Wales,191,high,other,0
+2025-04-07 13:08:29,Wales,191,high,hydro,0
+2025-04-07 13:08:29,Wales,191,high,solar,36.8
+2025-04-07 13:08:29,Wales,191,high,wind,13.2
+2025-04-07 13:08:29,GB,121,moderate,biomass,7.6
+2025-04-07 13:08:29,GB,121,moderate,coal,0
+2025-04-07 13:08:29,GB,121,moderate,imports,15.4
+2025-04-07 13:08:29,GB,121,moderate,gas,21.9
+2025-04-07 13:08:29,GB,121,moderate,nuclear,14.1
+2025-04-07 13:08:29,GB,121,moderate,other,0
+2025-04-07 13:08:29,GB,121,moderate,hydro,0
+2025-04-07 13:08:29,GB,121,moderate,solar,35.7
+2025-04-07 13:08:29,GB,121,moderate,wind,5.3
+2025-04-07 13:13:34,North Scotland,218,high,biomass,3.1
+2025-04-07 13:13:34,North Scotland,218,high,coal,0
+2025-04-07 13:13:34,North Scotland,218,high,imports,3.7
+2025-04-07 13:13:34,North Scotland,218,high,gas,54.3
+2025-04-07 13:13:34,North Scotland,218,high,nuclear,14.9
+2025-04-07 13:13:34,North Scotland,218,high,other,0
+2025-04-07 13:13:34,North Scotland,218,high,hydro,0
+2025-04-07 13:13:34,North Scotland,218,high,solar,7.2
+2025-04-07 13:13:34,North Scotland,218,high,wind,16.8
+2025-04-07 13:13:34,South Scotland,22,very low,biomass,9.6
+2025-04-07 13:13:34,South Scotland,22,very low,coal,0
+2025-04-07 13:13:34,South Scotland,22,very low,imports,11.6
+2025-04-07 13:13:34,South Scotland,22,very low,gas,2.6
+2025-04-07 13:13:34,South Scotland,22,very low,nuclear,48.6
+2025-04-07 13:13:34,South Scotland,22,very low,other,0
+2025-04-07 13:13:34,South Scotland,22,very low,hydro,0
+2025-04-07 13:13:34,South Scotland,22,very low,solar,22.3
+2025-04-07 13:13:34,South Scotland,22,very low,wind,5.3
+2025-04-07 13:13:34,North West England,76,low,biomass,12.2
+2025-04-07 13:13:34,North West England,76,low,coal,0
+2025-04-07 13:13:34,North West England,76,low,imports,6.9
+2025-04-07 13:13:34,North West England,76,low,gas,15.5
+2025-04-07 13:13:34,North West England,76,low,nuclear,49.4
+2025-04-07 13:13:34,North West England,76,low,other,0
+2025-04-07 13:13:34,North West England,76,low,hydro,0
+2025-04-07 13:13:34,North West England,76,low,solar,11.5
+2025-04-07 13:13:34,North West England,76,low,wind,4.5
+2025-04-07 13:13:34,North East England,30,low,biomass,17.7
+2025-04-07 13:13:34,North East England,30,low,coal,0
+2025-04-07 13:13:34,North East England,30,low,imports,38.8
+2025-04-07 13:13:34,North East England,30,low,gas,1.9
+2025-04-07 13:13:34,North East England,30,low,nuclear,25.8
+2025-04-07 13:13:34,North East England,30,low,other,0
+2025-04-07 13:13:34,North East England,30,low,hydro,0
+2025-04-07 13:13:34,North East England,30,low,solar,14
+2025-04-07 13:13:34,North East England,30,low,wind,1.7
+2025-04-07 13:13:34,Yorkshire,167,moderate,biomass,52.2
+2025-04-07 13:13:34,Yorkshire,167,moderate,coal,0
+2025-04-07 13:13:34,Yorkshire,167,moderate,imports,0.5
+2025-04-07 13:13:34,Yorkshire,167,moderate,gas,26.1
+2025-04-07 13:13:34,Yorkshire,167,moderate,nuclear,0.4
+2025-04-07 13:13:34,Yorkshire,167,moderate,other,0
+2025-04-07 13:13:34,Yorkshire,167,moderate,hydro,0
+2025-04-07 13:13:34,Yorkshire,167,moderate,solar,17.6
+2025-04-07 13:13:34,Yorkshire,167,moderate,wind,3.3
+2025-04-07 13:13:34,North Wales & Merseyside,60,low,biomass,2.9
+2025-04-07 13:13:34,North Wales & Merseyside,60,low,coal,0
+2025-04-07 13:13:34,North Wales & Merseyside,60,low,imports,2.4
+2025-04-07 13:13:34,North Wales & Merseyside,60,low,gas,14.1
+2025-04-07 13:13:34,North Wales & Merseyside,60,low,nuclear,12.2
+2025-04-07 13:13:34,North Wales & Merseyside,60,low,other,0
+2025-04-07 13:13:34,North Wales & Merseyside,60,low,hydro,0
+2025-04-07 13:13:34,North Wales & Merseyside,60,low,solar,49.2
+2025-04-07 13:13:34,North Wales & Merseyside,60,low,wind,19.3
+2025-04-07 13:13:34,South Wales,248,high,biomass,0
+2025-04-07 13:13:34,South Wales,248,high,coal,0
+2025-04-07 13:13:34,South Wales,248,high,imports,0
+2025-04-07 13:13:34,South Wales,248,high,gas,62.8
+2025-04-07 13:13:34,South Wales,248,high,nuclear,0
+2025-04-07 13:13:34,South Wales,248,high,other,0
+2025-04-07 13:13:34,South Wales,248,high,hydro,0
+2025-04-07 13:13:34,South Wales,248,high,solar,33.2
+2025-04-07 13:13:34,South Wales,248,high,wind,3.9
+2025-04-07 13:13:34,West Midlands,143,moderate,biomass,0.9
+2025-04-07 13:13:34,West Midlands,143,moderate,coal,0
+2025-04-07 13:13:34,West Midlands,143,moderate,imports,12.4
+2025-04-07 13:13:34,West Midlands,143,moderate,gas,32.6
+2025-04-07 13:13:34,West Midlands,143,moderate,nuclear,5.7
+2025-04-07 13:13:34,West Midlands,143,moderate,other,0
+2025-04-07 13:13:34,West Midlands,143,moderate,hydro,0
+2025-04-07 13:13:34,West Midlands,143,moderate,solar,45.6
+2025-04-07 13:13:34,West Midlands,143,moderate,wind,2.6
+2025-04-07 13:13:34,East Midlands,188,high,biomass,0
+2025-04-07 13:13:34,East Midlands,188,high,coal,0
+2025-04-07 13:13:34,East Midlands,188,high,imports,5.9
+2025-04-07 13:13:34,East Midlands,188,high,gas,43
+2025-04-07 13:13:34,East Midlands,188,high,nuclear,5
+2025-04-07 13:13:34,East Midlands,188,high,other,0
+2025-04-07 13:13:34,East Midlands,188,high,hydro,0
+2025-04-07 13:13:34,East Midlands,188,high,solar,42.8
+2025-04-07 13:13:34,East Midlands,188,high,wind,3.2
+2025-04-07 13:13:34,East England,141,moderate,biomass,0
+2025-04-07 13:13:34,East England,141,moderate,coal,0
+2025-04-07 13:13:34,East England,141,moderate,imports,20.9
+2025-04-07 13:13:34,East England,141,moderate,gas,14.2
+2025-04-07 13:13:34,East England,141,moderate,nuclear,22.9
+2025-04-07 13:13:34,East England,141,moderate,other,0
+2025-04-07 13:13:34,East England,141,moderate,hydro,0
+2025-04-07 13:13:34,East England,141,moderate,solar,35.5
+2025-04-07 13:13:34,East England,141,moderate,wind,6.4
+2025-04-07 13:13:34,South West England,81,low,biomass,0
+2025-04-07 13:13:34,South West England,81,low,coal,0
+2025-04-07 13:13:34,South West England,81,low,imports,0
+2025-04-07 13:13:34,South West England,81,low,gas,20.6
+2025-04-07 13:13:34,South West England,81,low,nuclear,0
+2025-04-07 13:13:34,South West England,81,low,other,0
+2025-04-07 13:13:34,South West England,81,low,hydro,0
+2025-04-07 13:13:34,South West England,81,low,solar,78
+2025-04-07 13:13:34,South West England,81,low,wind,1.4
+2025-04-07 13:13:34,South England,98,low,biomass,0
+2025-04-07 13:13:34,South England,98,low,coal,0
+2025-04-07 13:13:34,South England,98,low,imports,28.5
+2025-04-07 13:13:34,South England,98,low,gas,20.2
+2025-04-07 13:13:34,South England,98,low,nuclear,0
+2025-04-07 13:13:34,South England,98,low,other,0
+2025-04-07 13:13:34,South England,98,low,hydro,0.1
+2025-04-07 13:13:34,South England,98,low,solar,49.7
+2025-04-07 13:13:34,South England,98,low,wind,1.6
+2025-04-07 13:13:34,London,129,moderate,biomass,0
+2025-04-07 13:13:34,London,129,moderate,coal,0
+2025-04-07 13:13:34,London,129,moderate,imports,40.9
+2025-04-07 13:13:34,London,129,moderate,gas,18.8
+2025-04-07 13:13:34,London,129,moderate,nuclear,6.1
+2025-04-07 13:13:34,London,129,moderate,other,0
+2025-04-07 13:13:34,London,129,moderate,hydro,0.2
+2025-04-07 13:13:34,London,129,moderate,solar,26.7
+2025-04-07 13:13:34,London,129,moderate,wind,7.2
+2025-04-07 13:13:34,South East England,126,moderate,biomass,0
+2025-04-07 13:13:34,South East England,126,moderate,coal,0
+2025-04-07 13:13:34,South East England,126,moderate,imports,48.6
+2025-04-07 13:13:34,South East England,126,moderate,gas,20.5
+2025-04-07 13:13:34,South East England,126,moderate,nuclear,0
+2025-04-07 13:13:34,South East England,126,moderate,other,0
+2025-04-07 13:13:34,South East England,126,moderate,hydro,0.3
+2025-04-07 13:13:34,South East England,126,moderate,solar,23
+2025-04-07 13:13:34,South East England,126,moderate,wind,7.7
+2025-04-07 13:13:34,England,116,moderate,biomass,8.5
+2025-04-07 13:13:34,England,116,moderate,coal,0
+2025-04-07 13:13:34,England,116,moderate,imports,17.6
+2025-04-07 13:13:34,England,116,moderate,gas,20.3
+2025-04-07 13:13:34,England,116,moderate,nuclear,13.5
+2025-04-07 13:13:34,England,116,moderate,other,0
+2025-04-07 13:13:34,England,116,moderate,hydro,0
+2025-04-07 13:13:34,England,116,moderate,solar,36
+2025-04-07 13:13:34,England,116,moderate,wind,4.1
+2025-04-07 13:13:34,Scotland,89,low,biomass,4.3
+2025-04-07 13:13:34,Scotland,89,low,coal,0
+2025-04-07 13:13:34,Scotland,89,low,imports,4.9
+2025-04-07 13:13:34,Scotland,89,low,gas,19.4
+2025-04-07 13:13:34,Scotland,89,low,nuclear,28.4
+2025-04-07 13:13:34,Scotland,89,low,other,0
+2025-04-07 13:13:34,Scotland,89,low,hydro,0
+2025-04-07 13:13:34,Scotland,89,low,solar,32
+2025-04-07 13:13:34,Scotland,89,low,wind,11
+2025-04-07 13:13:34,Wales,191,high,biomass,0.4
+2025-04-07 13:13:34,Wales,191,high,coal,0
+2025-04-07 13:13:34,Wales,191,high,imports,0.8
+2025-04-07 13:13:34,Wales,191,high,gas,47.9
+2025-04-07 13:13:34,Wales,191,high,nuclear,0.8
+2025-04-07 13:13:34,Wales,191,high,other,0
+2025-04-07 13:13:34,Wales,191,high,hydro,0
+2025-04-07 13:13:34,Wales,191,high,solar,36.8
+2025-04-07 13:13:34,Wales,191,high,wind,13.2
+2025-04-07 13:13:34,GB,121,moderate,biomass,7.6
+2025-04-07 13:13:34,GB,121,moderate,coal,0
+2025-04-07 13:13:34,GB,121,moderate,imports,15.4
+2025-04-07 13:13:34,GB,121,moderate,gas,21.9
+2025-04-07 13:13:34,GB,121,moderate,nuclear,14.1
+2025-04-07 13:13:34,GB,121,moderate,other,0
+2025-04-07 13:13:34,GB,121,moderate,hydro,0
+2025-04-07 13:13:34,GB,121,moderate,solar,35.7
+2025-04-07 13:13:34,GB,121,moderate,wind,5.3
+2025-04-07 13:45:08,North Scotland,169,moderate,biomass,4.5
+2025-04-07 13:45:08,North Scotland,169,moderate,coal,0
+2025-04-07 13:45:08,North Scotland,169,moderate,imports,5.3
+2025-04-07 13:45:08,North Scotland,169,moderate,gas,41.4
+2025-04-07 13:45:08,North Scotland,169,moderate,nuclear,19.2
+2025-04-07 13:45:08,North Scotland,169,moderate,other,0
+2025-04-07 13:45:08,North Scotland,169,moderate,hydro,0
+2025-04-07 13:45:08,North Scotland,169,moderate,solar,10.4
+2025-04-07 13:45:08,North Scotland,169,moderate,wind,19.3
+2025-04-07 13:45:08,South Scotland,23,very low,biomass,10
+2025-04-07 13:45:08,South Scotland,23,very low,coal,0
+2025-04-07 13:45:08,South Scotland,23,very low,imports,11.9
+2025-04-07 13:45:08,South Scotland,23,very low,gas,2.7
+2025-04-07 13:45:08,South Scotland,23,very low,nuclear,47.3
+2025-04-07 13:45:08,South Scotland,23,very low,other,0
+2025-04-07 13:45:08,South Scotland,23,very low,hydro,0
+2025-04-07 13:45:08,South Scotland,23,very low,solar,23.3
+2025-04-07 13:45:08,South Scotland,23,very low,wind,4.8
+2025-04-07 13:45:08,North West England,73,low,biomass,13.4
+2025-04-07 13:45:08,North West England,73,low,coal,0
+2025-04-07 13:45:08,North West England,73,low,imports,7.2
+2025-04-07 13:45:08,North West England,73,low,gas,14.4
+2025-04-07 13:45:08,North West England,73,low,nuclear,48.6
+2025-04-07 13:45:08,North West England,73,low,other,0
+2025-04-07 13:45:08,North West England,73,low,hydro,0
+2025-04-07 13:45:08,North West England,73,low,solar,12.5
+2025-04-07 13:45:08,North West England,73,low,wind,3.9
+2025-04-07 13:45:08,North East England,31,low,biomass,18.1
+2025-04-07 13:45:08,North East England,31,low,coal,0
+2025-04-07 13:45:08,North East England,31,low,imports,37.6
+2025-04-07 13:45:08,North East England,31,low,gas,2.1
+2025-04-07 13:45:08,North East England,31,low,nuclear,25.6
+2025-04-07 13:45:08,North East England,31,low,other,0
+2025-04-07 13:45:08,North East England,31,low,hydro,0
+2025-04-07 13:45:08,North East England,31,low,solar,14.5
+2025-04-07 13:45:08,North East England,31,low,wind,1.9
+2025-04-07 13:45:08,Yorkshire,160,moderate,biomass,52.7
+2025-04-07 13:45:08,Yorkshire,160,moderate,coal,0
+2025-04-07 13:45:08,Yorkshire,160,moderate,imports,0.7
+2025-04-07 13:45:08,Yorkshire,160,moderate,gas,24
+2025-04-07 13:45:08,Yorkshire,160,moderate,nuclear,0.4
+2025-04-07 13:45:08,Yorkshire,160,moderate,other,0
+2025-04-07 13:45:08,Yorkshire,160,moderate,hydro,0
+2025-04-07 13:45:08,Yorkshire,160,moderate,solar,18.8
+2025-04-07 13:45:08,Yorkshire,160,moderate,wind,3.3
+2025-04-07 13:45:08,North Wales & Merseyside,45,low,biomass,3.3
+2025-04-07 13:45:08,North Wales & Merseyside,45,low,coal,0
+2025-04-07 13:45:08,North Wales & Merseyside,45,low,imports,3.1
+2025-04-07 13:45:08,North Wales & Merseyside,45,low,gas,10
+2025-04-07 13:45:08,North Wales & Merseyside,45,low,nuclear,12.6
+2025-04-07 13:45:08,North Wales & Merseyside,45,low,other,0
+2025-04-07 13:45:08,North Wales & Merseyside,45,low,hydro,0
+2025-04-07 13:45:08,North Wales & Merseyside,45,low,solar,53.9
+2025-04-07 13:45:08,North Wales & Merseyside,45,low,wind,17.1
+2025-04-07 13:45:08,South Wales,222,high,biomass,0
+2025-04-07 13:45:08,South Wales,222,high,coal,0
+2025-04-07 13:45:08,South Wales,222,high,imports,0
+2025-04-07 13:45:08,South Wales,222,high,gas,56.4
+2025-04-07 13:45:08,South Wales,222,high,nuclear,0
+2025-04-07 13:45:08,South Wales,222,high,other,0
+2025-04-07 13:45:08,South Wales,222,high,hydro,0
+2025-04-07 13:45:08,South Wales,222,high,solar,39.9
+2025-04-07 13:45:08,South Wales,222,high,wind,3.7
+2025-04-07 13:45:08,West Midlands,121,moderate,biomass,0.9
+2025-04-07 13:45:08,West Midlands,121,moderate,coal,0
+2025-04-07 13:45:08,West Midlands,121,moderate,imports,15.2
+2025-04-07 13:45:08,West Midlands,121,moderate,gas,26.4
+2025-04-07 13:45:08,West Midlands,121,moderate,nuclear,5.6
+2025-04-07 13:45:08,West Midlands,121,moderate,other,0
+2025-04-07 13:45:08,West Midlands,121,moderate,hydro,0
+2025-04-07 13:45:08,West Midlands,121,moderate,solar,49.3
+2025-04-07 13:45:08,West Midlands,121,moderate,wind,2.5
+2025-04-07 13:45:08,East Midlands,169,moderate,biomass,0
+2025-04-07 13:45:08,East Midlands,169,moderate,coal,0
+2025-04-07 13:45:08,East Midlands,169,moderate,imports,7.3
+2025-04-07 13:45:08,East Midlands,169,moderate,gas,37.6
+2025-04-07 13:45:08,East Midlands,169,moderate,nuclear,5.1
+2025-04-07 13:45:08,East Midlands,169,moderate,other,0
+2025-04-07 13:45:08,East Midlands,169,moderate,hydro,0
+2025-04-07 13:45:08,East Midlands,169,moderate,solar,46.3
+2025-04-07 13:45:08,East Midlands,169,moderate,wind,3.6
+2025-04-07 13:45:08,East England,134,moderate,biomass,0
+2025-04-07 13:45:08,East England,134,moderate,coal,0
+2025-04-07 13:45:08,East England,134,moderate,imports,20.9
+2025-04-07 13:45:08,East England,134,moderate,gas,12.8
+2025-04-07 13:45:08,East England,134,moderate,nuclear,23.2
+2025-04-07 13:45:08,East England,134,moderate,other,0
+2025-04-07 13:45:08,East England,134,moderate,hydro,0
+2025-04-07 13:45:08,East England,134,moderate,solar,36.3
+2025-04-07 13:45:08,East England,134,moderate,wind,6.8
+2025-04-07 13:45:08,South West England,78,low,biomass,0
+2025-04-07 13:45:08,South West England,78,low,coal,0
+2025-04-07 13:45:08,South West England,78,low,imports,0
+2025-04-07 13:45:08,South West England,78,low,gas,19.8
+2025-04-07 13:45:08,South West England,78,low,nuclear,0
+2025-04-07 13:45:08,South West England,78,low,other,0
+2025-04-07 13:45:08,South West England,78,low,hydro,0
+2025-04-07 13:45:08,South West England,78,low,solar,78.8
+2025-04-07 13:45:08,South West England,78,low,wind,1.5
+2025-04-07 13:45:08,South England,87,low,biomass,0
+2025-04-07 13:45:08,South England,87,low,coal,0
+2025-04-07 13:45:08,South England,87,low,imports,30.8
+2025-04-07 13:45:08,South England,87,low,gas,17.2
+2025-04-07 13:45:08,South England,87,low,nuclear,0
+2025-04-07 13:45:08,South England,87,low,other,0
+2025-04-07 13:45:08,South England,87,low,hydro,0.1
+2025-04-07 13:45:08,South England,87,low,solar,50.5
+2025-04-07 13:45:08,South England,87,low,wind,1.5
+2025-04-07 13:45:08,London,125,moderate,biomass,0
+2025-04-07 13:45:08,London,125,moderate,coal,0
+2025-04-07 13:45:08,London,125,moderate,imports,42.1
+2025-04-07 13:45:08,London,125,moderate,gas,18.2
+2025-04-07 13:45:08,London,125,moderate,nuclear,5.5
+2025-04-07 13:45:08,London,125,moderate,other,0
+2025-04-07 13:45:08,London,125,moderate,hydro,0.2
+2025-04-07 13:45:08,London,125,moderate,solar,26.8
+2025-04-07 13:45:08,London,125,moderate,wind,7.1
+2025-04-07 13:45:08,South East England,124,moderate,biomass,0
+2025-04-07 13:45:08,South East England,124,moderate,coal,0
+2025-04-07 13:45:08,South East England,124,moderate,imports,48.9
+2025-04-07 13:45:08,South East England,124,moderate,gas,19.9
+2025-04-07 13:45:08,South East England,124,moderate,nuclear,0
+2025-04-07 13:45:08,South East England,124,moderate,other,0
+2025-04-07 13:45:08,South East England,124,moderate,hydro,0.3
+2025-04-07 13:45:08,South East England,124,moderate,solar,23.6
+2025-04-07 13:45:08,South East England,124,moderate,wind,7.3
+2025-04-07 13:45:08,England,110,moderate,biomass,8.5
+2025-04-07 13:45:08,England,110,moderate,coal,0
+2025-04-07 13:45:08,England,110,moderate,imports,17.8
+2025-04-07 13:45:08,England,110,moderate,gas,18.6
+2025-04-07 13:45:08,England,110,moderate,nuclear,13.5
+2025-04-07 13:45:08,England,110,moderate,other,0
+2025-04-07 13:45:08,England,110,moderate,hydro,0
+2025-04-07 13:45:08,England,110,moderate,solar,37.5
+2025-04-07 13:45:08,England,110,moderate,wind,4
+2025-04-07 13:45:08,Scotland,92,low,biomass,4.2
+2025-04-07 13:45:08,Scotland,92,low,coal,0
+2025-04-07 13:45:08,Scotland,92,low,imports,4.6
+2025-04-07 13:45:08,Scotland,92,low,gas,20.5
+2025-04-07 13:45:08,Scotland,92,low,nuclear,27.1
+2025-04-07 13:45:08,Scotland,92,low,other,0
+2025-04-07 13:45:08,Scotland,92,low,hydro,0
+2025-04-07 13:45:08,Scotland,92,low,solar,32.9
+2025-04-07 13:45:08,Scotland,92,low,wind,10.6
+2025-04-07 13:45:08,Wales,198,high,biomass,0.3
+2025-04-07 13:45:08,Wales,198,high,coal,0
+2025-04-07 13:45:08,Wales,198,high,imports,0.6
+2025-04-07 13:45:08,Wales,198,high,gas,50
+2025-04-07 13:45:08,Wales,198,high,nuclear,0.5
+2025-04-07 13:45:08,Wales,198,high,other,0
+2025-04-07 13:45:08,Wales,198,high,hydro,0
+2025-04-07 13:45:08,Wales,198,high,solar,37.4
+2025-04-07 13:45:08,Wales,198,high,wind,11.3
+2025-04-07 13:45:08,GB,113,moderate,biomass,7.6
+2025-04-07 13:45:08,GB,113,moderate,coal,0
+2025-04-07 13:45:08,GB,113,moderate,imports,15.6
+2025-04-07 13:45:08,GB,113,moderate,gas,20.7
+2025-04-07 13:45:08,GB,113,moderate,nuclear,14
+2025-04-07 13:45:08,GB,113,moderate,other,0
+2025-04-07 13:45:08,GB,113,moderate,hydro,0
+2025-04-07 13:45:08,GB,113,moderate,solar,37.1
+2025-04-07 13:45:08,GB,113,moderate,wind,5.1
+2025-04-07 13:47:40,North Scotland,169,moderate,biomass,4.5
+2025-04-07 13:47:40,North Scotland,169,moderate,coal,0
+2025-04-07 13:47:40,North Scotland,169,moderate,imports,5.3
+2025-04-07 13:47:40,North Scotland,169,moderate,gas,41.4
+2025-04-07 13:47:40,North Scotland,169,moderate,nuclear,19.2
+2025-04-07 13:47:40,North Scotland,169,moderate,other,0
+2025-04-07 13:47:40,North Scotland,169,moderate,hydro,0
+2025-04-07 13:47:40,North Scotland,169,moderate,solar,10.4
+2025-04-07 13:47:40,North Scotland,169,moderate,wind,19.3
+2025-04-07 13:47:40,South Scotland,23,very low,biomass,10
+2025-04-07 13:47:40,South Scotland,23,very low,coal,0
+2025-04-07 13:47:40,South Scotland,23,very low,imports,11.9
+2025-04-07 13:47:40,South Scotland,23,very low,gas,2.7
+2025-04-07 13:47:40,South Scotland,23,very low,nuclear,47.3
+2025-04-07 13:47:40,South Scotland,23,very low,other,0
+2025-04-07 13:47:40,South Scotland,23,very low,hydro,0
+2025-04-07 13:47:40,South Scotland,23,very low,solar,23.3
+2025-04-07 13:47:40,South Scotland,23,very low,wind,4.8
+2025-04-07 13:47:40,North West England,73,low,biomass,13.4
+2025-04-07 13:47:40,North West England,73,low,coal,0
+2025-04-07 13:47:40,North West England,73,low,imports,7.2
+2025-04-07 13:47:40,North West England,73,low,gas,14.4
+2025-04-07 13:47:40,North West England,73,low,nuclear,48.6
+2025-04-07 13:47:40,North West England,73,low,other,0
+2025-04-07 13:47:40,North West England,73,low,hydro,0
+2025-04-07 13:47:40,North West England,73,low,solar,12.5
+2025-04-07 13:47:40,North West England,73,low,wind,3.9
+2025-04-07 13:47:40,North East England,31,low,biomass,18.1
+2025-04-07 13:47:40,North East England,31,low,coal,0
+2025-04-07 13:47:40,North East England,31,low,imports,37.6
+2025-04-07 13:47:40,North East England,31,low,gas,2.1
+2025-04-07 13:47:40,North East England,31,low,nuclear,25.6
+2025-04-07 13:47:40,North East England,31,low,other,0
+2025-04-07 13:47:40,North East England,31,low,hydro,0
+2025-04-07 13:47:40,North East England,31,low,solar,14.5
+2025-04-07 13:47:40,North East England,31,low,wind,1.9
+2025-04-07 13:47:40,Yorkshire,160,moderate,biomass,52.7
+2025-04-07 13:47:40,Yorkshire,160,moderate,coal,0
+2025-04-07 13:47:40,Yorkshire,160,moderate,imports,0.7
+2025-04-07 13:47:40,Yorkshire,160,moderate,gas,24
+2025-04-07 13:47:40,Yorkshire,160,moderate,nuclear,0.4
+2025-04-07 13:47:40,Yorkshire,160,moderate,other,0
+2025-04-07 13:47:40,Yorkshire,160,moderate,hydro,0
+2025-04-07 13:47:40,Yorkshire,160,moderate,solar,18.8
+2025-04-07 13:47:40,Yorkshire,160,moderate,wind,3.3
+2025-04-07 13:47:40,North Wales & Merseyside,45,low,biomass,3.3
+2025-04-07 13:47:40,North Wales & Merseyside,45,low,coal,0
+2025-04-07 13:47:40,North Wales & Merseyside,45,low,imports,3.1
+2025-04-07 13:47:40,North Wales & Merseyside,45,low,gas,10
+2025-04-07 13:47:40,North Wales & Merseyside,45,low,nuclear,12.6
+2025-04-07 13:47:40,North Wales & Merseyside,45,low,other,0
+2025-04-07 13:47:40,North Wales & Merseyside,45,low,hydro,0
+2025-04-07 13:47:40,North Wales & Merseyside,45,low,solar,53.9
+2025-04-07 13:47:40,North Wales & Merseyside,45,low,wind,17.1
+2025-04-07 13:47:40,South Wales,222,high,biomass,0
+2025-04-07 13:47:40,South Wales,222,high,coal,0
+2025-04-07 13:47:40,South Wales,222,high,imports,0
+2025-04-07 13:47:40,South Wales,222,high,gas,56.4
+2025-04-07 13:47:40,South Wales,222,high,nuclear,0
+2025-04-07 13:47:40,South Wales,222,high,other,0
+2025-04-07 13:47:40,South Wales,222,high,hydro,0
+2025-04-07 13:47:40,South Wales,222,high,solar,39.9
+2025-04-07 13:47:40,South Wales,222,high,wind,3.7
+2025-04-07 13:47:40,West Midlands,121,moderate,biomass,0.9
+2025-04-07 13:47:40,West Midlands,121,moderate,coal,0
+2025-04-07 13:47:40,West Midlands,121,moderate,imports,15.2
+2025-04-07 13:47:40,West Midlands,121,moderate,gas,26.4
+2025-04-07 13:47:40,West Midlands,121,moderate,nuclear,5.6
+2025-04-07 13:47:40,West Midlands,121,moderate,other,0
+2025-04-07 13:47:40,West Midlands,121,moderate,hydro,0
+2025-04-07 13:47:40,West Midlands,121,moderate,solar,49.3
+2025-04-07 13:47:40,West Midlands,121,moderate,wind,2.5
+2025-04-07 13:47:40,East Midlands,169,moderate,biomass,0
+2025-04-07 13:47:40,East Midlands,169,moderate,coal,0
+2025-04-07 13:47:40,East Midlands,169,moderate,imports,7.3
+2025-04-07 13:47:40,East Midlands,169,moderate,gas,37.6
+2025-04-07 13:47:40,East Midlands,169,moderate,nuclear,5.1
+2025-04-07 13:47:40,East Midlands,169,moderate,other,0
+2025-04-07 13:47:40,East Midlands,169,moderate,hydro,0
+2025-04-07 13:47:40,East Midlands,169,moderate,solar,46.3
+2025-04-07 13:47:40,East Midlands,169,moderate,wind,3.6
+2025-04-07 13:47:40,East England,134,moderate,biomass,0
+2025-04-07 13:47:40,East England,134,moderate,coal,0
+2025-04-07 13:47:40,East England,134,moderate,imports,20.9
+2025-04-07 13:47:40,East England,134,moderate,gas,12.8
+2025-04-07 13:47:40,East England,134,moderate,nuclear,23.2
+2025-04-07 13:47:40,East England,134,moderate,other,0
+2025-04-07 13:47:40,East England,134,moderate,hydro,0
+2025-04-07 13:47:40,East England,134,moderate,solar,36.3
+2025-04-07 13:47:40,East England,134,moderate,wind,6.8
+2025-04-07 13:47:40,South West England,78,low,biomass,0
+2025-04-07 13:47:40,South West England,78,low,coal,0
+2025-04-07 13:47:40,South West England,78,low,imports,0
+2025-04-07 13:47:40,South West England,78,low,gas,19.8
+2025-04-07 13:47:40,South West England,78,low,nuclear,0
+2025-04-07 13:47:40,South West England,78,low,other,0
+2025-04-07 13:47:40,South West England,78,low,hydro,0
+2025-04-07 13:47:40,South West England,78,low,solar,78.8
+2025-04-07 13:47:40,South West England,78,low,wind,1.5
+2025-04-07 13:47:40,South England,87,low,biomass,0
+2025-04-07 13:47:40,South England,87,low,coal,0
+2025-04-07 13:47:40,South England,87,low,imports,30.8
+2025-04-07 13:47:40,South England,87,low,gas,17.2
+2025-04-07 13:47:40,South England,87,low,nuclear,0
+2025-04-07 13:47:40,South England,87,low,other,0
+2025-04-07 13:47:40,South England,87,low,hydro,0.1
+2025-04-07 13:47:40,South England,87,low,solar,50.5
+2025-04-07 13:47:40,South England,87,low,wind,1.5
+2025-04-07 13:47:40,London,125,moderate,biomass,0
+2025-04-07 13:47:40,London,125,moderate,coal,0
+2025-04-07 13:47:40,London,125,moderate,imports,42.1
+2025-04-07 13:47:40,London,125,moderate,gas,18.2
+2025-04-07 13:47:40,London,125,moderate,nuclear,5.5
+2025-04-07 13:47:40,London,125,moderate,other,0
+2025-04-07 13:47:40,London,125,moderate,hydro,0.2
+2025-04-07 13:47:40,London,125,moderate,solar,26.8
+2025-04-07 13:47:40,London,125,moderate,wind,7.1
+2025-04-07 13:47:40,South East England,124,moderate,biomass,0
+2025-04-07 13:47:40,South East England,124,moderate,coal,0
+2025-04-07 13:47:40,South East England,124,moderate,imports,48.9
+2025-04-07 13:47:40,South East England,124,moderate,gas,19.9
+2025-04-07 13:47:40,South East England,124,moderate,nuclear,0
+2025-04-07 13:47:40,South East England,124,moderate,other,0
+2025-04-07 13:47:40,South East England,124,moderate,hydro,0.3
+2025-04-07 13:47:40,South East England,124,moderate,solar,23.6
+2025-04-07 13:47:40,South East England,124,moderate,wind,7.3
+2025-04-07 13:47:40,England,110,moderate,biomass,8.5
+2025-04-07 13:47:40,England,110,moderate,coal,0
+2025-04-07 13:47:40,England,110,moderate,imports,17.8
+2025-04-07 13:47:40,England,110,moderate,gas,18.6
+2025-04-07 13:47:40,England,110,moderate,nuclear,13.5
+2025-04-07 13:47:40,England,110,moderate,other,0
+2025-04-07 13:47:40,England,110,moderate,hydro,0
+2025-04-07 13:47:40,England,110,moderate,solar,37.5
+2025-04-07 13:47:40,England,110,moderate,wind,4
+2025-04-07 13:47:40,Scotland,92,low,biomass,4.2
+2025-04-07 13:47:40,Scotland,92,low,coal,0
+2025-04-07 13:47:40,Scotland,92,low,imports,4.6
+2025-04-07 13:47:40,Scotland,92,low,gas,20.5
+2025-04-07 13:47:40,Scotland,92,low,nuclear,27.1
+2025-04-07 13:47:40,Scotland,92,low,other,0
+2025-04-07 13:47:40,Scotland,92,low,hydro,0
+2025-04-07 13:47:40,Scotland,92,low,solar,32.9
+2025-04-07 13:47:40,Scotland,92,low,wind,10.6
+2025-04-07 13:47:40,Wales,198,high,biomass,0.3
+2025-04-07 13:47:40,Wales,198,high,coal,0
+2025-04-07 13:47:40,Wales,198,high,imports,0.6
+2025-04-07 13:47:40,Wales,198,high,gas,50
+2025-04-07 13:47:40,Wales,198,high,nuclear,0.5
+2025-04-07 13:47:40,Wales,198,high,other,0
+2025-04-07 13:47:40,Wales,198,high,hydro,0
+2025-04-07 13:47:40,Wales,198,high,solar,37.4
+2025-04-07 13:47:40,Wales,198,high,wind,11.3
+2025-04-07 13:47:40,GB,113,moderate,biomass,7.6
+2025-04-07 13:47:40,GB,113,moderate,coal,0
+2025-04-07 13:47:40,GB,113,moderate,imports,15.6
+2025-04-07 13:47:40,GB,113,moderate,gas,20.7
+2025-04-07 13:47:40,GB,113,moderate,nuclear,14
+2025-04-07 13:47:40,GB,113,moderate,other,0
+2025-04-07 13:47:40,GB,113,moderate,hydro,0
+2025-04-07 13:47:40,GB,113,moderate,solar,37.1
+2025-04-07 13:47:40,GB,113,moderate,wind,5.1
+2025-04-07 13:48:45,North Scotland,169,moderate,biomass,4.5
+2025-04-07 13:48:45,North Scotland,169,moderate,coal,0
+2025-04-07 13:48:45,North Scotland,169,moderate,imports,5.3
+2025-04-07 13:48:45,North Scotland,169,moderate,gas,41.4
+2025-04-07 13:48:45,North Scotland,169,moderate,nuclear,19.2
+2025-04-07 13:48:45,North Scotland,169,moderate,other,0
+2025-04-07 13:48:45,North Scotland,169,moderate,hydro,0
+2025-04-07 13:48:45,North Scotland,169,moderate,solar,10.4
+2025-04-07 13:48:45,North Scotland,169,moderate,wind,19.3
+2025-04-07 13:48:45,South Scotland,23,very low,biomass,10
+2025-04-07 13:48:45,South Scotland,23,very low,coal,0
+2025-04-07 13:48:45,South Scotland,23,very low,imports,11.9
+2025-04-07 13:48:45,South Scotland,23,very low,gas,2.7
+2025-04-07 13:48:45,South Scotland,23,very low,nuclear,47.3
+2025-04-07 13:48:45,South Scotland,23,very low,other,0
+2025-04-07 13:48:45,South Scotland,23,very low,hydro,0
+2025-04-07 13:48:45,South Scotland,23,very low,solar,23.3
+2025-04-07 13:48:45,South Scotland,23,very low,wind,4.8
+2025-04-07 13:48:45,North West England,73,low,biomass,13.4
+2025-04-07 13:48:45,North West England,73,low,coal,0
+2025-04-07 13:48:45,North West England,73,low,imports,7.2
+2025-04-07 13:48:45,North West England,73,low,gas,14.4
+2025-04-07 13:48:45,North West England,73,low,nuclear,48.6
+2025-04-07 13:48:45,North West England,73,low,other,0
+2025-04-07 13:48:45,North West England,73,low,hydro,0
+2025-04-07 13:48:45,North West England,73,low,solar,12.5
+2025-04-07 13:48:45,North West England,73,low,wind,3.9
+2025-04-07 13:48:45,North East England,31,low,biomass,18.1
+2025-04-07 13:48:45,North East England,31,low,coal,0
+2025-04-07 13:48:45,North East England,31,low,imports,37.6
+2025-04-07 13:48:45,North East England,31,low,gas,2.1
+2025-04-07 13:48:45,North East England,31,low,nuclear,25.6
+2025-04-07 13:48:45,North East England,31,low,other,0
+2025-04-07 13:48:45,North East England,31,low,hydro,0
+2025-04-07 13:48:45,North East England,31,low,solar,14.5
+2025-04-07 13:48:45,North East England,31,low,wind,1.9
+2025-04-07 13:48:45,Yorkshire,160,moderate,biomass,52.7
+2025-04-07 13:48:45,Yorkshire,160,moderate,coal,0
+2025-04-07 13:48:45,Yorkshire,160,moderate,imports,0.7
+2025-04-07 13:48:45,Yorkshire,160,moderate,gas,24
+2025-04-07 13:48:45,Yorkshire,160,moderate,nuclear,0.4
+2025-04-07 13:48:45,Yorkshire,160,moderate,other,0
+2025-04-07 13:48:45,Yorkshire,160,moderate,hydro,0
+2025-04-07 13:48:45,Yorkshire,160,moderate,solar,18.8
+2025-04-07 13:48:45,Yorkshire,160,moderate,wind,3.3
+2025-04-07 13:48:45,North Wales & Merseyside,45,low,biomass,3.3
+2025-04-07 13:48:45,North Wales & Merseyside,45,low,coal,0
+2025-04-07 13:48:45,North Wales & Merseyside,45,low,imports,3.1
+2025-04-07 13:48:45,North Wales & Merseyside,45,low,gas,10
+2025-04-07 13:48:45,North Wales & Merseyside,45,low,nuclear,12.6
+2025-04-07 13:48:45,North Wales & Merseyside,45,low,other,0
+2025-04-07 13:48:45,North Wales & Merseyside,45,low,hydro,0
+2025-04-07 13:48:45,North Wales & Merseyside,45,low,solar,53.9
+2025-04-07 13:48:45,North Wales & Merseyside,45,low,wind,17.1
+2025-04-07 13:48:45,South Wales,222,high,biomass,0
+2025-04-07 13:48:45,South Wales,222,high,coal,0
+2025-04-07 13:48:45,South Wales,222,high,imports,0
+2025-04-07 13:48:45,South Wales,222,high,gas,56.4
+2025-04-07 13:48:45,South Wales,222,high,nuclear,0
+2025-04-07 13:48:45,South Wales,222,high,other,0
+2025-04-07 13:48:45,South Wales,222,high,hydro,0
+2025-04-07 13:48:45,South Wales,222,high,solar,39.9
+2025-04-07 13:48:45,South Wales,222,high,wind,3.7
+2025-04-07 13:48:45,West Midlands,121,moderate,biomass,0.9
+2025-04-07 13:48:45,West Midlands,121,moderate,coal,0
+2025-04-07 13:48:45,West Midlands,121,moderate,imports,15.2
+2025-04-07 13:48:45,West Midlands,121,moderate,gas,26.4
+2025-04-07 13:48:45,West Midlands,121,moderate,nuclear,5.6
+2025-04-07 13:48:45,West Midlands,121,moderate,other,0
+2025-04-07 13:48:45,West Midlands,121,moderate,hydro,0
+2025-04-07 13:48:45,West Midlands,121,moderate,solar,49.3
+2025-04-07 13:48:45,West Midlands,121,moderate,wind,2.5
+2025-04-07 13:48:45,East Midlands,169,moderate,biomass,0
+2025-04-07 13:48:45,East Midlands,169,moderate,coal,0
+2025-04-07 13:48:45,East Midlands,169,moderate,imports,7.3
+2025-04-07 13:48:45,East Midlands,169,moderate,gas,37.6
+2025-04-07 13:48:45,East Midlands,169,moderate,nuclear,5.1
+2025-04-07 13:48:45,East Midlands,169,moderate,other,0
+2025-04-07 13:48:45,East Midlands,169,moderate,hydro,0
+2025-04-07 13:48:45,East Midlands,169,moderate,solar,46.3
+2025-04-07 13:48:45,East Midlands,169,moderate,wind,3.6
+2025-04-07 13:48:45,East England,134,moderate,biomass,0
+2025-04-07 13:48:45,East England,134,moderate,coal,0
+2025-04-07 13:48:45,East England,134,moderate,imports,20.9
+2025-04-07 13:48:45,East England,134,moderate,gas,12.8
+2025-04-07 13:48:45,East England,134,moderate,nuclear,23.2
+2025-04-07 13:48:45,East England,134,moderate,other,0
+2025-04-07 13:48:45,East England,134,moderate,hydro,0
+2025-04-07 13:48:45,East England,134,moderate,solar,36.3
+2025-04-07 13:48:45,East England,134,moderate,wind,6.8
+2025-04-07 13:48:45,South West England,78,low,biomass,0
+2025-04-07 13:48:45,South West England,78,low,coal,0
+2025-04-07 13:48:45,South West England,78,low,imports,0
+2025-04-07 13:48:45,South West England,78,low,gas,19.8
+2025-04-07 13:48:45,South West England,78,low,nuclear,0
+2025-04-07 13:48:45,South West England,78,low,other,0
+2025-04-07 13:48:45,South West England,78,low,hydro,0
+2025-04-07 13:48:45,South West England,78,low,solar,78.8
+2025-04-07 13:48:45,South West England,78,low,wind,1.5
+2025-04-07 13:48:45,South England,87,low,biomass,0
+2025-04-07 13:48:45,South England,87,low,coal,0
+2025-04-07 13:48:45,South England,87,low,imports,30.8
+2025-04-07 13:48:45,South England,87,low,gas,17.2
+2025-04-07 13:48:45,South England,87,low,nuclear,0
+2025-04-07 13:48:45,South England,87,low,other,0
+2025-04-07 13:48:45,South England,87,low,hydro,0.1
+2025-04-07 13:48:45,South England,87,low,solar,50.5
+2025-04-07 13:48:45,South England,87,low,wind,1.5
+2025-04-07 13:48:45,London,125,moderate,biomass,0
+2025-04-07 13:48:45,London,125,moderate,coal,0
+2025-04-07 13:48:45,London,125,moderate,imports,42.1
+2025-04-07 13:48:45,London,125,moderate,gas,18.2
+2025-04-07 13:48:45,London,125,moderate,nuclear,5.5
+2025-04-07 13:48:45,London,125,moderate,other,0
+2025-04-07 13:48:45,London,125,moderate,hydro,0.2
+2025-04-07 13:48:45,London,125,moderate,solar,26.8
+2025-04-07 13:48:45,London,125,moderate,wind,7.1
+2025-04-07 13:48:45,South East England,124,moderate,biomass,0
+2025-04-07 13:48:45,South East England,124,moderate,coal,0
+2025-04-07 13:48:45,South East England,124,moderate,imports,48.9
+2025-04-07 13:48:45,South East England,124,moderate,gas,19.9
+2025-04-07 13:48:45,South East England,124,moderate,nuclear,0
+2025-04-07 13:48:45,South East England,124,moderate,other,0
+2025-04-07 13:48:45,South East England,124,moderate,hydro,0.3
+2025-04-07 13:48:45,South East England,124,moderate,solar,23.6
+2025-04-07 13:48:45,South East England,124,moderate,wind,7.3
+2025-04-07 13:48:45,England,110,moderate,biomass,8.5
+2025-04-07 13:48:45,England,110,moderate,coal,0
+2025-04-07 13:48:45,England,110,moderate,imports,17.8
+2025-04-07 13:48:45,England,110,moderate,gas,18.6
+2025-04-07 13:48:45,England,110,moderate,nuclear,13.5
+2025-04-07 13:48:45,England,110,moderate,other,0
+2025-04-07 13:48:45,England,110,moderate,hydro,0
+2025-04-07 13:48:45,England,110,moderate,solar,37.5
+2025-04-07 13:48:45,England,110,moderate,wind,4
+2025-04-07 13:48:45,Scotland,92,low,biomass,4.2
+2025-04-07 13:48:45,Scotland,92,low,coal,0
+2025-04-07 13:48:45,Scotland,92,low,imports,4.6
+2025-04-07 13:48:45,Scotland,92,low,gas,20.5
+2025-04-07 13:48:45,Scotland,92,low,nuclear,27.1
+2025-04-07 13:48:45,Scotland,92,low,other,0
+2025-04-07 13:48:45,Scotland,92,low,hydro,0
+2025-04-07 13:48:45,Scotland,92,low,solar,32.9
+2025-04-07 13:48:45,Scotland,92,low,wind,10.6
+2025-04-07 13:48:45,Wales,198,high,biomass,0.3
+2025-04-07 13:48:45,Wales,198,high,coal,0
+2025-04-07 13:48:45,Wales,198,high,imports,0.6
+2025-04-07 13:48:45,Wales,198,high,gas,50
+2025-04-07 13:48:45,Wales,198,high,nuclear,0.5
+2025-04-07 13:48:45,Wales,198,high,other,0
+2025-04-07 13:48:45,Wales,198,high,hydro,0
+2025-04-07 13:48:45,Wales,198,high,solar,37.4
+2025-04-07 13:48:45,Wales,198,high,wind,11.3
+2025-04-07 13:48:45,GB,113,moderate,biomass,7.6
+2025-04-07 13:48:45,GB,113,moderate,coal,0
+2025-04-07 13:48:45,GB,113,moderate,imports,15.6
+2025-04-07 13:48:45,GB,113,moderate,gas,20.7
+2025-04-07 13:48:45,GB,113,moderate,nuclear,14
+2025-04-07 13:48:45,GB,113,moderate,other,0
+2025-04-07 13:48:45,GB,113,moderate,hydro,0
+2025-04-07 13:48:45,GB,113,moderate,solar,37.1
+2025-04-07 13:48:45,GB,113,moderate,wind,5.1
+2025-04-07 13:51:05,North Scotland,169,moderate,biomass,4.5
+2025-04-07 13:51:05,North Scotland,169,moderate,coal,0
+2025-04-07 13:51:05,North Scotland,169,moderate,imports,5.3
+2025-04-07 13:51:05,North Scotland,169,moderate,gas,41.4
+2025-04-07 13:51:05,North Scotland,169,moderate,nuclear,19.2
+2025-04-07 13:51:05,North Scotland,169,moderate,other,0
+2025-04-07 13:51:05,North Scotland,169,moderate,hydro,0
+2025-04-07 13:51:05,North Scotland,169,moderate,solar,10.4
+2025-04-07 13:51:05,North Scotland,169,moderate,wind,19.3
+2025-04-07 13:51:05,South Scotland,23,very low,biomass,10
+2025-04-07 13:51:05,South Scotland,23,very low,coal,0
+2025-04-07 13:51:05,South Scotland,23,very low,imports,11.9
+2025-04-07 13:51:05,South Scotland,23,very low,gas,2.7
+2025-04-07 13:51:05,South Scotland,23,very low,nuclear,47.3
+2025-04-07 13:51:05,South Scotland,23,very low,other,0
+2025-04-07 13:51:05,South Scotland,23,very low,hydro,0
+2025-04-07 13:51:05,South Scotland,23,very low,solar,23.3
+2025-04-07 13:51:05,South Scotland,23,very low,wind,4.8
+2025-04-07 13:51:05,North West England,73,low,biomass,13.4
+2025-04-07 13:51:05,North West England,73,low,coal,0
+2025-04-07 13:51:05,North West England,73,low,imports,7.2
+2025-04-07 13:51:05,North West England,73,low,gas,14.4
+2025-04-07 13:51:05,North West England,73,low,nuclear,48.6
+2025-04-07 13:51:05,North West England,73,low,other,0
+2025-04-07 13:51:05,North West England,73,low,hydro,0
+2025-04-07 13:51:05,North West England,73,low,solar,12.5
+2025-04-07 13:51:05,North West England,73,low,wind,3.9
+2025-04-07 13:51:05,North East England,31,low,biomass,18.1
+2025-04-07 13:51:05,North East England,31,low,coal,0
+2025-04-07 13:51:05,North East England,31,low,imports,37.6
+2025-04-07 13:51:05,North East England,31,low,gas,2.1
+2025-04-07 13:51:05,North East England,31,low,nuclear,25.6
+2025-04-07 13:51:05,North East England,31,low,other,0
+2025-04-07 13:51:05,North East England,31,low,hydro,0
+2025-04-07 13:51:05,North East England,31,low,solar,14.5
+2025-04-07 13:51:05,North East England,31,low,wind,1.9
+2025-04-07 13:51:05,Yorkshire,160,moderate,biomass,52.7
+2025-04-07 13:51:05,Yorkshire,160,moderate,coal,0
+2025-04-07 13:51:05,Yorkshire,160,moderate,imports,0.7
+2025-04-07 13:51:05,Yorkshire,160,moderate,gas,24
+2025-04-07 13:51:05,Yorkshire,160,moderate,nuclear,0.4
+2025-04-07 13:51:05,Yorkshire,160,moderate,other,0
+2025-04-07 13:51:05,Yorkshire,160,moderate,hydro,0
+2025-04-07 13:51:05,Yorkshire,160,moderate,solar,18.8
+2025-04-07 13:51:05,Yorkshire,160,moderate,wind,3.3
+2025-04-07 13:51:05,North Wales & Merseyside,45,low,biomass,3.3
+2025-04-07 13:51:05,North Wales & Merseyside,45,low,coal,0
+2025-04-07 13:51:05,North Wales & Merseyside,45,low,imports,3.1
+2025-04-07 13:51:05,North Wales & Merseyside,45,low,gas,10
+2025-04-07 13:51:05,North Wales & Merseyside,45,low,nuclear,12.6
+2025-04-07 13:51:05,North Wales & Merseyside,45,low,other,0
+2025-04-07 13:51:05,North Wales & Merseyside,45,low,hydro,0
+2025-04-07 13:51:05,North Wales & Merseyside,45,low,solar,53.9
+2025-04-07 13:51:05,North Wales & Merseyside,45,low,wind,17.1
+2025-04-07 13:51:05,South Wales,222,high,biomass,0
+2025-04-07 13:51:05,South Wales,222,high,coal,0
+2025-04-07 13:51:05,South Wales,222,high,imports,0
+2025-04-07 13:51:05,South Wales,222,high,gas,56.4
+2025-04-07 13:51:05,South Wales,222,high,nuclear,0
+2025-04-07 13:51:05,South Wales,222,high,other,0
+2025-04-07 13:51:05,South Wales,222,high,hydro,0
+2025-04-07 13:51:05,South Wales,222,high,solar,39.9
+2025-04-07 13:51:05,South Wales,222,high,wind,3.7
+2025-04-07 13:51:05,West Midlands,121,moderate,biomass,0.9
+2025-04-07 13:51:05,West Midlands,121,moderate,coal,0
+2025-04-07 13:51:05,West Midlands,121,moderate,imports,15.2
+2025-04-07 13:51:05,West Midlands,121,moderate,gas,26.4
+2025-04-07 13:51:05,West Midlands,121,moderate,nuclear,5.6
+2025-04-07 13:51:05,West Midlands,121,moderate,other,0
+2025-04-07 13:51:05,West Midlands,121,moderate,hydro,0
+2025-04-07 13:51:05,West Midlands,121,moderate,solar,49.3
+2025-04-07 13:51:05,West Midlands,121,moderate,wind,2.5
+2025-04-07 13:51:05,East Midlands,169,moderate,biomass,0
+2025-04-07 13:51:05,East Midlands,169,moderate,coal,0
+2025-04-07 13:51:05,East Midlands,169,moderate,imports,7.3
+2025-04-07 13:51:05,East Midlands,169,moderate,gas,37.6
+2025-04-07 13:51:05,East Midlands,169,moderate,nuclear,5.1
+2025-04-07 13:51:05,East Midlands,169,moderate,other,0
+2025-04-07 13:51:05,East Midlands,169,moderate,hydro,0
+2025-04-07 13:51:05,East Midlands,169,moderate,solar,46.3
+2025-04-07 13:51:05,East Midlands,169,moderate,wind,3.6
+2025-04-07 13:51:05,East England,134,moderate,biomass,0
+2025-04-07 13:51:05,East England,134,moderate,coal,0
+2025-04-07 13:51:05,East England,134,moderate,imports,20.9
+2025-04-07 13:51:05,East England,134,moderate,gas,12.8
+2025-04-07 13:51:05,East England,134,moderate,nuclear,23.2
+2025-04-07 13:51:05,East England,134,moderate,other,0
+2025-04-07 13:51:05,East England,134,moderate,hydro,0
+2025-04-07 13:51:05,East England,134,moderate,solar,36.3
+2025-04-07 13:51:05,East England,134,moderate,wind,6.8
+2025-04-07 13:51:05,South West England,78,low,biomass,0
+2025-04-07 13:51:05,South West England,78,low,coal,0
+2025-04-07 13:51:05,South West England,78,low,imports,0
+2025-04-07 13:51:05,South West England,78,low,gas,19.8
+2025-04-07 13:51:05,South West England,78,low,nuclear,0
+2025-04-07 13:51:05,South West England,78,low,other,0
+2025-04-07 13:51:05,South West England,78,low,hydro,0
+2025-04-07 13:51:05,South West England,78,low,solar,78.8
+2025-04-07 13:51:05,South West England,78,low,wind,1.5
+2025-04-07 13:51:05,South England,87,low,biomass,0
+2025-04-07 13:51:05,South England,87,low,coal,0
+2025-04-07 13:51:05,South England,87,low,imports,30.8
+2025-04-07 13:51:05,South England,87,low,gas,17.2
+2025-04-07 13:51:05,South England,87,low,nuclear,0
+2025-04-07 13:51:05,South England,87,low,other,0
+2025-04-07 13:51:05,South England,87,low,hydro,0.1
+2025-04-07 13:51:05,South England,87,low,solar,50.5
+2025-04-07 13:51:05,South England,87,low,wind,1.5
+2025-04-07 13:51:05,London,125,moderate,biomass,0
+2025-04-07 13:51:05,London,125,moderate,coal,0
+2025-04-07 13:51:05,London,125,moderate,imports,42.1
+2025-04-07 13:51:05,London,125,moderate,gas,18.2
+2025-04-07 13:51:05,London,125,moderate,nuclear,5.5
+2025-04-07 13:51:05,London,125,moderate,other,0
+2025-04-07 13:51:05,London,125,moderate,hydro,0.2
+2025-04-07 13:51:05,London,125,moderate,solar,26.8
+2025-04-07 13:51:05,London,125,moderate,wind,7.1
+2025-04-07 13:51:05,South East England,124,moderate,biomass,0
+2025-04-07 13:51:05,South East England,124,moderate,coal,0
+2025-04-07 13:51:05,South East England,124,moderate,imports,48.9
+2025-04-07 13:51:05,South East England,124,moderate,gas,19.9
+2025-04-07 13:51:05,South East England,124,moderate,nuclear,0
+2025-04-07 13:51:05,South East England,124,moderate,other,0
+2025-04-07 13:51:05,South East England,124,moderate,hydro,0.3
+2025-04-07 13:51:05,South East England,124,moderate,solar,23.6
+2025-04-07 13:51:05,South East England,124,moderate,wind,7.3
+2025-04-07 13:51:05,England,110,moderate,biomass,8.5
+2025-04-07 13:51:05,England,110,moderate,coal,0
+2025-04-07 13:51:05,England,110,moderate,imports,17.8
+2025-04-07 13:51:05,England,110,moderate,gas,18.6
+2025-04-07 13:51:05,England,110,moderate,nuclear,13.5
+2025-04-07 13:51:05,England,110,moderate,other,0
+2025-04-07 13:51:05,England,110,moderate,hydro,0
+2025-04-07 13:51:05,England,110,moderate,solar,37.5
+2025-04-07 13:51:05,England,110,moderate,wind,4
+2025-04-07 13:51:05,Scotland,92,low,biomass,4.2
+2025-04-07 13:51:05,Scotland,92,low,coal,0
+2025-04-07 13:51:05,Scotland,92,low,imports,4.6
+2025-04-07 13:51:05,Scotland,92,low,gas,20.5
+2025-04-07 13:51:05,Scotland,92,low,nuclear,27.1
+2025-04-07 13:51:05,Scotland,92,low,other,0
+2025-04-07 13:51:05,Scotland,92,low,hydro,0
+2025-04-07 13:51:05,Scotland,92,low,solar,32.9
+2025-04-07 13:51:05,Scotland,92,low,wind,10.6
+2025-04-07 13:51:05,Wales,198,high,biomass,0.3
+2025-04-07 13:51:05,Wales,198,high,coal,0
+2025-04-07 13:51:05,Wales,198,high,imports,0.6
+2025-04-07 13:51:05,Wales,198,high,gas,50
+2025-04-07 13:51:05,Wales,198,high,nuclear,0.5
+2025-04-07 13:51:05,Wales,198,high,other,0
+2025-04-07 13:51:05,Wales,198,high,hydro,0
+2025-04-07 13:51:05,Wales,198,high,solar,37.4
+2025-04-07 13:51:05,Wales,198,high,wind,11.3
+2025-04-07 13:51:05,GB,113,moderate,biomass,7.6
+2025-04-07 13:51:05,GB,113,moderate,coal,0
+2025-04-07 13:51:05,GB,113,moderate,imports,15.6
+2025-04-07 13:51:05,GB,113,moderate,gas,20.7
+2025-04-07 13:51:05,GB,113,moderate,nuclear,14
+2025-04-07 13:51:05,GB,113,moderate,other,0
+2025-04-07 13:51:05,GB,113,moderate,hydro,0
+2025-04-07 13:51:05,GB,113,moderate,solar,37.1
+2025-04-07 13:51:05,GB,113,moderate,wind,5.1
+2025-04-07 13:53:26,North Scotland,169,moderate,biomass,4.5
+2025-04-07 13:53:26,North Scotland,169,moderate,coal,0
+2025-04-07 13:53:26,North Scotland,169,moderate,imports,5.3
+2025-04-07 13:53:26,North Scotland,169,moderate,gas,41.4
+2025-04-07 13:53:26,North Scotland,169,moderate,nuclear,19.2
+2025-04-07 13:53:26,North Scotland,169,moderate,other,0
+2025-04-07 13:53:26,North Scotland,169,moderate,hydro,0
+2025-04-07 13:53:26,North Scotland,169,moderate,solar,10.4
+2025-04-07 13:53:26,North Scotland,169,moderate,wind,19.3
+2025-04-07 13:53:26,South Scotland,23,very low,biomass,10
+2025-04-07 13:53:26,South Scotland,23,very low,coal,0
+2025-04-07 13:53:26,South Scotland,23,very low,imports,11.9
+2025-04-07 13:53:26,South Scotland,23,very low,gas,2.7
+2025-04-07 13:53:26,South Scotland,23,very low,nuclear,47.3
+2025-04-07 13:53:26,South Scotland,23,very low,other,0
+2025-04-07 13:53:26,South Scotland,23,very low,hydro,0
+2025-04-07 13:53:26,South Scotland,23,very low,solar,23.3
+2025-04-07 13:53:26,South Scotland,23,very low,wind,4.8
+2025-04-07 13:53:26,North West England,73,low,biomass,13.4
+2025-04-07 13:53:26,North West England,73,low,coal,0
+2025-04-07 13:53:26,North West England,73,low,imports,7.2
+2025-04-07 13:53:26,North West England,73,low,gas,14.4
+2025-04-07 13:53:26,North West England,73,low,nuclear,48.6
+2025-04-07 13:53:26,North West England,73,low,other,0
+2025-04-07 13:53:26,North West England,73,low,hydro,0
+2025-04-07 13:53:26,North West England,73,low,solar,12.5
+2025-04-07 13:53:26,North West England,73,low,wind,3.9
+2025-04-07 13:53:26,North East England,31,low,biomass,18.1
+2025-04-07 13:53:26,North East England,31,low,coal,0
+2025-04-07 13:53:26,North East England,31,low,imports,37.6
+2025-04-07 13:53:26,North East England,31,low,gas,2.1
+2025-04-07 13:53:26,North East England,31,low,nuclear,25.6
+2025-04-07 13:53:26,North East England,31,low,other,0
+2025-04-07 13:53:26,North East England,31,low,hydro,0
+2025-04-07 13:53:26,North East England,31,low,solar,14.5
+2025-04-07 13:53:26,North East England,31,low,wind,1.9
+2025-04-07 13:53:26,Yorkshire,160,moderate,biomass,52.7
+2025-04-07 13:53:26,Yorkshire,160,moderate,coal,0
+2025-04-07 13:53:26,Yorkshire,160,moderate,imports,0.7
+2025-04-07 13:53:26,Yorkshire,160,moderate,gas,24
+2025-04-07 13:53:26,Yorkshire,160,moderate,nuclear,0.4
+2025-04-07 13:53:26,Yorkshire,160,moderate,other,0
+2025-04-07 13:53:26,Yorkshire,160,moderate,hydro,0
+2025-04-07 13:53:26,Yorkshire,160,moderate,solar,18.8
+2025-04-07 13:53:26,Yorkshire,160,moderate,wind,3.3
+2025-04-07 13:53:26,North Wales & Merseyside,45,low,biomass,3.3
+2025-04-07 13:53:26,North Wales & Merseyside,45,low,coal,0
+2025-04-07 13:53:26,North Wales & Merseyside,45,low,imports,3.1
+2025-04-07 13:53:26,North Wales & Merseyside,45,low,gas,10
+2025-04-07 13:53:26,North Wales & Merseyside,45,low,nuclear,12.6
+2025-04-07 13:53:26,North Wales & Merseyside,45,low,other,0
+2025-04-07 13:53:26,North Wales & Merseyside,45,low,hydro,0
+2025-04-07 13:53:26,North Wales & Merseyside,45,low,solar,53.9
+2025-04-07 13:53:26,North Wales & Merseyside,45,low,wind,17.1
+2025-04-07 13:53:26,South Wales,222,high,biomass,0
+2025-04-07 13:53:26,South Wales,222,high,coal,0
+2025-04-07 13:53:26,South Wales,222,high,imports,0
+2025-04-07 13:53:26,South Wales,222,high,gas,56.4
+2025-04-07 13:53:26,South Wales,222,high,nuclear,0
+2025-04-07 13:53:26,South Wales,222,high,other,0
+2025-04-07 13:53:26,South Wales,222,high,hydro,0
+2025-04-07 13:53:26,South Wales,222,high,solar,39.9
+2025-04-07 13:53:26,South Wales,222,high,wind,3.7
+2025-04-07 13:53:26,West Midlands,121,moderate,biomass,0.9
+2025-04-07 13:53:26,West Midlands,121,moderate,coal,0
+2025-04-07 13:53:26,West Midlands,121,moderate,imports,15.2
+2025-04-07 13:53:26,West Midlands,121,moderate,gas,26.4
+2025-04-07 13:53:26,West Midlands,121,moderate,nuclear,5.6
+2025-04-07 13:53:26,West Midlands,121,moderate,other,0
+2025-04-07 13:53:26,West Midlands,121,moderate,hydro,0
+2025-04-07 13:53:26,West Midlands,121,moderate,solar,49.3
+2025-04-07 13:53:26,West Midlands,121,moderate,wind,2.5
+2025-04-07 13:53:26,East Midlands,169,moderate,biomass,0
+2025-04-07 13:53:26,East Midlands,169,moderate,coal,0
+2025-04-07 13:53:26,East Midlands,169,moderate,imports,7.3
+2025-04-07 13:53:26,East Midlands,169,moderate,gas,37.6
+2025-04-07 13:53:26,East Midlands,169,moderate,nuclear,5.1
+2025-04-07 13:53:26,East Midlands,169,moderate,other,0
+2025-04-07 13:53:26,East Midlands,169,moderate,hydro,0
+2025-04-07 13:53:26,East Midlands,169,moderate,solar,46.3
+2025-04-07 13:53:26,East Midlands,169,moderate,wind,3.6
+2025-04-07 13:53:26,East England,134,moderate,biomass,0
+2025-04-07 13:53:26,East England,134,moderate,coal,0
+2025-04-07 13:53:26,East England,134,moderate,imports,20.9
+2025-04-07 13:53:26,East England,134,moderate,gas,12.8
+2025-04-07 13:53:26,East England,134,moderate,nuclear,23.2
+2025-04-07 13:53:26,East England,134,moderate,other,0
+2025-04-07 13:53:26,East England,134,moderate,hydro,0
+2025-04-07 13:53:26,East England,134,moderate,solar,36.3
+2025-04-07 13:53:26,East England,134,moderate,wind,6.8
+2025-04-07 13:53:26,South West England,78,low,biomass,0
+2025-04-07 13:53:26,South West England,78,low,coal,0
+2025-04-07 13:53:26,South West England,78,low,imports,0
+2025-04-07 13:53:26,South West England,78,low,gas,19.8
+2025-04-07 13:53:26,South West England,78,low,nuclear,0
+2025-04-07 13:53:26,South West England,78,low,other,0
+2025-04-07 13:53:26,South West England,78,low,hydro,0
+2025-04-07 13:53:26,South West England,78,low,solar,78.8
+2025-04-07 13:53:26,South West England,78,low,wind,1.5
+2025-04-07 13:53:26,South England,87,low,biomass,0
+2025-04-07 13:53:26,South England,87,low,coal,0
+2025-04-07 13:53:26,South England,87,low,imports,30.8
+2025-04-07 13:53:26,South England,87,low,gas,17.2
+2025-04-07 13:53:26,South England,87,low,nuclear,0
+2025-04-07 13:53:26,South England,87,low,other,0
+2025-04-07 13:53:26,South England,87,low,hydro,0.1
+2025-04-07 13:53:26,South England,87,low,solar,50.5
+2025-04-07 13:53:26,South England,87,low,wind,1.5
+2025-04-07 13:53:26,London,125,moderate,biomass,0
+2025-04-07 13:53:26,London,125,moderate,coal,0
+2025-04-07 13:53:26,London,125,moderate,imports,42.1
+2025-04-07 13:53:26,London,125,moderate,gas,18.2
+2025-04-07 13:53:26,London,125,moderate,nuclear,5.5
+2025-04-07 13:53:26,London,125,moderate,other,0
+2025-04-07 13:53:26,London,125,moderate,hydro,0.2
+2025-04-07 13:53:26,London,125,moderate,solar,26.8
+2025-04-07 13:53:26,London,125,moderate,wind,7.1
+2025-04-07 13:53:26,South East England,124,moderate,biomass,0
+2025-04-07 13:53:26,South East England,124,moderate,coal,0
+2025-04-07 13:53:26,South East England,124,moderate,imports,48.9
+2025-04-07 13:53:26,South East England,124,moderate,gas,19.9
+2025-04-07 13:53:26,South East England,124,moderate,nuclear,0
+2025-04-07 13:53:26,South East England,124,moderate,other,0
+2025-04-07 13:53:26,South East England,124,moderate,hydro,0.3
+2025-04-07 13:53:26,South East England,124,moderate,solar,23.6
+2025-04-07 13:53:26,South East England,124,moderate,wind,7.3
+2025-04-07 13:53:26,England,110,moderate,biomass,8.5
+2025-04-07 13:53:26,England,110,moderate,coal,0
+2025-04-07 13:53:26,England,110,moderate,imports,17.8
+2025-04-07 13:53:26,England,110,moderate,gas,18.6
+2025-04-07 13:53:26,England,110,moderate,nuclear,13.5
+2025-04-07 13:53:26,England,110,moderate,other,0
+2025-04-07 13:53:26,England,110,moderate,hydro,0
+2025-04-07 13:53:26,England,110,moderate,solar,37.5
+2025-04-07 13:53:26,England,110,moderate,wind,4
+2025-04-07 13:53:26,Scotland,92,low,biomass,4.2
+2025-04-07 13:53:26,Scotland,92,low,coal,0
+2025-04-07 13:53:26,Scotland,92,low,imports,4.6
+2025-04-07 13:53:26,Scotland,92,low,gas,20.5
+2025-04-07 13:53:26,Scotland,92,low,nuclear,27.1
+2025-04-07 13:53:26,Scotland,92,low,other,0
+2025-04-07 13:53:26,Scotland,92,low,hydro,0
+2025-04-07 13:53:26,Scotland,92,low,solar,32.9
+2025-04-07 13:53:26,Scotland,92,low,wind,10.6
+2025-04-07 13:53:26,Wales,198,high,biomass,0.3
+2025-04-07 13:53:26,Wales,198,high,coal,0
+2025-04-07 13:53:26,Wales,198,high,imports,0.6
+2025-04-07 13:53:26,Wales,198,high,gas,50
+2025-04-07 13:53:26,Wales,198,high,nuclear,0.5
+2025-04-07 13:53:26,Wales,198,high,other,0
+2025-04-07 13:53:26,Wales,198,high,hydro,0
+2025-04-07 13:53:26,Wales,198,high,solar,37.4
+2025-04-07 13:53:26,Wales,198,high,wind,11.3
+2025-04-07 13:53:26,GB,113,moderate,biomass,7.6
+2025-04-07 13:53:26,GB,113,moderate,coal,0
+2025-04-07 13:53:26,GB,113,moderate,imports,15.6
+2025-04-07 13:53:26,GB,113,moderate,gas,20.7
+2025-04-07 13:53:26,GB,113,moderate,nuclear,14
+2025-04-07 13:53:26,GB,113,moderate,other,0
+2025-04-07 13:53:26,GB,113,moderate,hydro,0
+2025-04-07 13:53:26,GB,113,moderate,solar,37.1
+2025-04-07 13:53:26,GB,113,moderate,wind,5.1
+2025-04-07 13:54:35,North Scotland,169,moderate,biomass,4.5
+2025-04-07 13:54:35,North Scotland,169,moderate,coal,0
+2025-04-07 13:54:35,North Scotland,169,moderate,imports,5.3
+2025-04-07 13:54:35,North Scotland,169,moderate,gas,41.4
+2025-04-07 13:54:35,North Scotland,169,moderate,nuclear,19.2
+2025-04-07 13:54:35,North Scotland,169,moderate,other,0
+2025-04-07 13:54:35,North Scotland,169,moderate,hydro,0
+2025-04-07 13:54:35,North Scotland,169,moderate,solar,10.4
+2025-04-07 13:54:35,North Scotland,169,moderate,wind,19.3
+2025-04-07 13:54:35,South Scotland,23,very low,biomass,10
+2025-04-07 13:54:35,South Scotland,23,very low,coal,0
+2025-04-07 13:54:35,South Scotland,23,very low,imports,11.9
+2025-04-07 13:54:35,South Scotland,23,very low,gas,2.7
+2025-04-07 13:54:35,South Scotland,23,very low,nuclear,47.3
+2025-04-07 13:54:35,South Scotland,23,very low,other,0
+2025-04-07 13:54:35,South Scotland,23,very low,hydro,0
+2025-04-07 13:54:35,South Scotland,23,very low,solar,23.3
+2025-04-07 13:54:35,South Scotland,23,very low,wind,4.8
+2025-04-07 13:54:35,North West England,73,low,biomass,13.4
+2025-04-07 13:54:35,North West England,73,low,coal,0
+2025-04-07 13:54:35,North West England,73,low,imports,7.2
+2025-04-07 13:54:35,North West England,73,low,gas,14.4
+2025-04-07 13:54:35,North West England,73,low,nuclear,48.6
+2025-04-07 13:54:35,North West England,73,low,other,0
+2025-04-07 13:54:35,North West England,73,low,hydro,0
+2025-04-07 13:54:35,North West England,73,low,solar,12.5
+2025-04-07 13:54:35,North West England,73,low,wind,3.9
+2025-04-07 13:54:35,North East England,31,low,biomass,18.1
+2025-04-07 13:54:35,North East England,31,low,coal,0
+2025-04-07 13:54:35,North East England,31,low,imports,37.6
+2025-04-07 13:54:35,North East England,31,low,gas,2.1
+2025-04-07 13:54:35,North East England,31,low,nuclear,25.6
+2025-04-07 13:54:35,North East England,31,low,other,0
+2025-04-07 13:54:35,North East England,31,low,hydro,0
+2025-04-07 13:54:35,North East England,31,low,solar,14.5
+2025-04-07 13:54:35,North East England,31,low,wind,1.9
+2025-04-07 13:54:35,Yorkshire,160,moderate,biomass,52.7
+2025-04-07 13:54:35,Yorkshire,160,moderate,coal,0
+2025-04-07 13:54:35,Yorkshire,160,moderate,imports,0.7
+2025-04-07 13:54:35,Yorkshire,160,moderate,gas,24
+2025-04-07 13:54:35,Yorkshire,160,moderate,nuclear,0.4
+2025-04-07 13:54:35,Yorkshire,160,moderate,other,0
+2025-04-07 13:54:35,Yorkshire,160,moderate,hydro,0
+2025-04-07 13:54:35,Yorkshire,160,moderate,solar,18.8
+2025-04-07 13:54:35,Yorkshire,160,moderate,wind,3.3
+2025-04-07 13:54:35,North Wales & Merseyside,45,low,biomass,3.3
+2025-04-07 13:54:35,North Wales & Merseyside,45,low,coal,0
+2025-04-07 13:54:35,North Wales & Merseyside,45,low,imports,3.1
+2025-04-07 13:54:35,North Wales & Merseyside,45,low,gas,10
+2025-04-07 13:54:35,North Wales & Merseyside,45,low,nuclear,12.6
+2025-04-07 13:54:35,North Wales & Merseyside,45,low,other,0
+2025-04-07 13:54:35,North Wales & Merseyside,45,low,hydro,0
+2025-04-07 13:54:35,North Wales & Merseyside,45,low,solar,53.9
+2025-04-07 13:54:35,North Wales & Merseyside,45,low,wind,17.1
+2025-04-07 13:54:35,South Wales,222,high,biomass,0
+2025-04-07 13:54:35,South Wales,222,high,coal,0
+2025-04-07 13:54:35,South Wales,222,high,imports,0
+2025-04-07 13:54:35,South Wales,222,high,gas,56.4
+2025-04-07 13:54:35,South Wales,222,high,nuclear,0
+2025-04-07 13:54:35,South Wales,222,high,other,0
+2025-04-07 13:54:35,South Wales,222,high,hydro,0
+2025-04-07 13:54:35,South Wales,222,high,solar,39.9
+2025-04-07 13:54:35,South Wales,222,high,wind,3.7
+2025-04-07 13:54:35,West Midlands,121,moderate,biomass,0.9
+2025-04-07 13:54:35,West Midlands,121,moderate,coal,0
+2025-04-07 13:54:35,West Midlands,121,moderate,imports,15.2
+2025-04-07 13:54:35,West Midlands,121,moderate,gas,26.4
+2025-04-07 13:54:35,West Midlands,121,moderate,nuclear,5.6
+2025-04-07 13:54:35,West Midlands,121,moderate,other,0
+2025-04-07 13:54:35,West Midlands,121,moderate,hydro,0
+2025-04-07 13:54:35,West Midlands,121,moderate,solar,49.3
+2025-04-07 13:54:35,West Midlands,121,moderate,wind,2.5
+2025-04-07 13:54:35,East Midlands,169,moderate,biomass,0
+2025-04-07 13:54:35,East Midlands,169,moderate,coal,0
+2025-04-07 13:54:35,East Midlands,169,moderate,imports,7.3
+2025-04-07 13:54:35,East Midlands,169,moderate,gas,37.6
+2025-04-07 13:54:35,East Midlands,169,moderate,nuclear,5.1
+2025-04-07 13:54:35,East Midlands,169,moderate,other,0
+2025-04-07 13:54:35,East Midlands,169,moderate,hydro,0
+2025-04-07 13:54:35,East Midlands,169,moderate,solar,46.3
+2025-04-07 13:54:35,East Midlands,169,moderate,wind,3.6
+2025-04-07 13:54:35,East England,134,moderate,biomass,0
+2025-04-07 13:54:35,East England,134,moderate,coal,0
+2025-04-07 13:54:35,East England,134,moderate,imports,20.9
+2025-04-07 13:54:35,East England,134,moderate,gas,12.8
+2025-04-07 13:54:35,East England,134,moderate,nuclear,23.2
+2025-04-07 13:54:35,East England,134,moderate,other,0
+2025-04-07 13:54:35,East England,134,moderate,hydro,0
+2025-04-07 13:54:35,East England,134,moderate,solar,36.3
+2025-04-07 13:54:35,East England,134,moderate,wind,6.8
+2025-04-07 13:54:35,South West England,78,low,biomass,0
+2025-04-07 13:54:35,South West England,78,low,coal,0
+2025-04-07 13:54:35,South West England,78,low,imports,0
+2025-04-07 13:54:35,South West England,78,low,gas,19.8
+2025-04-07 13:54:35,South West England,78,low,nuclear,0
+2025-04-07 13:54:35,South West England,78,low,other,0
+2025-04-07 13:54:35,South West England,78,low,hydro,0
+2025-04-07 13:54:35,South West England,78,low,solar,78.8
+2025-04-07 13:54:35,South West England,78,low,wind,1.5
+2025-04-07 13:54:35,South England,87,low,biomass,0
+2025-04-07 13:54:35,South England,87,low,coal,0
+2025-04-07 13:54:35,South England,87,low,imports,30.8
+2025-04-07 13:54:35,South England,87,low,gas,17.2
+2025-04-07 13:54:35,South England,87,low,nuclear,0
+2025-04-07 13:54:35,South England,87,low,other,0
+2025-04-07 13:54:35,South England,87,low,hydro,0.1
+2025-04-07 13:54:35,South England,87,low,solar,50.5
+2025-04-07 13:54:35,South England,87,low,wind,1.5
+2025-04-07 13:54:35,London,125,moderate,biomass,0
+2025-04-07 13:54:35,London,125,moderate,coal,0
+2025-04-07 13:54:35,London,125,moderate,imports,42.1
+2025-04-07 13:54:35,London,125,moderate,gas,18.2
+2025-04-07 13:54:35,London,125,moderate,nuclear,5.5
+2025-04-07 13:54:35,London,125,moderate,other,0
+2025-04-07 13:54:35,London,125,moderate,hydro,0.2
+2025-04-07 13:54:35,London,125,moderate,solar,26.8
+2025-04-07 13:54:35,London,125,moderate,wind,7.1
+2025-04-07 13:54:35,South East England,124,moderate,biomass,0
+2025-04-07 13:54:35,South East England,124,moderate,coal,0
+2025-04-07 13:54:35,South East England,124,moderate,imports,48.9
+2025-04-07 13:54:35,South East England,124,moderate,gas,19.9
+2025-04-07 13:54:35,South East England,124,moderate,nuclear,0
+2025-04-07 13:54:35,South East England,124,moderate,other,0
+2025-04-07 13:54:35,South East England,124,moderate,hydro,0.3
+2025-04-07 13:54:35,South East England,124,moderate,solar,23.6
+2025-04-07 13:54:35,South East England,124,moderate,wind,7.3
+2025-04-07 13:54:35,England,110,moderate,biomass,8.5
+2025-04-07 13:54:35,England,110,moderate,coal,0
+2025-04-07 13:54:35,England,110,moderate,imports,17.8
+2025-04-07 13:54:35,England,110,moderate,gas,18.6
+2025-04-07 13:54:35,England,110,moderate,nuclear,13.5
+2025-04-07 13:54:35,England,110,moderate,other,0
+2025-04-07 13:54:35,England,110,moderate,hydro,0
+2025-04-07 13:54:35,England,110,moderate,solar,37.5
+2025-04-07 13:54:35,England,110,moderate,wind,4
+2025-04-07 13:54:35,Scotland,92,low,biomass,4.2
+2025-04-07 13:54:35,Scotland,92,low,coal,0
+2025-04-07 13:54:35,Scotland,92,low,imports,4.6
+2025-04-07 13:54:35,Scotland,92,low,gas,20.5
+2025-04-07 13:54:35,Scotland,92,low,nuclear,27.1
+2025-04-07 13:54:35,Scotland,92,low,other,0
+2025-04-07 13:54:35,Scotland,92,low,hydro,0
+2025-04-07 13:54:35,Scotland,92,low,solar,32.9
+2025-04-07 13:54:35,Scotland,92,low,wind,10.6
+2025-04-07 13:54:35,Wales,198,high,biomass,0.3
+2025-04-07 13:54:35,Wales,198,high,coal,0
+2025-04-07 13:54:35,Wales,198,high,imports,0.6
+2025-04-07 13:54:35,Wales,198,high,gas,50
+2025-04-07 13:54:35,Wales,198,high,nuclear,0.5
+2025-04-07 13:54:35,Wales,198,high,other,0
+2025-04-07 13:54:35,Wales,198,high,hydro,0
+2025-04-07 13:54:35,Wales,198,high,solar,37.4
+2025-04-07 13:54:35,Wales,198,high,wind,11.3
+2025-04-07 13:54:35,GB,113,moderate,biomass,7.6
+2025-04-07 13:54:35,GB,113,moderate,coal,0
+2025-04-07 13:54:35,GB,113,moderate,imports,15.6
+2025-04-07 13:54:35,GB,113,moderate,gas,20.7
+2025-04-07 13:54:35,GB,113,moderate,nuclear,14
+2025-04-07 13:54:35,GB,113,moderate,other,0
+2025-04-07 13:54:35,GB,113,moderate,hydro,0
+2025-04-07 13:54:35,GB,113,moderate,solar,37.1
+2025-04-07 13:54:35,GB,113,moderate,wind,5.1
+2025-04-07 13:55:30,North Scotland,169,moderate,biomass,4.5
+2025-04-07 13:55:30,North Scotland,169,moderate,coal,0
+2025-04-07 13:55:30,North Scotland,169,moderate,imports,5.3
+2025-04-07 13:55:30,North Scotland,169,moderate,gas,41.4
+2025-04-07 13:55:30,North Scotland,169,moderate,nuclear,19.2
+2025-04-07 13:55:30,North Scotland,169,moderate,other,0
+2025-04-07 13:55:30,North Scotland,169,moderate,hydro,0
+2025-04-07 13:55:30,North Scotland,169,moderate,solar,10.4
+2025-04-07 13:55:30,North Scotland,169,moderate,wind,19.3
+2025-04-07 13:55:30,South Scotland,23,very low,biomass,10
+2025-04-07 13:55:30,South Scotland,23,very low,coal,0
+2025-04-07 13:55:30,South Scotland,23,very low,imports,11.9
+2025-04-07 13:55:30,South Scotland,23,very low,gas,2.7
+2025-04-07 13:55:30,South Scotland,23,very low,nuclear,47.3
+2025-04-07 13:55:30,South Scotland,23,very low,other,0
+2025-04-07 13:55:30,South Scotland,23,very low,hydro,0
+2025-04-07 13:55:30,South Scotland,23,very low,solar,23.3
+2025-04-07 13:55:30,South Scotland,23,very low,wind,4.8
+2025-04-07 13:55:30,North West England,73,low,biomass,13.4
+2025-04-07 13:55:30,North West England,73,low,coal,0
+2025-04-07 13:55:30,North West England,73,low,imports,7.2
+2025-04-07 13:55:30,North West England,73,low,gas,14.4
+2025-04-07 13:55:30,North West England,73,low,nuclear,48.6
+2025-04-07 13:55:30,North West England,73,low,other,0
+2025-04-07 13:55:30,North West England,73,low,hydro,0
+2025-04-07 13:55:30,North West England,73,low,solar,12.5
+2025-04-07 13:55:30,North West England,73,low,wind,3.9
+2025-04-07 13:55:30,North East England,31,low,biomass,18.1
+2025-04-07 13:55:30,North East England,31,low,coal,0
+2025-04-07 13:55:30,North East England,31,low,imports,37.6
+2025-04-07 13:55:30,North East England,31,low,gas,2.1
+2025-04-07 13:55:30,North East England,31,low,nuclear,25.6
+2025-04-07 13:55:30,North East England,31,low,other,0
+2025-04-07 13:55:30,North East England,31,low,hydro,0
+2025-04-07 13:55:30,North East England,31,low,solar,14.5
+2025-04-07 13:55:30,North East England,31,low,wind,1.9
+2025-04-07 13:55:30,Yorkshire,160,moderate,biomass,52.7
+2025-04-07 13:55:30,Yorkshire,160,moderate,coal,0
+2025-04-07 13:55:30,Yorkshire,160,moderate,imports,0.7
+2025-04-07 13:55:30,Yorkshire,160,moderate,gas,24
+2025-04-07 13:55:30,Yorkshire,160,moderate,nuclear,0.4
+2025-04-07 13:55:30,Yorkshire,160,moderate,other,0
+2025-04-07 13:55:30,Yorkshire,160,moderate,hydro,0
+2025-04-07 13:55:30,Yorkshire,160,moderate,solar,18.8
+2025-04-07 13:55:30,Yorkshire,160,moderate,wind,3.3
+2025-04-07 13:55:30,North Wales & Merseyside,45,low,biomass,3.3
+2025-04-07 13:55:30,North Wales & Merseyside,45,low,coal,0
+2025-04-07 13:55:30,North Wales & Merseyside,45,low,imports,3.1
+2025-04-07 13:55:30,North Wales & Merseyside,45,low,gas,10
+2025-04-07 13:55:30,North Wales & Merseyside,45,low,nuclear,12.6
+2025-04-07 13:55:30,North Wales & Merseyside,45,low,other,0
+2025-04-07 13:55:30,North Wales & Merseyside,45,low,hydro,0
+2025-04-07 13:55:30,North Wales & Merseyside,45,low,solar,53.9
+2025-04-07 13:55:30,North Wales & Merseyside,45,low,wind,17.1
+2025-04-07 13:55:30,South Wales,222,high,biomass,0
+2025-04-07 13:55:30,South Wales,222,high,coal,0
+2025-04-07 13:55:30,South Wales,222,high,imports,0
+2025-04-07 13:55:30,South Wales,222,high,gas,56.4
+2025-04-07 13:55:30,South Wales,222,high,nuclear,0
+2025-04-07 13:55:30,South Wales,222,high,other,0
+2025-04-07 13:55:30,South Wales,222,high,hydro,0
+2025-04-07 13:55:30,South Wales,222,high,solar,39.9
+2025-04-07 13:55:30,South Wales,222,high,wind,3.7
+2025-04-07 13:55:30,West Midlands,121,moderate,biomass,0.9
+2025-04-07 13:55:30,West Midlands,121,moderate,coal,0
+2025-04-07 13:55:30,West Midlands,121,moderate,imports,15.2
+2025-04-07 13:55:30,West Midlands,121,moderate,gas,26.4
+2025-04-07 13:55:30,West Midlands,121,moderate,nuclear,5.6
+2025-04-07 13:55:30,West Midlands,121,moderate,other,0
+2025-04-07 13:55:30,West Midlands,121,moderate,hydro,0
+2025-04-07 13:55:30,West Midlands,121,moderate,solar,49.3
+2025-04-07 13:55:30,West Midlands,121,moderate,wind,2.5
+2025-04-07 13:55:30,East Midlands,169,moderate,biomass,0
+2025-04-07 13:55:30,East Midlands,169,moderate,coal,0
+2025-04-07 13:55:30,East Midlands,169,moderate,imports,7.3
+2025-04-07 13:55:30,East Midlands,169,moderate,gas,37.6
+2025-04-07 13:55:30,East Midlands,169,moderate,nuclear,5.1
+2025-04-07 13:55:30,East Midlands,169,moderate,other,0
+2025-04-07 13:55:30,East Midlands,169,moderate,hydro,0
+2025-04-07 13:55:30,East Midlands,169,moderate,solar,46.3
+2025-04-07 13:55:30,East Midlands,169,moderate,wind,3.6
+2025-04-07 13:55:30,East England,134,moderate,biomass,0
+2025-04-07 13:55:30,East England,134,moderate,coal,0
+2025-04-07 13:55:30,East England,134,moderate,imports,20.9
+2025-04-07 13:55:30,East England,134,moderate,gas,12.8
+2025-04-07 13:55:30,East England,134,moderate,nuclear,23.2
+2025-04-07 13:55:30,East England,134,moderate,other,0
+2025-04-07 13:55:30,East England,134,moderate,hydro,0
+2025-04-07 13:55:30,East England,134,moderate,solar,36.3
+2025-04-07 13:55:30,East England,134,moderate,wind,6.8
+2025-04-07 13:55:30,South West England,78,low,biomass,0
+2025-04-07 13:55:30,South West England,78,low,coal,0
+2025-04-07 13:55:30,South West England,78,low,imports,0
+2025-04-07 13:55:30,South West England,78,low,gas,19.8
+2025-04-07 13:55:30,South West England,78,low,nuclear,0
+2025-04-07 13:55:30,South West England,78,low,other,0
+2025-04-07 13:55:30,South West England,78,low,hydro,0
+2025-04-07 13:55:30,South West England,78,low,solar,78.8
+2025-04-07 13:55:30,South West England,78,low,wind,1.5
+2025-04-07 13:55:30,South England,87,low,biomass,0
+2025-04-07 13:55:30,South England,87,low,coal,0
+2025-04-07 13:55:30,South England,87,low,imports,30.8
+2025-04-07 13:55:30,South England,87,low,gas,17.2
+2025-04-07 13:55:30,South England,87,low,nuclear,0
+2025-04-07 13:55:30,South England,87,low,other,0
+2025-04-07 13:55:30,South England,87,low,hydro,0.1
+2025-04-07 13:55:30,South England,87,low,solar,50.5
+2025-04-07 13:55:30,South England,87,low,wind,1.5
+2025-04-07 13:55:30,London,125,moderate,biomass,0
+2025-04-07 13:55:30,London,125,moderate,coal,0
+2025-04-07 13:55:30,London,125,moderate,imports,42.1
+2025-04-07 13:55:30,London,125,moderate,gas,18.2
+2025-04-07 13:55:30,London,125,moderate,nuclear,5.5
+2025-04-07 13:55:30,London,125,moderate,other,0
+2025-04-07 13:55:30,London,125,moderate,hydro,0.2
+2025-04-07 13:55:30,London,125,moderate,solar,26.8
+2025-04-07 13:55:30,London,125,moderate,wind,7.1
+2025-04-07 13:55:30,South East England,124,moderate,biomass,0
+2025-04-07 13:55:30,South East England,124,moderate,coal,0
+2025-04-07 13:55:30,South East England,124,moderate,imports,48.9
+2025-04-07 13:55:30,South East England,124,moderate,gas,19.9
+2025-04-07 13:55:30,South East England,124,moderate,nuclear,0
+2025-04-07 13:55:30,South East England,124,moderate,other,0
+2025-04-07 13:55:30,South East England,124,moderate,hydro,0.3
+2025-04-07 13:55:30,South East England,124,moderate,solar,23.6
+2025-04-07 13:55:30,South East England,124,moderate,wind,7.3
+2025-04-07 13:55:30,England,110,moderate,biomass,8.5
+2025-04-07 13:55:30,England,110,moderate,coal,0
+2025-04-07 13:55:30,England,110,moderate,imports,17.8
+2025-04-07 13:55:30,England,110,moderate,gas,18.6
+2025-04-07 13:55:30,England,110,moderate,nuclear,13.5
+2025-04-07 13:55:30,England,110,moderate,other,0
+2025-04-07 13:55:30,England,110,moderate,hydro,0
+2025-04-07 13:55:30,England,110,moderate,solar,37.5
+2025-04-07 13:55:30,England,110,moderate,wind,4
+2025-04-07 13:55:30,Scotland,92,low,biomass,4.2
+2025-04-07 13:55:30,Scotland,92,low,coal,0
+2025-04-07 13:55:30,Scotland,92,low,imports,4.6
+2025-04-07 13:55:30,Scotland,92,low,gas,20.5
+2025-04-07 13:55:30,Scotland,92,low,nuclear,27.1
+2025-04-07 13:55:30,Scotland,92,low,other,0
+2025-04-07 13:55:30,Scotland,92,low,hydro,0
+2025-04-07 13:55:30,Scotland,92,low,solar,32.9
+2025-04-07 13:55:30,Scotland,92,low,wind,10.6
+2025-04-07 13:55:30,Wales,198,high,biomass,0.3
+2025-04-07 13:55:30,Wales,198,high,coal,0
+2025-04-07 13:55:30,Wales,198,high,imports,0.6
+2025-04-07 13:55:30,Wales,198,high,gas,50
+2025-04-07 13:55:30,Wales,198,high,nuclear,0.5
+2025-04-07 13:55:30,Wales,198,high,other,0
+2025-04-07 13:55:30,Wales,198,high,hydro,0
+2025-04-07 13:55:30,Wales,198,high,solar,37.4
+2025-04-07 13:55:30,Wales,198,high,wind,11.3
+2025-04-07 13:55:30,GB,113,moderate,biomass,7.6
+2025-04-07 13:55:30,GB,113,moderate,coal,0
+2025-04-07 13:55:30,GB,113,moderate,imports,15.6
+2025-04-07 13:55:30,GB,113,moderate,gas,20.7
+2025-04-07 13:55:30,GB,113,moderate,nuclear,14
+2025-04-07 13:55:30,GB,113,moderate,other,0
+2025-04-07 13:55:30,GB,113,moderate,hydro,0
+2025-04-07 13:55:30,GB,113,moderate,solar,37.1
+2025-04-07 13:55:30,GB,113,moderate,wind,5.1
+2025-04-07 13:55:50,North Scotland,169,moderate,biomass,4.5
+2025-04-07 13:55:50,North Scotland,169,moderate,coal,0
+2025-04-07 13:55:50,North Scotland,169,moderate,imports,5.3
+2025-04-07 13:55:50,North Scotland,169,moderate,gas,41.4
+2025-04-07 13:55:50,North Scotland,169,moderate,nuclear,19.2
+2025-04-07 13:55:50,North Scotland,169,moderate,other,0
+2025-04-07 13:55:50,North Scotland,169,moderate,hydro,0
+2025-04-07 13:55:50,North Scotland,169,moderate,solar,10.4
+2025-04-07 13:55:50,North Scotland,169,moderate,wind,19.3
+2025-04-07 13:55:50,South Scotland,23,very low,biomass,10
+2025-04-07 13:55:50,South Scotland,23,very low,coal,0
+2025-04-07 13:55:50,South Scotland,23,very low,imports,11.9
+2025-04-07 13:55:50,South Scotland,23,very low,gas,2.7
+2025-04-07 13:55:50,South Scotland,23,very low,nuclear,47.3
+2025-04-07 13:55:50,South Scotland,23,very low,other,0
+2025-04-07 13:55:50,South Scotland,23,very low,hydro,0
+2025-04-07 13:55:50,South Scotland,23,very low,solar,23.3
+2025-04-07 13:55:50,South Scotland,23,very low,wind,4.8
+2025-04-07 13:55:50,North West England,73,low,biomass,13.4
+2025-04-07 13:55:50,North West England,73,low,coal,0
+2025-04-07 13:55:50,North West England,73,low,imports,7.2
+2025-04-07 13:55:50,North West England,73,low,gas,14.4
+2025-04-07 13:55:50,North West England,73,low,nuclear,48.6
+2025-04-07 13:55:50,North West England,73,low,other,0
+2025-04-07 13:55:50,North West England,73,low,hydro,0
+2025-04-07 13:55:50,North West England,73,low,solar,12.5
+2025-04-07 13:55:50,North West England,73,low,wind,3.9
+2025-04-07 13:55:50,North East England,31,low,biomass,18.1
+2025-04-07 13:55:50,North East England,31,low,coal,0
+2025-04-07 13:55:50,North East England,31,low,imports,37.6
+2025-04-07 13:55:50,North East England,31,low,gas,2.1
+2025-04-07 13:55:50,North East England,31,low,nuclear,25.6
+2025-04-07 13:55:50,North East England,31,low,other,0
+2025-04-07 13:55:50,North East England,31,low,hydro,0
+2025-04-07 13:55:50,North East England,31,low,solar,14.5
+2025-04-07 13:55:50,North East England,31,low,wind,1.9
+2025-04-07 13:55:50,Yorkshire,160,moderate,biomass,52.7
+2025-04-07 13:55:50,Yorkshire,160,moderate,coal,0
+2025-04-07 13:55:50,Yorkshire,160,moderate,imports,0.7
+2025-04-07 13:55:50,Yorkshire,160,moderate,gas,24
+2025-04-07 13:55:50,Yorkshire,160,moderate,nuclear,0.4
+2025-04-07 13:55:50,Yorkshire,160,moderate,other,0
+2025-04-07 13:55:50,Yorkshire,160,moderate,hydro,0
+2025-04-07 13:55:50,Yorkshire,160,moderate,solar,18.8
+2025-04-07 13:55:50,Yorkshire,160,moderate,wind,3.3
+2025-04-07 13:55:50,North Wales & Merseyside,45,low,biomass,3.3
+2025-04-07 13:55:50,North Wales & Merseyside,45,low,coal,0
+2025-04-07 13:55:50,North Wales & Merseyside,45,low,imports,3.1
+2025-04-07 13:55:50,North Wales & Merseyside,45,low,gas,10
+2025-04-07 13:55:50,North Wales & Merseyside,45,low,nuclear,12.6
+2025-04-07 13:55:50,North Wales & Merseyside,45,low,other,0
+2025-04-07 13:55:50,North Wales & Merseyside,45,low,hydro,0
+2025-04-07 13:55:50,North Wales & Merseyside,45,low,solar,53.9
+2025-04-07 13:55:50,North Wales & Merseyside,45,low,wind,17.1
+2025-04-07 13:55:50,South Wales,222,high,biomass,0
+2025-04-07 13:55:50,South Wales,222,high,coal,0
+2025-04-07 13:55:50,South Wales,222,high,imports,0
+2025-04-07 13:55:50,South Wales,222,high,gas,56.4
+2025-04-07 13:55:50,South Wales,222,high,nuclear,0
+2025-04-07 13:55:50,South Wales,222,high,other,0
+2025-04-07 13:55:50,South Wales,222,high,hydro,0
+2025-04-07 13:55:50,South Wales,222,high,solar,39.9
+2025-04-07 13:55:50,South Wales,222,high,wind,3.7
+2025-04-07 13:55:50,West Midlands,121,moderate,biomass,0.9
+2025-04-07 13:55:50,West Midlands,121,moderate,coal,0
+2025-04-07 13:55:50,West Midlands,121,moderate,imports,15.2
+2025-04-07 13:55:50,West Midlands,121,moderate,gas,26.4
+2025-04-07 13:55:50,West Midlands,121,moderate,nuclear,5.6
+2025-04-07 13:55:50,West Midlands,121,moderate,other,0
+2025-04-07 13:55:50,West Midlands,121,moderate,hydro,0
+2025-04-07 13:55:50,West Midlands,121,moderate,solar,49.3
+2025-04-07 13:55:50,West Midlands,121,moderate,wind,2.5
+2025-04-07 13:55:50,East Midlands,169,moderate,biomass,0
+2025-04-07 13:55:50,East Midlands,169,moderate,coal,0
+2025-04-07 13:55:50,East Midlands,169,moderate,imports,7.3
+2025-04-07 13:55:50,East Midlands,169,moderate,gas,37.6
+2025-04-07 13:55:50,East Midlands,169,moderate,nuclear,5.1
+2025-04-07 13:55:50,East Midlands,169,moderate,other,0
+2025-04-07 13:55:50,East Midlands,169,moderate,hydro,0
+2025-04-07 13:55:50,East Midlands,169,moderate,solar,46.3
+2025-04-07 13:55:50,East Midlands,169,moderate,wind,3.6
+2025-04-07 13:55:50,East England,134,moderate,biomass,0
+2025-04-07 13:55:50,East England,134,moderate,coal,0
+2025-04-07 13:55:50,East England,134,moderate,imports,20.9
+2025-04-07 13:55:50,East England,134,moderate,gas,12.8
+2025-04-07 13:55:50,East England,134,moderate,nuclear,23.2
+2025-04-07 13:55:50,East England,134,moderate,other,0
+2025-04-07 13:55:50,East England,134,moderate,hydro,0
+2025-04-07 13:55:50,East England,134,moderate,solar,36.3
+2025-04-07 13:55:50,East England,134,moderate,wind,6.8
+2025-04-07 13:55:50,South West England,78,low,biomass,0
+2025-04-07 13:55:50,South West England,78,low,coal,0
+2025-04-07 13:55:50,South West England,78,low,imports,0
+2025-04-07 13:55:50,South West England,78,low,gas,19.8
+2025-04-07 13:55:50,South West England,78,low,nuclear,0
+2025-04-07 13:55:50,South West England,78,low,other,0
+2025-04-07 13:55:50,South West England,78,low,hydro,0
+2025-04-07 13:55:50,South West England,78,low,solar,78.8
+2025-04-07 13:55:50,South West England,78,low,wind,1.5
+2025-04-07 13:55:50,South England,87,low,biomass,0
+2025-04-07 13:55:50,South England,87,low,coal,0
+2025-04-07 13:55:50,South England,87,low,imports,30.8
+2025-04-07 13:55:50,South England,87,low,gas,17.2
+2025-04-07 13:55:50,South England,87,low,nuclear,0
+2025-04-07 13:55:50,South England,87,low,other,0
+2025-04-07 13:55:50,South England,87,low,hydro,0.1
+2025-04-07 13:55:50,South England,87,low,solar,50.5
+2025-04-07 13:55:50,South England,87,low,wind,1.5
+2025-04-07 13:55:50,London,125,moderate,biomass,0
+2025-04-07 13:55:50,London,125,moderate,coal,0
+2025-04-07 13:55:50,London,125,moderate,imports,42.1
+2025-04-07 13:55:50,London,125,moderate,gas,18.2
+2025-04-07 13:55:50,London,125,moderate,nuclear,5.5
+2025-04-07 13:55:50,London,125,moderate,other,0
+2025-04-07 13:55:50,London,125,moderate,hydro,0.2
+2025-04-07 13:55:50,London,125,moderate,solar,26.8
+2025-04-07 13:55:50,London,125,moderate,wind,7.1
+2025-04-07 13:55:50,South East England,124,moderate,biomass,0
+2025-04-07 13:55:50,South East England,124,moderate,coal,0
+2025-04-07 13:55:50,South East England,124,moderate,imports,48.9
+2025-04-07 13:55:50,South East England,124,moderate,gas,19.9
+2025-04-07 13:55:50,South East England,124,moderate,nuclear,0
+2025-04-07 13:55:50,South East England,124,moderate,other,0
+2025-04-07 13:55:50,South East England,124,moderate,hydro,0.3
+2025-04-07 13:55:50,South East England,124,moderate,solar,23.6
+2025-04-07 13:55:50,South East England,124,moderate,wind,7.3
+2025-04-07 13:55:50,England,110,moderate,biomass,8.5
+2025-04-07 13:55:50,England,110,moderate,coal,0
+2025-04-07 13:55:50,England,110,moderate,imports,17.8
+2025-04-07 13:55:50,England,110,moderate,gas,18.6
+2025-04-07 13:55:50,England,110,moderate,nuclear,13.5
+2025-04-07 13:55:50,England,110,moderate,other,0
+2025-04-07 13:55:50,England,110,moderate,hydro,0
+2025-04-07 13:55:50,England,110,moderate,solar,37.5
+2025-04-07 13:55:50,England,110,moderate,wind,4
+2025-04-07 13:55:50,Scotland,92,low,biomass,4.2
+2025-04-07 13:55:50,Scotland,92,low,coal,0
+2025-04-07 13:55:50,Scotland,92,low,imports,4.6
+2025-04-07 13:55:50,Scotland,92,low,gas,20.5
+2025-04-07 13:55:50,Scotland,92,low,nuclear,27.1
+2025-04-07 13:55:50,Scotland,92,low,other,0
+2025-04-07 13:55:50,Scotland,92,low,hydro,0
+2025-04-07 13:55:50,Scotland,92,low,solar,32.9
+2025-04-07 13:55:50,Scotland,92,low,wind,10.6
+2025-04-07 13:55:50,Wales,198,high,biomass,0.3
+2025-04-07 13:55:50,Wales,198,high,coal,0
+2025-04-07 13:55:50,Wales,198,high,imports,0.6
+2025-04-07 13:55:50,Wales,198,high,gas,50
+2025-04-07 13:55:50,Wales,198,high,nuclear,0.5
+2025-04-07 13:55:50,Wales,198,high,other,0
+2025-04-07 13:55:50,Wales,198,high,hydro,0
+2025-04-07 13:55:50,Wales,198,high,solar,37.4
+2025-04-07 13:55:50,Wales,198,high,wind,11.3
+2025-04-07 13:55:50,GB,113,moderate,biomass,7.6
+2025-04-07 13:55:50,GB,113,moderate,coal,0
+2025-04-07 13:55:50,GB,113,moderate,imports,15.6
+2025-04-07 13:55:50,GB,113,moderate,gas,20.7
+2025-04-07 13:55:50,GB,113,moderate,nuclear,14
+2025-04-07 13:55:50,GB,113,moderate,other,0
+2025-04-07 13:55:50,GB,113,moderate,hydro,0
+2025-04-07 13:55:50,GB,113,moderate,solar,37.1
+2025-04-07 13:55:50,GB,113,moderate,wind,5.1
+2025-04-07 13:56:08,North Scotland,169,moderate,biomass,4.5
+2025-04-07 13:56:08,North Scotland,169,moderate,coal,0
+2025-04-07 13:56:08,North Scotland,169,moderate,imports,5.3
+2025-04-07 13:56:08,North Scotland,169,moderate,gas,41.4
+2025-04-07 13:56:08,North Scotland,169,moderate,nuclear,19.2
+2025-04-07 13:56:08,North Scotland,169,moderate,other,0
+2025-04-07 13:56:08,North Scotland,169,moderate,hydro,0
+2025-04-07 13:56:08,North Scotland,169,moderate,solar,10.4
+2025-04-07 13:56:08,North Scotland,169,moderate,wind,19.3
+2025-04-07 13:56:08,South Scotland,23,very low,biomass,10
+2025-04-07 13:56:08,South Scotland,23,very low,coal,0
+2025-04-07 13:56:08,South Scotland,23,very low,imports,11.9
+2025-04-07 13:56:08,South Scotland,23,very low,gas,2.7
+2025-04-07 13:56:08,South Scotland,23,very low,nuclear,47.3
+2025-04-07 13:56:08,South Scotland,23,very low,other,0
+2025-04-07 13:56:08,South Scotland,23,very low,hydro,0
+2025-04-07 13:56:08,South Scotland,23,very low,solar,23.3
+2025-04-07 13:56:08,South Scotland,23,very low,wind,4.8
+2025-04-07 13:56:08,North West England,73,low,biomass,13.4
+2025-04-07 13:56:08,North West England,73,low,coal,0
+2025-04-07 13:56:08,North West England,73,low,imports,7.2
+2025-04-07 13:56:08,North West England,73,low,gas,14.4
+2025-04-07 13:56:08,North West England,73,low,nuclear,48.6
+2025-04-07 13:56:08,North West England,73,low,other,0
+2025-04-07 13:56:08,North West England,73,low,hydro,0
+2025-04-07 13:56:08,North West England,73,low,solar,12.5
+2025-04-07 13:56:08,North West England,73,low,wind,3.9
+2025-04-07 13:56:08,North East England,31,low,biomass,18.1
+2025-04-07 13:56:08,North East England,31,low,coal,0
+2025-04-07 13:56:08,North East England,31,low,imports,37.6
+2025-04-07 13:56:08,North East England,31,low,gas,2.1
+2025-04-07 13:56:08,North East England,31,low,nuclear,25.6
+2025-04-07 13:56:08,North East England,31,low,other,0
+2025-04-07 13:56:08,North East England,31,low,hydro,0
+2025-04-07 13:56:08,North East England,31,low,solar,14.5
+2025-04-07 13:56:08,North East England,31,low,wind,1.9
+2025-04-07 13:56:08,Yorkshire,160,moderate,biomass,52.7
+2025-04-07 13:56:08,Yorkshire,160,moderate,coal,0
+2025-04-07 13:56:08,Yorkshire,160,moderate,imports,0.7
+2025-04-07 13:56:08,Yorkshire,160,moderate,gas,24
+2025-04-07 13:56:08,Yorkshire,160,moderate,nuclear,0.4
+2025-04-07 13:56:08,Yorkshire,160,moderate,other,0
+2025-04-07 13:56:08,Yorkshire,160,moderate,hydro,0
+2025-04-07 13:56:08,Yorkshire,160,moderate,solar,18.8
+2025-04-07 13:56:08,Yorkshire,160,moderate,wind,3.3
+2025-04-07 13:56:08,North Wales & Merseyside,45,low,biomass,3.3
+2025-04-07 13:56:08,North Wales & Merseyside,45,low,coal,0
+2025-04-07 13:56:08,North Wales & Merseyside,45,low,imports,3.1
+2025-04-07 13:56:08,North Wales & Merseyside,45,low,gas,10
+2025-04-07 13:56:08,North Wales & Merseyside,45,low,nuclear,12.6
+2025-04-07 13:56:08,North Wales & Merseyside,45,low,other,0
+2025-04-07 13:56:08,North Wales & Merseyside,45,low,hydro,0
+2025-04-07 13:56:08,North Wales & Merseyside,45,low,solar,53.9
+2025-04-07 13:56:08,North Wales & Merseyside,45,low,wind,17.1
+2025-04-07 13:56:08,South Wales,222,high,biomass,0
+2025-04-07 13:56:08,South Wales,222,high,coal,0
+2025-04-07 13:56:08,South Wales,222,high,imports,0
+2025-04-07 13:56:08,South Wales,222,high,gas,56.4
+2025-04-07 13:56:08,South Wales,222,high,nuclear,0
+2025-04-07 13:56:08,South Wales,222,high,other,0
+2025-04-07 13:56:08,South Wales,222,high,hydro,0
+2025-04-07 13:56:08,South Wales,222,high,solar,39.9
+2025-04-07 13:56:08,South Wales,222,high,wind,3.7
+2025-04-07 13:56:08,West Midlands,121,moderate,biomass,0.9
+2025-04-07 13:56:08,West Midlands,121,moderate,coal,0
+2025-04-07 13:56:08,West Midlands,121,moderate,imports,15.2
+2025-04-07 13:56:08,West Midlands,121,moderate,gas,26.4
+2025-04-07 13:56:08,West Midlands,121,moderate,nuclear,5.6
+2025-04-07 13:56:08,West Midlands,121,moderate,other,0
+2025-04-07 13:56:08,West Midlands,121,moderate,hydro,0
+2025-04-07 13:56:08,West Midlands,121,moderate,solar,49.3
+2025-04-07 13:56:08,West Midlands,121,moderate,wind,2.5
+2025-04-07 13:56:08,East Midlands,169,moderate,biomass,0
+2025-04-07 13:56:08,East Midlands,169,moderate,coal,0
+2025-04-07 13:56:08,East Midlands,169,moderate,imports,7.3
+2025-04-07 13:56:08,East Midlands,169,moderate,gas,37.6
+2025-04-07 13:56:08,East Midlands,169,moderate,nuclear,5.1
+2025-04-07 13:56:08,East Midlands,169,moderate,other,0
+2025-04-07 13:56:08,East Midlands,169,moderate,hydro,0
+2025-04-07 13:56:08,East Midlands,169,moderate,solar,46.3
+2025-04-07 13:56:08,East Midlands,169,moderate,wind,3.6
+2025-04-07 13:56:08,East England,134,moderate,biomass,0
+2025-04-07 13:56:08,East England,134,moderate,coal,0
+2025-04-07 13:56:08,East England,134,moderate,imports,20.9
+2025-04-07 13:56:08,East England,134,moderate,gas,12.8
+2025-04-07 13:56:08,East England,134,moderate,nuclear,23.2
+2025-04-07 13:56:08,East England,134,moderate,other,0
+2025-04-07 13:56:08,East England,134,moderate,hydro,0
+2025-04-07 13:56:08,East England,134,moderate,solar,36.3
+2025-04-07 13:56:08,East England,134,moderate,wind,6.8
+2025-04-07 13:56:08,South West England,78,low,biomass,0
+2025-04-07 13:56:08,South West England,78,low,coal,0
+2025-04-07 13:56:08,South West England,78,low,imports,0
+2025-04-07 13:56:08,South West England,78,low,gas,19.8
+2025-04-07 13:56:08,South West England,78,low,nuclear,0
+2025-04-07 13:56:08,South West England,78,low,other,0
+2025-04-07 13:56:08,South West England,78,low,hydro,0
+2025-04-07 13:56:08,South West England,78,low,solar,78.8
+2025-04-07 13:56:08,South West England,78,low,wind,1.5
+2025-04-07 13:56:08,South England,87,low,biomass,0
+2025-04-07 13:56:08,South England,87,low,coal,0
+2025-04-07 13:56:08,South England,87,low,imports,30.8
+2025-04-07 13:56:08,South England,87,low,gas,17.2
+2025-04-07 13:56:08,South England,87,low,nuclear,0
+2025-04-07 13:56:08,South England,87,low,other,0
+2025-04-07 13:56:08,South England,87,low,hydro,0.1
+2025-04-07 13:56:08,South England,87,low,solar,50.5
+2025-04-07 13:56:08,South England,87,low,wind,1.5
+2025-04-07 13:56:08,London,125,moderate,biomass,0
+2025-04-07 13:56:08,London,125,moderate,coal,0
+2025-04-07 13:56:08,London,125,moderate,imports,42.1
+2025-04-07 13:56:08,London,125,moderate,gas,18.2
+2025-04-07 13:56:08,London,125,moderate,nuclear,5.5
+2025-04-07 13:56:08,London,125,moderate,other,0
+2025-04-07 13:56:08,London,125,moderate,hydro,0.2
+2025-04-07 13:56:08,London,125,moderate,solar,26.8
+2025-04-07 13:56:08,London,125,moderate,wind,7.1
+2025-04-07 13:56:08,South East England,124,moderate,biomass,0
+2025-04-07 13:56:08,South East England,124,moderate,coal,0
+2025-04-07 13:56:08,South East England,124,moderate,imports,48.9
+2025-04-07 13:56:08,South East England,124,moderate,gas,19.9
+2025-04-07 13:56:08,South East England,124,moderate,nuclear,0
+2025-04-07 13:56:08,South East England,124,moderate,other,0
+2025-04-07 13:56:08,South East England,124,moderate,hydro,0.3
+2025-04-07 13:56:08,South East England,124,moderate,solar,23.6
+2025-04-07 13:56:08,South East England,124,moderate,wind,7.3
+2025-04-07 13:56:08,England,110,moderate,biomass,8.5
+2025-04-07 13:56:08,England,110,moderate,coal,0
+2025-04-07 13:56:08,England,110,moderate,imports,17.8
+2025-04-07 13:56:08,England,110,moderate,gas,18.6
+2025-04-07 13:56:08,England,110,moderate,nuclear,13.5
+2025-04-07 13:56:08,England,110,moderate,other,0
+2025-04-07 13:56:08,England,110,moderate,hydro,0
+2025-04-07 13:56:08,England,110,moderate,solar,37.5
+2025-04-07 13:56:08,England,110,moderate,wind,4
+2025-04-07 13:56:08,Scotland,92,low,biomass,4.2
+2025-04-07 13:56:08,Scotland,92,low,coal,0
+2025-04-07 13:56:08,Scotland,92,low,imports,4.6
+2025-04-07 13:56:08,Scotland,92,low,gas,20.5
+2025-04-07 13:56:08,Scotland,92,low,nuclear,27.1
+2025-04-07 13:56:08,Scotland,92,low,other,0
+2025-04-07 13:56:08,Scotland,92,low,hydro,0
+2025-04-07 13:56:08,Scotland,92,low,solar,32.9
+2025-04-07 13:56:08,Scotland,92,low,wind,10.6
+2025-04-07 13:56:08,Wales,198,high,biomass,0.3
+2025-04-07 13:56:08,Wales,198,high,coal,0
+2025-04-07 13:56:08,Wales,198,high,imports,0.6
+2025-04-07 13:56:08,Wales,198,high,gas,50
+2025-04-07 13:56:08,Wales,198,high,nuclear,0.5
+2025-04-07 13:56:08,Wales,198,high,other,0
+2025-04-07 13:56:08,Wales,198,high,hydro,0
+2025-04-07 13:56:08,Wales,198,high,solar,37.4
+2025-04-07 13:56:08,Wales,198,high,wind,11.3
+2025-04-07 13:56:08,GB,113,moderate,biomass,7.6
+2025-04-07 13:56:08,GB,113,moderate,coal,0
+2025-04-07 13:56:08,GB,113,moderate,imports,15.6
+2025-04-07 13:56:08,GB,113,moderate,gas,20.7
+2025-04-07 13:56:08,GB,113,moderate,nuclear,14
+2025-04-07 13:56:08,GB,113,moderate,other,0
+2025-04-07 13:56:08,GB,113,moderate,hydro,0
+2025-04-07 13:56:08,GB,113,moderate,solar,37.1
+2025-04-07 13:56:08,GB,113,moderate,wind,5.1
