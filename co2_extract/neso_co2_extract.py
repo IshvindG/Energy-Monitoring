@@ -1,5 +1,3 @@
-# This script extracts data about forecast and actual carbon intensity data
-import json
 from urllib import parse
 import requests
 import csv
