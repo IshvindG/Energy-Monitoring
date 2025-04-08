@@ -96,4 +96,4 @@ venv/
 *.tfstate.backup
 .terraform.lock.hcl
 *.log
-energy-generation/data/.csv
+energy-generation/data/*.csv
