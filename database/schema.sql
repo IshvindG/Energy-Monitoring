@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS outage_postcodes;
 DROP TABLE IF EXISTS outages;
 DROP TABLE IF EXISTS regions;
+DROP TABLE IF EXISTS demands;
 
 CREATE TABLE regions(
     region_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
@@ -101,5 +102,12 @@ CREATE TABLE alerts(
     CONSTRAINT fk_outage_postcode_id FOREIGN KEY (outage_postcode_id) REFERENCES outage_postcodes (outage_postcode_id),
     CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users (user_id)
 
+);
+
+CREATE TABLE demands(
+    demand_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
+    demand_at TIMESTAMP,
+    total_demand SMALLINT,
+    PRIMARY KEY (demand_id)
 );
 
