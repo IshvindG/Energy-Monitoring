@@ -1,4 +1,4 @@
-"""Extract energy generation data"""
+"""Extract energy generation data from online source"""
 from datetime import datetime, timedelta
 import csv
 import logging
@@ -8,8 +8,9 @@ TODAY = datetime.now()
 YESTERDAY = TODAY - timedelta(hours=24)
 
 BASE_URL = "https://data.elexon.co.uk/bmrs/api/v1"
-FUEL_GEN_URL = f"{BASE_URL}/generation/outturn/current"
-SYS_DEMAND_URL = f"{BASE_URL}/demand/outturn/summary?resolution=hourly&format=json"
+# FUEL_GEN_URL = f"{BASE_URL}/generation/outturn/current"
+FUEL_GEN_URL = f"{BASE_URL}/datasets/FUELINST"
+SYS_DEMAND_URL = f"{BASE_URL}/demand/outturn/summary?resolution=minute&format=json"
 INTERCONNECT_URL = f"{BASE_URL}/generation/outturn/interconnectors"
 MARKET_PRICE_URL = f"{BASE_URL}/balancing/pricing/market-index"\
     f"?from={YESTERDAY.isoformat()}&to={TODAY.isoformat()}&dataProviders=APXMIDP"
@@ -63,14 +64,15 @@ def save_data(filename: str, data: list[dict]) -> None:
 
 
 if __name__ == "__main__":
+    # When run alone this script will take data and write to CSV files
     energy_gen_data = get_generation_data()
-    save_data('data/energy_generation.csv', energy_gen_data)
+    save_data('data/energy_generation.csv', energy_gen_data['data'])
 
     demand_data = get_demand_data()
     save_data('data/energy_demand.csv', demand_data)
 
     interconnect_data = get_interconnect_data()
-    save_data('data/interconnect.csv', interconnect_data['data'])
+    save_data('data/interconnect.csv', interconnect_data.get('data'))
 
     market_price_data = get_pricing_data()
-    save_data('data/market_price.csv', market_price_data['data'])
+    save_data('data/market_price.csv', market_price_data.get('data'))
