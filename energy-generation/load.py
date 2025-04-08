@@ -13,6 +13,7 @@ DB_USER = os.getenv('DB_USER')
 DB_PASSWORD = os.getenv('DB_PASSWORD')
 DB_NAME = os.getenv('DB_NAME')
 DB_PORT = os.getenv('DB_PORT')
+logger = logging.getLogger()
 
 
 def get_connection() -> connection:
@@ -32,6 +33,8 @@ def get_cursor(db_conn: connection) -> cursor:
 
 def load_energy_generation_data(data: list[dict]) -> None:
     """Load energy generation data into the database"""
+
+    logger.info("Loading energy data into database")
     db_conn = get_connection()
     db_cursor = get_cursor(db_conn)
 
@@ -53,6 +56,7 @@ def load_energy_generation_data(data: list[dict]) -> None:
 def load_market_price_data(data: list[dict]) -> None:
     """Load market data into database"""
 
+    logger.info("Loading market data into database")
     db_conn = get_connection()
     db_cursor = get_cursor(db_conn)
 
@@ -73,7 +77,7 @@ def load_market_price_data(data: list[dict]) -> None:
 
 def load_energy_demand_data(data: list[dict]) -> None:
     """Load demand data into database"""
-
+    logger.info("Loading demand data into database")
     db_conn = get_connection()
     db_cursor = get_cursor(db_conn)
 

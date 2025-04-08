@@ -30,21 +30,25 @@ def perform_http_get(url: str) -> list[dict]:
 
 def get_generation_data() -> list[dict]:
     """Retrieve generation data from Elexon Insights"""
+    logger.info("Getting Generation data...")
     return perform_http_get(FUEL_GEN_URL)
 
 
 def get_demand_data() -> list[dict]:
     """Retrieve demand data from Elexon Insights"""
+    logger.info("Getting Demand data...")
     return perform_http_get(SYS_DEMAND_URL)
 
 
 def get_pricing_data() -> list[dict]:
     """Retrieve market index data from Elexon Insights"""
+    logger.info("Getting Pricing data...")
     return perform_http_get(MARKET_PRICE_URL)
 
 
 def get_interconnect_data() -> list[dict]:
     """Retrieve interconnect data from Elexon Insights"""
+    logger.info("Getting Interconnect data...")
     return perform_http_get(INTERCONNECT_URL)
 
 
