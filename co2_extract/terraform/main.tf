@@ -40,10 +40,6 @@ data "aws_iam_policy_document" "lambda-logging" {
 }
 
 
-resource "aws_ecr_repository" "energy-co2-repo" {
-  name = "c16-energy-co2-pipeline"
-}
-
 resource "aws_iam_role" "energy-co2-lambda-iam" {
   name               = "c16-energy-co2-lambda-iam"
   assume_role_policy = data.aws_iam_policy_document.assume-role.json
