@@ -13,7 +13,7 @@ provider "aws" {
 
 
 data "aws_ecr_image" "energy-generation-pipeline-image" {
-  repository_name = c16-energy-generation-pipeline
+  repository_name = "c16-energy-generation-pipeline"
   image_tag = "latest"
 }
 
@@ -60,14 +60,14 @@ resource "aws_iam_role_policy" "lambda-logs-policy" {
 
 resource "aws_lambda_function" "energy-generation-lambda" {
   function_name = "c16-energy-generation-lambda"
-  image_uri = data.aws_ecr_image.energy-generation-image.image_uri
+  image_uri = data.aws_ecr_image.energy-generation-pipeline-image.image_uri
 
   role = aws_iam_role.energy-generation-lambda-iam.arn
   package_type = "Image"
   environment {
     variables = {
                 DB_NAME = var.DB_NAME,
-                DB_USERNAME = var.DB_USERNAME,
+                DB_USER = var.DB_USER,
                 DB_HOST = var.DB_HOST,
                 DB_PORT = var.DB_PORT,
                 DB_PASSWORD = var.DB_PASSWORD
