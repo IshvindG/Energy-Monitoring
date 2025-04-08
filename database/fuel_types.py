@@ -56,6 +56,7 @@ def insert_fuel_types_into_db(fuel_types: list[str], conn: 'Connection'):
 
 
 if __name__ == "__main__":
+    enable_logging()
     connection = get_connection_to_db()
     fuels = get_fuel_types_from_api(URL)
     insert_fuel_types_into_db(fuels, connection)
