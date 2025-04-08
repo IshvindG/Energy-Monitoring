@@ -18,9 +18,12 @@ def enable_logger() -> None:
     )
 
 
-def main():
+def handler(event: dict, context: dict):
     """Main method - Perform ETL pipeline"""
     enable_logger()
+
+    logger.info("Event: %s", event)
+    logger.info("Context: %s", context)
 
     logger.info("Getting data")
     pricing_data = get_pricing_data().get('data')
@@ -30,7 +33,7 @@ def main():
     logger.info("Creating dataframes")
     pricing_data_df = pd.DataFrame(pricing_data)
     demand_data_df = pd.DataFrame(demand_data)
-    generation_data_df = pd.DataFrame(generation_data)\
+    generation_data_df = pd.DataFrame(generation_data)
 
     logger.info("Cleaning data")
     cleaned_pricing_data = transform_market_price(pricing_data_df)
@@ -51,4 +54,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    handler(None, None)

@@ -109,8 +109,8 @@ if __name__ == '__main__':
     db_connection = get_connection()
     db_cur = get_cursor(db_connection)
 
-    # energy_generation_data = load_csv('data/energy_generation_cleaned.csv')
-    # load_energy_generation_data(energy_generation_data)
+    energy_generation_data = load_csv('data/energy_generation_cleaned.csv')
+    load_energy_generation_data(energy_generation_data)
 
     market_price_data = load_csv('data/market_price_cleaned.csv')
     print(market_price_data)
@@ -118,7 +118,7 @@ if __name__ == '__main__':
 
     demand_data = load_csv('data/energy_demand_cleaned.csv')
     print(demand_data)
-    # load_energy_demand_data(demand_data)
+    load_energy_demand_data(demand_data)
 
     db_cur.close()
     db_connection.close()
