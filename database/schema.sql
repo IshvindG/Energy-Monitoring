@@ -36,7 +36,7 @@ CREATE TABLE outage_postcodes(
 
 CREATE TABLE prices(
     price_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
-    price_per_kwh SMALLINT,
+    price_per_mwh SMALLINT,
     price_at TIMESTAMP,
     region_id SMALLINT,
     PRIMARY KEY (price_id),
@@ -59,7 +59,7 @@ CREATE TABLE carbon_intensities(
 CREATE TABLE fuel_types(
     fuel_type_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
     fuel_type VARCHAR(20),
-    regenerative BOOL,
+    fuel_type_name VARCHAR(50),
     PRIMARY KEY (fuel_type_id)
 );
 
