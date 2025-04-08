@@ -11,7 +11,8 @@ BASE_URL = "https://data.elexon.co.uk/bmrs/api/v1"
 FUEL_GEN_URL = f"{BASE_URL}/generation/outturn/current"
 SYS_DEMAND_URL = f"{BASE_URL}/demand/outturn/summary?resolution=hourly&format=json"
 INTERCONNECT_URL = f"{BASE_URL}/generation/outturn/interconnectors"
-MARKET_PRICE_URL = f"{BASE_URL}/balancing/pricing/market-index?from={YESTERDAY.isoformat()}&to={TODAY.isoformat()}&dataProviders=APXMIDP"
+MARKET_PRICE_URL = f"{BASE_URL}/balancing/pricing/market-index"\
+    f"?from={YESTERDAY.isoformat()}&to={TODAY.isoformat()}&dataProviders=APXMIDP"
 
 logger = logging.getLogger()
 
