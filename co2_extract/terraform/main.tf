@@ -11,6 +11,12 @@ provider "aws" {
   region = "eu-west-2"
 }
 
+
+data "aws_ecr_image" "energy-co2-pipeline-image" {
+  repository_name = c16-energy-co2-pipeline
+  image_tag = "latest"
+}
+
 data "aws_iam_policy_document" "assume-role" {
   statement {
     effect = "Allow"
@@ -51,14 +57,11 @@ resource "aws_iam_role_policy" "lambda-logs-policy" {
   policy = data.aws_iam_policy_document.lambda-logging.json
 }
 
-data "aws_ecr_image" "energy-co2-image" {
-  repository_name = aws_ecr_repository.energy-co2-repo.name
-  image_tag       = "latest"
-}
 
 resource "aws_lambda_function" "energy-co2-lambda" {
   function_name = "c16-energy-co2-lambda"
   image_uri = data.aws_ecr_image.energy-co2-image.image_uri
+
   role = aws_iam_role.energy-co2-lambda-iam.arn
   package_type = "Image"
   environment {
