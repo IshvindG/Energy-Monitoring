@@ -5,12 +5,12 @@ from transform import transform_market_price, transform_energy_generation, trans
 from load import load_market_price_data, load_energy_generation_data, load_energy_demand_data
 import pandas as pd
 
-logger = logging.getLogger()
+logger = logging.getLogger(__name__)
 
 
 def enable_logger() -> None:
     """Enable basic logger"""
-    logger.basicConfig(
+    logging.basicConfig(
         level=logging.INFO,
         format="{asctime} - {levelname} - {message}",
         style="{",

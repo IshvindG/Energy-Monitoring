@@ -2,8 +2,9 @@
 import logging
 import pandas as pd
 DATA_FOLDER = "data/"
+DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
 
-logger = logging.getLogger()
+logger = logging.getLogger(__name__)
 
 
 def filter_by_largest(filter_column_name: str, df: pd.DataFrame) -> pd.DataFrame:
@@ -28,7 +29,8 @@ def transform_energy_demand(df: pd.DataFrame) -> pd.DataFrame:
     """Read and transform energy demand"""
     logger.info("Working on energy demand dataframe")
     df.drop(columns=['recordType'], inplace=True)
-    df['startTime'] = pd.to_datetime(df['startTime'], utc=True)
+    df['startTime'] = pd.to_datetime(
+        df['startTime'], utc=True, format='ISO8601')
     df = filter_by_largest('startTime', df)
     return df
 
@@ -39,7 +41,8 @@ def transform_interconnect_data(df: pd.DataFrame) -> pd.DataFrame:
     df.drop(columns=['dataset', 'startTime', 'settlementDate',
             'settlementDateTimezone', 'settlementPeriod'], inplace=True)
 
-    df['publishTime'] = pd.to_datetime(df['publishTime'], utc=True)
+    df['publishTime'] = pd.to_datetime(
+        df['publishTime'], utc=True, format='ISO8601')
     df = filter_by_largest('publishTime', df)
     return df
 
@@ -50,7 +53,8 @@ def transform_market_price(df: pd.DataFrame) -> pd.DataFrame:
     logger.info("Working on energy market pricing dataframe")
     df.drop(columns=['dataProvider', 'settlementDate',
             'settlementPeriod'], inplace=True)
-    df['startTime'] = pd.to_datetime(df['startTime'], utc=True)
+    df['startTime'] = pd.to_datetime(
+        df['startTime'], utc=True, format='ISO8601')
     df = filter_by_largest('startTime', df)
     return df
 

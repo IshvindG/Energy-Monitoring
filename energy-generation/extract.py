@@ -14,7 +14,7 @@ INTERCONNECT_URL = f"{BASE_URL}/generation/outturn/interconnectors"
 MARKET_PRICE_URL = f"{BASE_URL}/balancing/pricing/market-index"\
     f"?from={YESTERDAY.isoformat()}&to={TODAY.isoformat()}&dataProviders=APXMIDP"
 
-logger = logging.getLogger()
+logger = logging.getLogger(__name__)
 
 
 def perform_http_get(url: str) -> list[dict]:

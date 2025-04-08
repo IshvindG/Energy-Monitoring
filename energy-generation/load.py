@@ -13,7 +13,7 @@ DB_USER = os.getenv('DB_USER')
 DB_PASSWORD = os.getenv('DB_PASSWORD')
 DB_NAME = os.getenv('DB_NAME')
 DB_PORT = os.getenv('DB_PORT')
-logger = logging.getLogger()
+logger = logging.getLogger(__name__)
 
 
 def get_connection() -> connection:
@@ -47,7 +47,9 @@ def load_energy_generation_data(data: list[dict]) -> None:
         db_cursor.executemany(statement, (rows))
         db_conn.commit()
     except (psycopg2.Error) as db_error:
-        logging.error('Load failed - %s', db_error)
+        logger.error('Error Loading generation data')
+        logger.error('Load failed - %s', db_error)
+        logger.error('Value %s', data)
     finally:
         db_cursor.close()
         db_conn.close()
@@ -69,7 +71,9 @@ def load_market_price_data(data: list[dict]) -> None:
         db_cursor.execute(statement, row)
         db_conn.commit()
     except (psycopg2.Error) as db_error:
-        logging.error('Load failed - %s', db_error)
+        logger.error('Error Loading price data')
+        logger.error('Load failed - %s', db_error)
+        logger.error('Value %s', data)
     finally:
         db_cursor.close()
         db_conn.close()
@@ -90,7 +94,9 @@ def load_energy_demand_data(data: list[dict]) -> None:
         db_cursor.execute(statement, row)
         db_conn.commit()
     except (psycopg2.Error) as db_error:
-        logging.error('Load failed - %s', db_error)
+        logger.error('Error Loading demand data')
+        logger.error('Load failed - %s', db_error)
+        logger.error('Value %s', data)
     finally:
         db_cursor.close()
         db_conn.close()
