@@ -8,7 +8,6 @@ TODAY = datetime.now()
 YESTERDAY = TODAY - timedelta(hours=24)
 
 BASE_URL = "https://data.elexon.co.uk/bmrs/api/v1"
-# FUEL_GEN_URL = f"{BASE_URL}/generation/outturn/current"
 FUEL_GEN_URL = f"{BASE_URL}/datasets/FUELINST"
 SYS_DEMAND_URL = f"{BASE_URL}/demand/outturn/summary?resolution=minute&format=json"
 INTERCONNECT_URL = f"{BASE_URL}/generation/outturn/interconnectors"
