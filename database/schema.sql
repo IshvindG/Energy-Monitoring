@@ -117,6 +117,6 @@ CREATE TABLE alerts(
 CREATE TABLE demands(
     demand_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
     demand_at TIMESTAMP,
-    total_demand SMALLINT,
+    total_demand BIGINT,
     PRIMARY KEY (demand_id)
 );
