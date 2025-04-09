@@ -13,7 +13,7 @@ provider "aws" {
 
 
 data "aws_ecr_image" "update-user-image" {
-  repository_name = "c16-energy-subscribe-users"
+  repository_name = "c16-energy-unsubscribe-users"
   image_tag = "latest"
 }
 
@@ -46,23 +46,23 @@ data "aws_iam_policy_document" "lambda-logging" {
 }
 
 
-resource "aws_iam_role" "energy-subscribe-lambda-iam" {
-  name               = "c16-energy-subscribe-lambda-iam"
+resource "aws_iam_role" "energy-unsubscribe-lambda-iam" {
+  name               = "c16-energy-unsubscribe-lambda-iam"
   assume_role_policy = data.aws_iam_policy_document.assume-role.json
 }
 
 resource "aws_iam_role_policy" "lambda-logs-policy" {
   name   = "lambda-logs"
-  role   = aws_iam_role.energy-subscribe-lambda-iam.id
+  role   = aws_iam_role.energy-unsubscribe-lambda-iam.id
   policy = data.aws_iam_policy_document.lambda-logging.json
 }
 
 
 resource "aws_lambda_function" "energy-subscribe-lambda" {
-  function_name = "c16-energy-subscribe-lambda"
+  function_name = "c16-energy-unsubscribe-lambda"
   image_uri = data.aws_ecr_image.update-user-image.image_uri
 
-  role = aws_iam_role.energy-subscribe-lambda-iam.arn
+  role = aws_iam_role.energy-unsubscribe-lambda-iam.arn
   package_type = "Image"
   environment {
     variables = {

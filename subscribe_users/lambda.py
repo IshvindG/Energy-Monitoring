@@ -59,15 +59,12 @@ def check_user_exists(cursor: 'Cursor', user: dict):
     their user_id"""
     first_name, last_name, phone, email, postcode = user_details(user)
     query = """SELECT user_id FROM users
-                WHERE first_name = %s
-                AND last_name = %s
-                AND phone_number = %s
-                AND email = %s
-                AND postcode = %s"""
+                WHERE phone_number = %s
+                OR email = %s"""
 
     logging.info("Checking if user exists...")
 
-    cursor.execute(query, (first_name, last_name, phone, email, postcode))
+    cursor.execute(query, (phone, email))
     result = cursor.fetchall()
 
     if not result:
@@ -177,7 +174,7 @@ def send_email_verification(email: str, first_name: str):
     logging.info("Sending email verification to: %s", email)
     ses = boto3.client('ses', region_name='eu-west-2')
     ses.send_email(
-        Source="trainee.hadia.fadlelmawla@sigmalabs.co.uk",
+        Source=os.getenv("SENDER_EMAIL"),
         Destination={"ToAddresses": [email]},
         Message={
             "Subject": {"Data": "Welcome to Energy Monitor"},
@@ -244,3 +241,25 @@ def lambda_handler(event, context):
             "statusCode": 500,
             "body": json.dumps({"error": "Internal server error"})
         }
+
+
+def fake_event():
+
+    fake_event = {
+        "body": json.dumps({
+            "first_name": "Hadia",
+            "last_name": "Fadlelmawla",
+            "type": "newsletter",
+            "email": "trainee.hadia.fadlelmawla@sigmalabs.co.uk",
+            "phone": "+46487934"
+        })
+    }
+
+    return fake_event
+
+
+if __name__ == "__main__":
+
+    event = fake_event()
+    context = {}
+    lambda_handler(event, context)
