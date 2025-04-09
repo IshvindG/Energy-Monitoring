@@ -1,10 +1,24 @@
 import requests
 import os
 import csv
+import time
 from datetime import datetime
 from os.path import exists
 from bs4 import BeautifulSoup
 import pandas as pd
+import urllib3
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 
 # Providers
 
@@ -218,8 +232,94 @@ def sp_outage_scraper():
         print("No new records to append.")
 
 
+def scrape_northern_powergrid_map():
+    chrome_options = Options()
+    chrome_options.add_argument("--start-maximized")
+    driver = webdriver.Chrome(service=Service(
+        ChromeDriverManager().install()), options=chrome_options)
+
+    try:
+        driver.get("https://power.northernpowergrid.com/Powercuts/map")
+
+        wait = WebDriverWait(driver, 15)
+
+        try:
+            popup_bg = wait.until(
+                EC.presence_of_element_located((By.ID, "b72-PopupBG")))
+            print("Popup found, clicking to dismiss...")
+            ActionChains(driver).move_by_offset(10, 10).click().perform()
+            time.sleep(1)
+        except:
+            print("No popup found or already dismissed.")
+
+        try:
+            power_cut_button = wait.until(
+                EC.element_to_be_clickable((By.ID, "ButtonGroupItem6")))
+            power_cut_button.click()
+            print("Selected 'Current Power Cut' layer.")
+        except:
+            print("Failed to select the layer. Check button ID or visibility.")
+
+        time.sleep(2)
+
+        records = driver.find_elements(By.CSS_SELECTOR, ".record-list-item")
+        print(f"Found {len(records)} records.")
+
+        northern_power_outage_data = []
+
+        for record in records:
+            try:
+                power_cut_id = record.find_element(
+                    By.CSS_SELECTOR, ".mobile-right").text.strip()
+
+                category = record.find_element(
+                    By.CSS_SELECTOR, ".hide-tablet").text.strip() if record.find_elements(By.CSS_SELECTOR, ".hide-tablet") else "N/A"
+
+                start_time = record.find_elements(
+                    By.CSS_SELECTOR, ".OSFillParent")[0].text.strip()
+
+                end_time = record.find_elements(
+                    By.CSS_SELECTOR, ".OSFillParent")[1].text.strip()
+
+                postcodes = []
+                postcode_elements = record.find_elements(
+                    By.CSS_SELECTOR, ".list-group.inline-postcodes span[data-expression]")
+                for postcode in postcode_elements:
+                    postcodes.append(postcode.text.strip())
+                postcodes_str = ", ".join(postcodes)
+
+                premises_affected = record.find_elements(
+                    By.CSS_SELECTOR, ".hide-desktop")[2].text.strip()
+
+                northern_power_outage_data.append({
+                    "Power Cut ID": power_cut_id,
+                    "Category": category,
+                    "Start Time": start_time,
+                    "End Time": end_time,
+                    "Postcodes Affected": postcodes_str,
+                    "Premises Affected": premises_affected
+                })
+
+                print(
+                    f"Scraped: {power_cut_id}, {category}, {start_time}, {end_time}, {postcodes_str}, {premises_affected}")
+
+            except Exception as e:
+                print(f"Error with record: {e}")
+                continue
+
+        df = pd.DataFrame(northern_power_outage_data)
+        print(df)
+
+        df.to_csv("northern_power_outage_data.csv", index=False)
+        print("Data saved to northern_power_outage_data.csv")
+
+    finally:
+        driver.quit()
+
+
 if __name__ == "__main__":
     national_gird_outage_data()
     uk_power_networks_outage_data()
     ssen_outage_data()
     sp_outage_scraper()
+    scrape_northern_powergrid_map()
