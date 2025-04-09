@@ -11,4 +11,15 @@ labels:
 
 ---
 
-Please assign this ticket for someone to work on. Please make sure to add details, what is being fixed, where and set the size!
+> Please assign this ticket for someone to work on. Please make sure to add details, what is being fixed, where and set the size!
+
+### Description
+
+
+
+### Size
+
+
+
+ 
+---
