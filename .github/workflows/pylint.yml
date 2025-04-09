@@ -24,4 +24,4 @@ jobs:
             
             - name: Analyse Code
               run: |
-                pylint **/*.py --rcfile ./.pylintrc
+                pylint **/*.py --rcfile ./.pylintrc --output-format=github
