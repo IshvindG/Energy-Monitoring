@@ -1,13 +1,13 @@
-"""File for signing up to the alert system"""
+"""Script to create a subscription page in the dashboard"""
+import re
 import os
 import streamlit as st
+from utils.unsub_api import submit_form
 import psycopg2
-from psycopg2.extensions import connection
 from dotenv import load_dotenv
-from utils.api import submit_form
 
 
-def get_connection_to_db() -> connection:
+def get_connection_to_db():
     """Gets a psycopg2 connection to the energy database"""
     load_dotenv()
     return psycopg2.connect(host=os.getenv("DB_HOST"),
@@ -17,16 +17,16 @@ def get_connection_to_db() -> connection:
                             port=os.getenv("DB_PORT"))
 
 
-def execute_query(conn: connection, query: str) -> list[str]:
-    """Execute a query on the database"""
+def execute_query(conn: 'Connection', query: str) -> list[str]:
+    """"""
     cursor = conn.cursor()
     cursor.execute(query)
     result = cursor.fetchall()
     return result
 
 
-def get_region_data(conn: connection) -> list[str]:
-    """Get Region data from the database"""
+def get_region_data(conn: 'Connection') -> list[str]:
+
     cursor = conn.cursor()
 
     query = """SELECT region_name FROM regions;"""
@@ -40,30 +40,16 @@ def get_region_data(conn: connection) -> list[str]:
     return region_data
 
 
-def get_provider_data(conn: connection) -> list[str]:
-    """Get Provider data from the database"""
-    cursor = conn.cursor()
-
-    query = """SELECT provider_name FROM providers;"""
-    cursor.execute(query)
-    result = cursor.fetchall()
-    provider_data = []
-    for provider in result:
-        provider_data.append(provider[0])
-    return provider_data
-
-
-def newsletter_form(regions: list[str], providers: list[str]):
-    """Display Newsletter subscription form"""
-
-    st.header("Subscribe to Newsletter")
+def newsletter_form(regions: list[str]):
+    regions.append('All')
+    st.header("Unsubscribe from Newsletter")
     with st.form("newsletter_form"):
         first_name = st.text_input("First Name")
         last_name = st.text_input("Last Name")
+        phone = st.text_input("Phone Number")
         email = st.text_input("Email")
         region = st.selectbox("Region", regions)
         postcode = st.text_input("Postcode")
-        provider = st.selectbox("Provider", providers)
         submitted = st.form_submit_button("Submit")
 
         if submitted:
@@ -71,26 +57,25 @@ def newsletter_form(regions: list[str], providers: list[str]):
                 "type": "newsletter",
                 "first_name": first_name,
                 "last_name": last_name,
+                "phone": phone,
                 "email": email,
                 "region": region,
-                "postcode": postcode,
-                "provider": provider
+                "postcode": postcode
             })
             if result:
-                st.success("You're subscribed! 🎉")
+                st.success("You've successfully unsubscribed! ")
 
 
-def alert_form(regions: list[str], providers: list[str]):
-    """Display Alert subscription form"""
-
-    st.header("Subscribe to Outage Alerts")
+def alert_form(regions: list[str]):
+    regions.append('All')
+    st.header("Unsubscribe from Outage Alerts")
     with st.form("outage_form"):
         first_name = st.text_input("First Name", key="f2")
         last_name = st.text_input("Last Name", key="l2")
         phone = st.text_input("Phone Number", key="p2")
+        email = st.text_input("Email")
         region = st.selectbox("Region", regions, key="r2")
         postcode = st.text_input("Postcode", key="pc2")
-        provider = st.selectbox("Provider", providers, key="pr2")
         submitted = st.form_submit_button("Submit")
 
         if submitted:
@@ -99,31 +84,30 @@ def alert_form(regions: list[str], providers: list[str]):
                 "first_name": first_name,
                 "last_name": last_name,
                 "phone": phone,
+                "email": email,
                 "region": region,
                 "postcode": postcode,
-                "provider": provider
+
             })
             if result:
-                st.success("Alert subscription saved!")
+                st.success("Unsubscribed from alert!")
 
 
-def main(conn: connection):
-    """Start Dashboard"""
+def main(conn: 'Connection'):
 
-    st.title("Subscribe")
+    st.title("Unsubscribe :(")
 
     tab1, tab2 = st.tabs(["Newsletter", "Outage Alerts"])
 
     regions = get_region_data(conn)
-    providers = get_provider_data(conn)
 
     with tab1:
-        newsletter_form(regions, providers)
+        newsletter_form(regions)
 
     with tab2:
-        alert_form(regions, providers)
+        alert_form(regions)
 
 
 if __name__ == "__main__":
-    db_connection = get_connection_to_db()
-    main(db_connection)
+    connection = get_connection_to_db()
+    main(connection)
