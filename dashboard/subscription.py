@@ -1,8 +1,10 @@
+"""File for signing up to the alert system"""
 import os
 import streamlit as st
-from utils.api import submit_form
 import psycopg2
+from psycopg2.extensions import connection
 from dotenv import load_dotenv
+from utils.api import submit_form
 
 
 def get_connection_to_db():
@@ -15,15 +17,16 @@ def get_connection_to_db():
                             port=os.getenv("DB_PORT"))
 
 
-def execute_query(conn: 'Connection', query: str) -> list[str]:
+def execute_query(conn: connection, query: str) -> list[str]:
+    """Execute a query on the database"""
     cursor = conn.cursor()
     cursor.execute(query)
     result = cursor.fetchall()
     return result
 
 
-def get_region_data(conn: 'Connection') -> list[str]:
-
+def get_region_data(conn: connection) -> list[str]:
+    """Get Region data from the database"""
     cursor = conn.cursor()
 
     query = """SELECT region_name FROM regions;"""
@@ -37,8 +40,8 @@ def get_region_data(conn: 'Connection') -> list[str]:
     return region_data
 
 
-def get_provider_data(conn: 'Connection') -> list[str]:
-
+def get_provider_data(conn: connection) -> list[str]:
+    """Get Provider data from the database"""
     cursor = conn.cursor()
 
     query = """SELECT provider_name FROM providers;"""
@@ -51,6 +54,7 @@ def get_provider_data(conn: 'Connection') -> list[str]:
 
 
 def newsletter_form(regions: list[str], providers: list[str]):
+    """Display Newsletter subscription form"""
 
     st.header("Subscribe to Newsletter")
     with st.form("newsletter_form"):
@@ -77,6 +81,7 @@ def newsletter_form(regions: list[str], providers: list[str]):
 
 
 def alert_form(regions: list[str], providers: list[str]):
+    """Display Alert subscription form"""
 
     st.header("Subscribe to Outage Alerts")
     with st.form("outage_form"):
@@ -102,7 +107,8 @@ def alert_form(regions: list[str], providers: list[str]):
                 st.success("Alert subscription saved!")
 
 
-def main(conn: 'Connection'):
+def main(conn: connection):
+    """Start Dashboard"""
 
     st.title("Subscribe")
 
@@ -119,5 +125,5 @@ def main(conn: 'Connection'):
 
 
 if __name__ == "__main__":
-    connection = get_connection_to_db()
-    main(connection)
+    db_connection = get_connection_to_db()
+    main(db_connection)
