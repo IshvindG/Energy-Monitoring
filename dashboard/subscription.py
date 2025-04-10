@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from utils.api import submit_form
 
 
-def get_connection_to_db():
+def get_connection_to_db() -> connection:
     """Gets a psycopg2 connection to the energy database"""
     load_dotenv()
     return psycopg2.connect(host=os.getenv("DB_HOST"),
