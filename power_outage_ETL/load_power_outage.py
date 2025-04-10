@@ -1,10 +1,14 @@
+import os
+import logging
 import pandas as pd
 import psycopg2
 from psycopg2 import sql
-import os
 from dotenv import load_dotenv
 
 load_dotenv()
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
+
 
 DB_HOST = os.getenv('DB_HOST')
 DB_PORT = os.getenv('DB_PORT')
@@ -86,9 +90,21 @@ def upload_data_from_csv(csv_file):
     """
     Upload the cleaned data from the CSV file to the RDS Postgres database.
     """
-    df = pd.read_csv(csv_file)
+    logging.info(
+        "Starting the upload process from CSV file: %s", csv_file)
+
+    try:
+        df = pd.read_csv(csv_file)
+        logging.info(
+            "CSV file %s read successfully, %s rows found.", csv_file, len(df))
+    except Exception as e:
+        logging.error(
+            "Error reading the CSV file %s: %s", csv_file, e)
+        return
 
     connection, cursor = connect_to_db()
+
+    logging.info("Connected to the database.")
 
     for _, row in df.iterrows():
         reference_id = row['reference_id']
@@ -104,16 +120,22 @@ def upload_data_from_csv(csv_file):
         provider_id = get_provider_id(cursor, provider_name)
 
         if provider_id is None:
-            print(
-                f"Warning: Provider '{provider_name}' not found in the database.")
+            logging.warning(
+                "Provider '%s' not found in the database.", provider_name)
             provider_id = 'NA'
 
         if not check_if_outage_exists(cursor, reference_id):
+            logging.info(
+                "Inserting outage data for reference_id: %s", reference_id)
             insert_outage_data(cursor, connection, reference_id,
                                outage_start, outage_end, provider_id, planned)
+        else:
+            logging.info(
+                "Outage with reference_id %s already exists, skipping insertion.", reference_id)
 
     cursor.close()
     connection.close()
+    logging.info("Database connection closed. Data upload process completed.")
 
 
 if __name__ == "__main__":

@@ -1,20 +1,25 @@
-import requests
-import os
 import csv
+import logging
+import os
 import time
 from datetime import datetime
 from os.path import exists
-from bs4 import BeautifulSoup
 import pandas as pd
+import requests
 import urllib3
+from bs4 import BeautifulSoup
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from webdriver_manager.chrome import ChromeDriverManager
+
+
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -27,16 +32,38 @@ NORTHERN_POWER_URL = "https://power.northernpowergrid.com/Powercuts/map"
 ELECTRIC_NW_URL = "https://www.enwl.co.uk/power-cuts/power-cuts-power-cuts-live-power-cut-information-fault-list/fault-list/?postcodeOrReferenceNumber="
 
 
+def setup_chrome_driver():
+    """Setup Chrome WebDriver with appropriate options for Docker environment"""
+    chrome_options = Options()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    chrome_options.add_argument('--disable-gpu')
+
+    try:
+        service = Service('/usr/bin/chromedriver')
+        driver = webdriver.Chrome(service=service, options=chrome_options)
+        return driver
+    except Exception as e:
+        logging.error("Failed to initialize Chrome driver: %s", e)
+        raise
+
+
 def national_gird_outage_data():
     '''Fetch and append unique power outage records for Midlands (National Grid).'''
+    logging.info("Fetching data from National Grid.")
     url = NATIONAL_GRID_URL
     current_dir = os.path.dirname(os.path.abspath(__file__))
     save_path = os.path.join(current_dir, "national_grid_power_outages.csv")
 
-    response = requests.get(url)
-    response.raise_for_status()
-    content = response.content.decode('utf-8').splitlines()
-    reader = csv.DictReader(content)
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        content = response.content.decode('utf-8').splitlines()
+        reader = csv.DictReader(content)
+    except requests.exceptions.RequestException as e:
+        logging.error("Error fetching data from National Grid: %s", e)
+        return
 
     existing_ids = set()
     if os.path.exists(save_path):
@@ -68,22 +95,23 @@ def national_gird_outage_data():
                 new_rows += 1
                 existing_ids.add(incident_id)
 
-    print(f"Appended {new_rows} new records to {save_path}")
+    logging.info("Appended %s new records to %s", new_rows, save_path)
 
 
 def uk_power_networks_outage_data():
     '''Fetch and append unique UK Power Networks outage records.'''
+    logging.info("Fetching data from UK Power Networks.")
     url = UK_POWER_NETWORKS_URL
     filename = 'ukpowernetworks_outage.csv'
     file_exists = os.path.exists(filename)
 
-    response = requests.get(url)
-    if response.status_code != 200:
-        print(
-            f"Failed to fetch data. HTTP Status code: {response.status_code}")
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()
+    except requests.exceptions.RequestException as e:
+        logging.error("Error fetching data from UK Power Networks: %s", e)
         return
-
-    data = response.json()
 
     existing_ids = set()
     if file_exists:
@@ -115,21 +143,23 @@ def uk_power_networks_outage_data():
                 existing_ids.add(incident_id)
                 new_rows += 1
 
-    print(f"Appended {new_rows} new records to '{filename}'.")
+    logging.info("Appended %s new records to '%s'.", new_rows, filename)
 
 
 def ssen_outage_data():
     '''Fetch and append unique SSEN outage records'''
+    logging.info("Fetching data from SSEN.")
     url = SSEN_URL
     filename = 'ssen_outage_data.csv'
     file_exists = os.path.exists(filename)
 
-    response = requests.get(url)
-    if response.status_code != 200:
-        print("Error fetching data from API")
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()
+    except requests.exceptions.RequestException as e:
+        logging.error("Error fetching data from SSEN: %s", e)
         return
-
-    data = response.json()
 
     existing_ids = set()
     if file_exists:
@@ -161,108 +191,121 @@ def ssen_outage_data():
                 existing_ids.add(incident_id)
                 new_rows += 1
 
-    print(f"Appended {new_rows} new records to '{filename}'.")
+    logging.info("Appended %s new records to '%s'.", new_rows, filename)
 
 
 def sp_outage_scraper():
     '''Scrapes Scottish Power outage data and appends unique entries to CSV'''
+    logging.info("Starting scrape for Scottish Power outage data.")
     url = 'https://www.spenergynetworks.co.uk/pages/power_cuts_list.aspx'
     filename = 'sp_outage_data.csv'
 
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-    }
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
 
-    response = requests.get(url, verify=False, headers=headers)
-    if response.status_code != 200:
-        print("Failed to retrieve the webpage.")
-        return
+    try:
+        driver = setup_chrome_driver()
 
-    soup = BeautifulSoup(response.content, 'html.parser')
-    rows = soup.find_all('div', class_='Item')
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        }
 
-    existing_ids = set()
-    if os.path.exists(filename):
-        df_existing = pd.read_csv(filename)
-        existing_ids = set(df_existing['incident_id'])
+        response = requests.get(url, verify=False, headers=headers)
+        if response.status_code != 200:
+            logging.error("Failed to retrieve the webpage.")
+            return
 
-    new_data = []
+        soup = BeautifulSoup(response.content, 'html.parser')
+        rows = soup.find_all('div', class_='Item')
 
-    for row in rows:
-        fields = row.find_all('div', class_='Field')
-
-        reference = fields[0].find('span', class_='Value')
-        reference = reference.text.strip() if reference else "N/A"
-
-        created_on = fields[1].find('span', class_='Value')
-        created_on = created_on.text.strip() if created_on else "N/A"
-
-        estimated_on = fields[2].find('span', class_='Value')
-        estimated_on = estimated_on.text.strip() if estimated_on else "N/A"
-
-        status = fields[3].find('span', class_='Value')
-        status = status.text.strip() if status else "N/A"
-
-        affected_area = fields[4].find('span', class_='Value')
-        affected_area = affected_area.text.strip() if affected_area else "N/A"
-
-        if reference not in existing_ids:
-            new_data.append({
-                'incident_id': reference,
-                'outage_start': created_on,
-                'planned': status,
-                'outage_end': estimated_on,
-                'region': 'Scottish Power',
-                'postcodes': affected_area
-            })
-            existing_ids.add(reference)
-
-    if new_data:
-        df_new = pd.DataFrame(new_data)
+        existing_ids = set()
         if os.path.exists(filename):
-            df_new.to_csv(filename, mode='a', index=False, header=False)
-        else:
-            df_new.to_csv(filename, index=False)
-        print(f"Appended {len(new_data)} new outage records.")
-    else:
-        print("No new records to append.")
+            df_existing = pd.read_csv(filename)
+            existing_ids = set(df_existing['incident_id'])
+
+        new_data = []
+
+        for row in rows:
+            fields = row.find_all('div', class_='Field')
+
+            reference = fields[0].find('span', class_='Value')
+            reference = reference.text.strip() if reference else "N/A"
+
+            created_on = fields[1].find('span', class_='Value')
+            created_on = created_on.text.strip() if created_on else "N/A"
+
+            estimated_on = fields[2].find('span', class_='Value')
+            estimated_on = estimated_on.text.strip() if estimated_on else "N/A"
+
+            status = fields[3].find('span', class_='Value')
+            status = status.text.strip() if status else "N/A"
+
+            affected_postcodes = fields[4].find('span', class_='Value')
+            affected_postcodes = affected_postcodes.text.strip() if affected_postcodes else "N/A"
+
+            if reference not in existing_ids:
+                new_data.append(
+                    [reference, created_on, estimated_on, status, affected_postcodes])
+
+        if new_data:
+            with open(filename, mode='a', newline='', encoding='utf-8') as f:
+                writer = csv.writer(f)
+                if os.path.getsize(filename) == 0:
+                    writer.writerow(
+                        ['incident_id', 'outage_start', 'outage_end', 'status', 'postcodes'])
+
+                writer.writerows(new_data)
+
+            logging.info("Appended %s new records to '%s'.",
+                         len(new_data), filename)
+
+        driver.quit()
+
+    except Exception as e:
+        logging.error("Error during scrape: %s", e)
 
 
 def scrape_northern_powergrid_map():
     '''Scrapes Northern Powergrid website for outage data'''
-    chrome_options = Options()
-    chrome_options.add_argument("--start-maximized")
-    chrome_options.add_argument('--headless')
 
-    driver = webdriver.Chrome(service=Service(
-        ChromeDriverManager().install()), options=chrome_options)
+    chrome_options = Options()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+
+    driver = setup_chrome_driver()
 
     try:
         driver.get(NORTHERN_POWER_URL)
+        logging.info("Opened URL: %s", NORTHERN_POWER_URL)
 
         wait = WebDriverWait(driver, 15)
 
         try:
             popup_bg = wait.until(
                 EC.presence_of_element_located((By.ID, "b72-PopupBG")))
-            print("Popup found, clicking to dismiss...")
+            logging.info("Popup found, clicking to dismiss...")
             ActionChains(driver).move_by_offset(10, 10).click().perform()
             time.sleep(1)
         except:
-            print("No popup found or already dismissed.")
+            logging.warning("No popup found or already dismissed.")
 
         try:
             power_cut_button = wait.until(
-                EC.element_to_be_clickable((By.ID, "ButtonGroupItem6")))
+                EC.element_to_be_clickable((By.ID, "ButtonGroupItem6"))
+            )
             power_cut_button.click()
-            print("Selected 'Current Power Cut' layer.")
+            logging.info("Selected 'Current Power Cut' layer.")
         except:
-            print("Failed to select the layer. Check button ID or visibility.")
+            logging.error(
+                "Failed to select the layer. Check button ID or visibility.")
 
         time.sleep(2)
 
         records = driver.find_elements(By.CSS_SELECTOR, ".record-list-item")
-        print(f"Found {len(records)} records.")
+        logging.info("Found %s records.", len(records))
 
         northern_power_outage_data = []
 
@@ -270,9 +313,8 @@ def scrape_northern_powergrid_map():
             try:
                 power_cut_id = record.find_element(
                     By.CSS_SELECTOR, ".mobile-right").text.strip()
-
-                category = record.find_element(
-                    By.CSS_SELECTOR, ".hide-tablet").text.strip() if record.find_elements(By.CSS_SELECTOR, ".hide-tablet") else "N/A"
+                category = record.find_element(By.CSS_SELECTOR, ".hide-tablet").text.strip(
+                ) if record.find_elements(By.CSS_SELECTOR, ".hide-tablet") else "N/A"
 
                 start_time_elem = record.find_elements(
                     By.CSS_SELECTOR, 'div[style*="width: 12%"] span')
@@ -303,18 +345,18 @@ def scrape_northern_powergrid_map():
                     "Premises Affected": premises_affected
                 })
 
-                print(
-                    f"Scraped: {power_cut_id}, {category}, {start_time}, {end_time}, {postcodes_str}, {premises_affected}")
+                logging.info(
+                    "Scraped: %s, %s, %s, %s, %s, %s", {power_cut_id}, {category}, {start_time}, {end_time}, {postcodes_str}, {premises_affected})
 
             except Exception as e:
-                print(f"Error with record: {e}")
+                logging.error("Error with record: %s", e)
                 continue
 
         df = pd.DataFrame(northern_power_outage_data)
-        print(df)
+        logging.info("Data frame created: %s", df.head())
 
         df.to_csv("northern_power_outage_data.csv", index=False)
-        print("Data saved to northern_power_outage_data.csv")
+        logging.info("Data saved to northern_power_outage_data.csv")
 
     finally:
         driver.quit()
@@ -322,27 +364,24 @@ def scrape_northern_powergrid_map():
 
 def electric_nw_outage_data():
     '''Scrapes the Electric Northwest power cut website for data about outages'''
-    from selenium import webdriver
-    from selenium.webdriver.common.by import By
-    from selenium.webdriver.chrome.options import Options
-    from bs4 import BeautifulSoup
-    import csv
-    import time
 
-    options = Options()
-    options.add_argument('--headless')
-    options.add_argument('--disable-gpu')
-    options.add_argument('--window-size=1920x1080')
+    chrome_options = Options()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
 
-    driver = webdriver.Chrome(options=options)
+    driver = setup_chrome_driver()
 
     try:
         url = ELECTRIC_NW_URL
         driver.get(url)
+        logging.info("Opened URL: %s", url)
         time.sleep(5)
 
         total_faults = len(driver.find_elements(
             By.CLASS_NAME, "c-fault-listing__item"))
+        logging.info("Found %s total faults.", total_faults)
+
         all_outages = []
 
         for i in range(total_faults):
@@ -379,7 +418,7 @@ def electric_nw_outage_data():
                 time.sleep(3)
 
             except Exception as e:
-                print(f"Error processing fault #{i + 1}: {e}")
+                logging.error("Error processing fault #%s: %s", i + 1, e)
                 continue
 
         csv_filename = 'electric_nw_outage_data.csv'
@@ -390,18 +429,53 @@ def electric_nw_outage_data():
                 writer.writeheader()
                 for row in all_outages:
                     writer.writerow(row)
-            print(f"Data successfully saved to {csv_filename}")
+            logging.info(
+                "Data successfully saved to %s", csv_filename)
         else:
-            print("No outage data found.")
+            logging.warning("No outage data found.")
 
     finally:
         driver.quit()
+
+
+def create_empty_csv_files():
+    """Create empty CSV files with headers to prevent errors in the cleaning process"""
+
+    csv_files = {
+        'northern_power_outage_data.csv': ['Power Cut ID', 'Category', 'Start Time', 'End Time', 'Postcodes Affected', 'Premises Affected'],
+        'electric_nw_outage_data.csv': ['Incident ID', 'Type', 'Start Time', 'End Time', 'Region', 'Postcodes'],
+        'sp_outage_data.csv': ['incident_id', 'outage_start', 'outage_end', 'status', 'postcodes'],
+    }
+
+    for filename, headers in csv_files.items():
+        if not os.path.exists(filename) or os.path.getsize(filename) == 0:
+            logging.info("Creating empty CSV file with headers: %s", filename)
+            with open(filename, 'w', newline='') as f:
+                writer = csv.writer(f)
+                writer.writerow(headers)
 
 
 if __name__ == "__main__":
     national_gird_outage_data()
     uk_power_networks_outage_data()
     ssen_outage_data()
-    sp_outage_scraper()
-    scrape_northern_powergrid_map()
-    electric_nw_outage_data()
+
+    try:
+        sp_outage_scraper()
+    except Exception as e:
+        logging.error("Error in sp_outage_scraper: %s", e)
+
+    try:
+        scrape_northern_powergrid_map()
+    except Exception as e:
+        logging.error("Error in scrape_northern_powergrid_map: %s", e)
+
+    try:
+        electric_nw_outage_data()
+    except Exception as e:
+        logging.error("Error in electric_nw_outage_data: %s", e)
+
+        create_empty_csv_files()
+    except Exception as e:
+        logging.error("Critical error in ETL process: %s", e)
+        create_empty_csv_files()
