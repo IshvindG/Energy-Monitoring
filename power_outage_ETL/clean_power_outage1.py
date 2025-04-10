@@ -84,7 +84,6 @@ def clean_northern_power():
 
     logging.info("Cleaning Northern Power Grid data.")
 
-    import os
     if not os.path.exists('northern_power_outage_data.csv') or os.path.getsize('northern_power_outage_data.csv') == 0:
         logging.warning(
             "northern_power_outage_data.csv is empty or doesn't exist. Skipping processing.")
@@ -134,7 +133,7 @@ def clean_northern_power():
     except pd.errors.EmptyDataError:
         logging.warning(
             "northern_power_outage_data.csv is empty. Skipping processing.")
-    except Exception as e:
+    except OSError as e:
         logging.error("Error processing Northern Power Grid data: %s", e)
 
     logging.info("Northern Power Grid cleaning process completed.")

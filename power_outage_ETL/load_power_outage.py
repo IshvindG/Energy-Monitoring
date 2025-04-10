@@ -1,8 +1,10 @@
 import os
 import logging
+from typing import Tuple, Optional, Any
 import pandas as pd
 import psycopg2
 from psycopg2 import sql
+from psycopg2.extensions import connection as Connection, cursor as Cursor
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -17,7 +19,7 @@ DB_USER = os.getenv('DB_USER')
 DB_PASSWORD = os.getenv('DB_PASSWORD')
 
 
-def connect_to_db():
+def connect_to_db() -> Tuple[Connection, Cursor]:
     """
     Establish a connection to the PostgreSQL database.
     """
@@ -32,7 +34,7 @@ def connect_to_db():
     return connection, cursor
 
 
-def check_if_outage_exists(cursor, reference_id):
+def check_if_outage_exists(cursor: Cursor, reference_id: str) -> bool:
     """
     Check if an outage_id already exists in the database.
     """
@@ -43,7 +45,7 @@ def check_if_outage_exists(cursor, reference_id):
     return result[0]
 
 
-def get_provider_id(cursor, provider_name):
+def get_provider_id(cursor: Cursor, provider_name: str) -> None:
     """
     Get the provider_id based on the provider_name from the providers table.
     """
@@ -57,7 +59,14 @@ def get_provider_id(cursor, provider_name):
     return None
 
 
-def insert_outage_data(cursor, connection, reference_id, outage_start, outage_end, provider_id, planned):
+def insert_outage_data(cursor: Cursor,
+                       connection: Connection,
+                       reference_id: str,
+                       outage_start: Optional[Any],
+                       outage_end: Optional[Any],
+                       provider_id: Any,
+                       planned: Optional[bool]
+                       ) -> None:
     """
     Insert a new outage record into the database.
     """
@@ -70,7 +79,7 @@ def insert_outage_data(cursor, connection, reference_id, outage_start, outage_en
     connection.commit()
 
 
-def convert_planned_to_bool(planned):
+def convert_planned_to_bool(planned: Any) -> Optional[bool]:
     """
     Convert the 'planned' column to a boolean value.
     """
@@ -86,7 +95,7 @@ def convert_planned_to_bool(planned):
         return None
 
 
-def upload_data_from_csv(csv_file):
+def upload_data_from_csv(csv_file: str) -> None:
     """
     Upload the cleaned data from the CSV file to the RDS Postgres database.
     """
