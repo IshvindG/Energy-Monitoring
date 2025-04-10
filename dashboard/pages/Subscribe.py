@@ -1,8 +1,4 @@
-<<<<<<< HEAD:dashboard/subscription.py
 """File for signing up to the alert system"""
-=======
-"""Script to create a subscription page in the dashboard"""
->>>>>>> 95025e8 (updating dashboard to add unsubscribe page and tweaking lambdas):dashboard/pages/Subscribe.py
 import os
 import streamlit as st
 import psycopg2
@@ -21,13 +17,8 @@ def get_connection_to_db():
                             port=os.getenv("DB_PORT"))
 
 
-<<<<<<< HEAD:dashboard/subscription.py
 def execute_query(conn: connection, query: str) -> list[str]:
     """Execute a query on the database"""
-=======
-def execute_query(conn: 'Connection', query: str) -> list[str]:
-    """"""
->>>>>>> 95025e8 (updating dashboard to add unsubscribe page and tweaking lambdas):dashboard/pages/Subscribe.py
     cursor = conn.cursor()
     cursor.execute(query)
     result = cursor.fetchall()
