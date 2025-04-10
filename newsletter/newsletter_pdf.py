@@ -29,12 +29,12 @@ def create_html_report(data: dict):
             <h1>Monthly Energy Report</h1>
             <div style="margin-bottom: 20px;">
                 <h3>KPI - Highest Price</h3>
-                <p><strong>Price:</strong> €{highest_price}</p>
+                <p><strong>Price:</strong> £{highest_price}</p>
                 <p><strong>Date:</strong> {highest_price_date}</p>
             </div>
             <div style="margin-bottom: 20px;">
                 <h3>KPI - Lowest Price</h3>
-                <p><strong>Price:</strong> €{data.get("Lowest Price", "N/A")}</p>
+                <p><strong>Price:</strong> £{data.get("Lowest Price", "N/A")}</p>
             </div>
             <div style="margin-bottom: 20px;">
                 <h3>KPI - Total Demand</h3>
