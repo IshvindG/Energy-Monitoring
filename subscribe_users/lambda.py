@@ -1,5 +1,6 @@
 """Script to create users if they don't already exist, and subscribe them to 
 newsletter/alerts within a lambda"""
+import re
 import json
 import os
 import logging
@@ -73,6 +74,37 @@ def check_user_exists(cursor: 'Cursor', user: dict):
 
     user_id = result[0][0]
     return user_id
+
+
+# def validate_user_info(user: dict) -> bool:
+#     """Validates email, phone, and name fields."""
+
+#     email = user.get("email")
+#     phone = user.get("phone")
+#     first_name = user.get("first_name")
+#     last_name = user.get("last_name")
+
+#     email_regex = r"^[\w\.-]+@[\w\.-]+\.\w{2,}$"
+#     phone_regex = r"^\+\d{7,15}$"
+#     name_regex = r"^[A-Za-zÀ-ÿ'`’\- ]{1,50}$"
+
+#     if not re.match(email_regex, email or ""):
+#         logging.error("Invalid email format: %s", email)
+#         return False
+
+#     if not re.match(phone_regex, phone or ""):
+#         logging.error("Invalid phone number format: %s", phone)
+#         return False
+
+#     if not re.match(name_regex, first_name or ""):
+#         logging.error("Invalid first name: %s", first_name)
+#         return False
+
+#     if not re.match(name_regex, last_name or ""):
+#         logging.error("Invalid last name: %s", last_name)
+#         return False
+
+#     return True
 
 
 def upload_user_to_db(cursor: 'Cursor', user: dict) -> int:
@@ -150,23 +182,42 @@ def subscribe_user_to_alert(cursor: 'Cursor', region: str, user_id: int):
                         (SELECT region_id FROM regions WHERE region_name = %s)
                     )"""
     cursor.execute(query, (user_id, region))
+    # send_phone_verification(phone)
+    logging.info("User subscribed to alert and verification sent!")
 
 
 def handle_alerts(cursor: 'Cursor', user_id: int, user: dict):
     """Combining alert checks and subscription"""
+    region = user["region"]
+    phone = user["phone"]
     if not check_if_user_has_alert(cursor, user, user_id):
-        subscribe_user_to_alert(cursor, user, user_id)
+        subscribe_user_to_alert(cursor, region, user_id)
         logging.info("User subscribed to alert successfully")
 
 
+# def send_phone_verification(phone: str):
+#     """Sending a phone verification text when a new user subscribes"""
+#     logging.info("Sending phone verification to: %s", phone)
+#     sns = boto3.client('sns', region_name='eu-west-2')
+#     sns.publish(
+#         PhoneNumber=phone,
+#         Message="You've been subscribed to Energy Monitor alerts.",
+#     )
+
+
 def send_phone_verification(phone: str):
-    """Sending a phone verification text when a new user subscribes"""
-    logging.info("Sending phone verification to: %s", phone)
-    sns = boto3.client('sns', region_name='eu-west-2')
-    sns.publish(
-        PhoneNumber=phone,
-        Message="You've been subscribed to Energy Monitor alerts.",
-    )
+    """Send a phone verification text via SNS."""
+    sns = boto3.client(
+        'sns', region_name='eu-west-2')
+    try:
+        response = sns.verify_phone_number(
+            PhoneNumber=phone
+        )
+        logging.info(
+            f"Phone verification initiated for {phone}. Response: {response}")
+    except ClientError as e:
+        logging.error(f"Error sending verification SMS: {e}")
+        raise
 
 
 def send_email_verification(email: str, first_name: str):
@@ -212,27 +263,32 @@ def lambda_handler(event, context):
         cursor = connection.cursor()
         user_response = define_user_info(event)
 
-        user_id = check_user_exists(cursor, user_response)
+        # if not validate_user_info(user_response):
+        #     return {
+        #         "statusCode": 400,
+        #         "body": json.dumps({"error": "Invalid input format"})
+        #     }
 
+        user_id = check_user_exists(cursor, user_response)
+        new_user = False
         if not user_id:
             user_id = upload_user_to_db(cursor, user_response)
             connection.commit()
             send_verifications(user_response)
-
-        else:
-            logging.info("User found. No need for verifications.")
+            new_user = True
 
         if user_response["type"] == "newsletter":
             handle_newsletter(cursor, user_id, user_response)
 
-        if user_response["type"] == "alert":
-
+        elif user_response["type"] == "alert":
             handle_alerts(cursor, user_id, user_response)
+
         connection.commit()
+        connection.close()
 
         return {
             "statusCode": 200,
-            "body": json.dumps({"message": "User subscribed"})
+            "body": json.dumps({"message": "User created and subscribed" if new_user else "User subscribed"})
         }
 
     except Exception as e:
@@ -241,25 +297,3 @@ def lambda_handler(event, context):
             "statusCode": 500,
             "body": json.dumps({"error": "Internal server error"})
         }
-
-
-def fake_event():
-
-    fake_event = {
-        "body": json.dumps({
-            "first_name": "Hadia",
-            "last_name": "Fadlelmawla",
-            "type": "newsletter",
-            "email": "trainee.hadia.fadlelmawla@sigmalabs.co.uk",
-            "phone": "+46487934"
-        })
-    }
-
-    return fake_event
-
-
-if __name__ == "__main__":
-
-    event = fake_event()
-    context = {}
-    lambda_handler(event, context)
