@@ -32,16 +32,9 @@ CREATE TABLE outages(
     outage_end TIMESTAMP,
     region_id SMALLINT,
     planned BOOL,
+    reference_id VARCHAR(30),
     PRIMARY KEY (outage_id),
     CONSTRAINT fk_region_id_outage FOREIGN KEY (region_id) REFERENCES regions (region_id)
-);
-
-CREATE TABLE outage_postcodes(
-    outage_postcode_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
-    postcode VARCHAR(7),
-    outage_id SMALLINT,
-    PRIMARY KEY (outage_postcode_id),
-    CONSTRAINT fk_outage_id FOREIGN KEY (outage_id) REFERENCES outages (outage_id)
 );
 
 
@@ -56,7 +49,6 @@ CREATE TABLE prices(
 CREATE TABLE carbon_intensities(
     carbon_intensity_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
     index VARCHAR(10),
-    current_measure SMALLINT,
     forecast_measure SMALLINT,
     measure_at TIMESTAMP,
     region_id SMALLINT,
@@ -85,10 +77,8 @@ CREATE TABLE users(
     user_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
     first_name VARCHAR(50),
     last_name VARCHAR(50),
-    DOB DATE,
     email VARCHAR(254),
     phone_number VARCHAR(15),
-    postcode VARCHAR(7),
     PRIMARY KEY (user_id)
 );
 
@@ -103,12 +93,11 @@ CREATE TABLE subscriptions(
 
 CREATE TABLE alerts(
     alert_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
-    outage_postcode_id SMALLINT,
     user_id SMALLINT,
     last_alert_sent TIMESTAMP,
     region_id SMALLINT,
+    postcode VARCHAR(7),
     PRIMARY KEY (alert_id),
-    CONSTRAINT fk_outage_postcode_id FOREIGN KEY (outage_postcode_id) REFERENCES outage_postcodes (outage_postcode_id),
     CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users (user_id),
     CONSTRAINT fk_region_id_alerts FOREIGN KEY (region_id) REFERENCES regions (region_id)
 
@@ -120,3 +109,15 @@ CREATE TABLE demands(
     total_demand BIGINT,
     PRIMARY KEY (demand_id)
 );
+
+ALTER SEQUENCE providers_provider_id_seq RESTART WITH 1;
+ALTER SEQUENCE regions_region_id_seq RESTART WITH 1;
+ALTER SEQUENCE outages_outage_id_seq RESTART WITH 1;
+ALTER SEQUENCE prices_price_id_seq RESTART WITH 1;
+ALTER SEQUENCE carbon_intensities_carbon_intensity_id_seq RESTART WITH 1;
+ALTER SEQUENCE fuel_types_fuel_type_id_seq RESTART WITH 1;
+ALTER SEQUENCE generations_generation_id_seq RESTART WITH 1;
+ALTER SEQUENCE users_user_id_seq RESTART WITH 1;
+ALTER SEQUENCE subscriptions_subscription_id_seq RESTART WITH 1;
+ALTER SEQUENCE alerts_alert_id_seq RESTART WITH 1;
+ALTER SEQUENCE demands_demand_id_seq RESTART WITH 1;
