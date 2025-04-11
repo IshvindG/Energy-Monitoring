@@ -80,7 +80,7 @@ def clean_data(records: List[Dict]) -> pd.DataFrame:
     return melted
 
 
-def save_to_csv(df: pd.DataFrame, filename: str = 'clean_live_co2.csv') -> None:
+def save_to_csv(df: pd.DataFrame, filename: str = '/tmp/clean_live_co2.csv') -> None:
     """
     Saves the dataframe to a CSV file. The file is overwritten each time.
     """

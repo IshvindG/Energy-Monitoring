@@ -91,7 +91,7 @@ def insert_carbon_intensities(df: pd.DataFrame, conn: Connection, cur: Cursor):
 
 
 if __name__ == "__main__":
-    file_path = "clean_live_co2.csv"
+    file_path = "/tmp/clean_live_co2.csv"
     df = load_csv(file_path)
     conn, cur = connect_to_db()
     insert_carbon_intensities(df, conn, cur)
