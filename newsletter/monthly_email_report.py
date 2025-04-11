@@ -2,8 +2,8 @@
 import logging
 from dotenv import load_dotenv
 from send_email import send_email_with_attachment
-from newsletter import get_connection_to_db, enable_logging
 from newsletter_pdf import create_report_data, create_pdf_report
+from newsletter import get_connection_to_db, enable_logging
 
 
 def get_subscribed_users(cursor: 'Cursor') -> list[tuple]:
@@ -32,6 +32,7 @@ def lambda_handler(event, context):
     try:
         load_dotenv()
         enable_logging()
+        logging.info('Event: %s, Context %s', event, context)
         pdf_filename = "/tmp/monthly_report.pdf"
         logging.info("Getting connection")
         db_connection = get_connection_to_db()
