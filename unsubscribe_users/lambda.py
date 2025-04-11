@@ -181,7 +181,7 @@ def unsubscribe_user_from_alerts_one_region(cursor: 'Cursor', region: str, user_
 def handle_alerts(cursor: 'Cursor', user_id: int, user: dict):
     """Combining alert checks and unsubscribing"""
     region = user['region']
-    if check_if_user_has_alert_any(cursor, user, user_id):
+    if check_if_user_has_alert_any(cursor, user_id):
         if region == 'All':
             unsubscribe_user_from_alerts_all(cursor, user_id)
         unsubscribe_user_from_alerts_one_region(cursor, user, user_id)
