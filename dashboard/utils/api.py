@@ -1,6 +1,6 @@
 """API utility for submitting form to AWS API Gateway"""
-import requests
 import os
+import requests
 from dotenv import load_dotenv
 
 load_dotenv()

@@ -1,5 +1,4 @@
 """Script to create a subscription page in the dashboard"""
-import re
 import os
 import streamlit as st
 from utils.unsub_api import submit_form
