@@ -102,6 +102,30 @@ def load_energy_demand_data(data: list[dict]) -> None:
         db_conn.close()
 
 
+def load_energy_solar_data(data: list[dict]) -> None:
+    """Load embedded solar generation data into the database"""
+
+    logger.info("Loading embedded solar generation data into database")
+    db_conn = get_connection()
+    db_cursor = get_cursor(db_conn)
+
+    row = [(row.get('generation_mw'), row.get('fuelType'),
+            row.get('publishTime')) for row in data]
+    statement = """
+    INSERT INTO generations (mw_generated, fuel_type_id, generation_at)
+    VALUES (%s, (SELECT fuel_type_id FROM fuel_types WHERE fuel_type = %s), %s)"""
+    try:
+        db_cursor.executemany(statement, (row))
+        db_conn.commit()
+    except (psycopg2.Error) as db_error:
+        logger.error('Error Loading generation data')
+        logger.error('Load failed - %s', db_error)
+        logger.error('Value %s', data)
+    finally:
+        db_cursor.close()
+        db_conn.close()
+
+
 def load_csv(filename: str) -> list:
     """Take a file and load a list of rows from it"""
 
@@ -125,6 +149,10 @@ if __name__ == '__main__':
     demand_data = load_csv('data/energy_demand_cleaned.csv')
     print(demand_data)
     load_energy_demand_data(demand_data)
+
+    solar_data = load_csv('data/solar_estimate_cleaned.csv')
+    print(solar_data)
+    load_energy_solar_data(solar_data)
 
     db_cur.close()
     db_connection.close()
