@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS outages;
 DROP TABLE IF EXISTS regions;
 DROP TABLE IF EXISTS demands;
 DROP TABLE IF EXISTS providers;
-
+DROP TABLE IF EXISTS fuel_categories;
 
 CREATE TABLE providers(
     provider_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
@@ -58,11 +58,19 @@ CREATE TABLE carbon_intensities(
 
 );
 
+CREATE TABLE fuel_categories(
+    fuel_category_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
+    fuel_category VARCHAR(30),
+    PRIMARY KEY (fuel_category_id)
+);
+
 CREATE TABLE fuel_types(
     fuel_type_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
     fuel_type VARCHAR(20),
     fuel_type_name VARCHAR(50),
-    PRIMARY KEY (fuel_type_id)
+    fuel_category_id SMALLINT,
+    PRIMARY KEY (fuel_type_id),
+    CONSTRAINT fk_fuel_category_id FOREIGN KEY (fuel_category_id) REFERENCES fuel_categories (fuel_category_id)
 );
 
 CREATE TABLE generations(
@@ -124,3 +132,4 @@ ALTER SEQUENCE users_user_id_seq RESTART WITH 1;
 ALTER SEQUENCE subscriptions_subscription_id_seq RESTART WITH 1;
 ALTER SEQUENCE alerts_alert_id_seq RESTART WITH 1;
 ALTER SEQUENCE demands_demand_id_seq RESTART WITH 1;
+ALTER SEQUENCE fuel_categories RESTART WITH 1;
