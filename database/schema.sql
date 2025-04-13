@@ -42,6 +42,7 @@ CREATE TABLE prices(
     price_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
     price_per_mwh DECIMAL(5,2),
     price_at TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT NOW(),
     PRIMARY KEY (price_id)
 );
 
@@ -69,6 +70,7 @@ CREATE TABLE generations(
     mw_generated SMALLINT,
     fuel_type_id SMALLINT,
     generation_at TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT NOW(),
     PRIMARY KEY (generation_id),
     CONSTRAINT fk_fuel_type_id FOREIGN KEY (fuel_type_id) REFERENCES fuel_types (fuel_type_id)
 );
@@ -107,6 +109,7 @@ CREATE TABLE demands(
     demand_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
     demand_at TIMESTAMP,
     total_demand BIGINT,
+    updated_at TIMESTAMP DEFAULT NOW(),
     PRIMARY KEY (demand_id)
 );
 
