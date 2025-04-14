@@ -34,7 +34,8 @@ def define_user_info(response: dict) -> dict:
         "phone": body.get("phone"),
         "email": body.get("email"),
         "type": body.get("type"),
-        "region": body.get("region")
+        "region": body.get("region") if body.get("region") and body.get("region") != "--" else None,
+        "postcode": body.get("postcode") or None
     }
     return user_info
 
