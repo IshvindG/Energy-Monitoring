@@ -24,6 +24,7 @@ DB_PASSWORD = os.getenv('DB_PASSWORD')
 
 
 def get_db_connection():
+    '''Establishes connection to database'''
     return psycopg2.connect(
         host=DB_HOST,
         port=DB_PORT,
@@ -34,6 +35,7 @@ def get_db_connection():
 
 
 def get_recent_data():
+    '''Gets recent data for up to date visualisations'''
     conn = get_db_connection()
     now = datetime.utcnow()
     past_24h = now - timedelta(hours=24)
@@ -60,6 +62,7 @@ def get_recent_data():
 
 
 def plot_recent_carbon_and_demand(df_carbon, df_demand):
+    '''Plot line graph of co2 emissions and demand'''
     fig, ax1 = plt.subplots(figsize=(18, 8))
 
     sns.lineplot(
@@ -83,6 +86,8 @@ def plot_recent_carbon_and_demand(df_carbon, df_demand):
 
 
 def show_emissions_doughnut_by_region():
+    '''Plot doughnut chart of emissions per region'''
+
     time_period = st.selectbox(
         "Select the time period for CO₂ emissions data:",
         ["Last 24 hours", "Last 72 hours", "Last week"]
@@ -145,6 +150,7 @@ def show_emissions_doughnut_by_region():
 
 
 def show_outages_by_provider():
+    '''Show power outage by energy provider'''
     conn = get_db_connection()
 
     region_provider_query = """
@@ -208,6 +214,7 @@ def show_outages_by_provider():
 
 
 def fetch_data(conn, option):
+
     if option == "Outages":
         query = """
         SELECT r.region_name, COUNT(*) as value
@@ -233,11 +240,13 @@ def fetch_data(conn, option):
 
 
 def load_geojson():
+    '''Load map api'''
     geo_url = "https://sdgdata.gov.uk/sdg-data/en/geojson/regions/indicator_8-10-1.geojson"
     return requests.get(geo_url).json()
 
 
 def build_map(df, label, geojson, geo_to_db_region_map):
+    '''Build map to plot data on'''
     min_val = df["value"].min()
     max_val = df["value"].max()
     colormap = linear.OrRd_09.scale(min_val, max_val)
@@ -276,6 +285,7 @@ def build_map(df, label, geojson, geo_to_db_region_map):
 
 
 def main():
+    '''Main function to display all visualisations'''
     st.title("Energy Trends: CO₂ Emissions vs Electricity Demand")
 
     df_carbon, df_demand = get_recent_data()
