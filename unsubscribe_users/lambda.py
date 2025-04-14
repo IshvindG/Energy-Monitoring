@@ -130,21 +130,6 @@ def check_if_user_has_alert_one_region(cursor: 'Cursor', region: str, user_id: i
     return False
 
 
-# def check_if_user_has_alert_any(cursor: 'Cursor', user_id: int) -> bool:
-#     """Checking is a user already has an alert for the specified region, returning
-#     true/false"""
-
-#     logging.info("Checking if user has alert for region...")
-#     query = """SELECT * FROM alerts WHERE user_id = %s"""
-#     cursor.execute(query, (user_id, ))
-#     result = cursor.fetchone()
-#     if result:
-#         logging.info("User subscribed to alerts")
-#         return True
-#     logging.info("User not subscribed to any alerts")
-#     return False
-
-
 def unsubscribe_user_from_alerts_all(cursor: 'Cursor', user_id: int):
     """Unsubscribing user from all alerts, updating alerts table"""
     logging.info("Unsubscribing user from all alerts...")
