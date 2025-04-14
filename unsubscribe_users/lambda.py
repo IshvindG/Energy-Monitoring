@@ -102,6 +102,9 @@ def check_if_user_has_alert_one_region(cursor: 'Cursor', region: str, user_id: i
     """Checking is a user already has an alert for the specified region, returning
     true/false"""
 
+    if postcode == "":
+        postcode = None
+
     logging.info("Checking if user has alert for region...")
     if region and postcode:
         query = """SELECT * FROM alerts WHERE user_id = %s AND region_id = (
@@ -152,6 +155,9 @@ def unsubscribe_user_from_alerts_all(cursor: 'Cursor', user_id: int):
 def unsubscribe_user_from_alerts_one_region(cursor: 'Cursor', region: str, user_id: int, postcode: str):
     """Unsubscribing user from alert based on chosen region, updating alerts table"""
     logging.info("Unsubscribing user from all alerts...")
+
+    if postcode == "":
+        postcode = None
 
     if region and postcode:
         query = """DELETE FROM alerts WHERE user_id = %s
