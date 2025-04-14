@@ -40,7 +40,7 @@ def get_region_data(conn: connection) -> list[str]:
     return region_data
 
 
-def newsletter_form(regions: list[str]):
+def newsletter_form():
     """Display Newsletter subscription form"""
 
     st.header("Subscribe to Newsletter")
@@ -49,8 +49,6 @@ def newsletter_form(regions: list[str]):
         last_name = st.text_input("Last Name")
         phone = st.text_input("Phone Number")
         email = st.text_input("Email")
-        region = st.selectbox("Region", regions)
-        postcode = st.text_input("Postcode")
         submitted = st.form_submit_button("Submit")
 
         if submitted:
@@ -59,9 +57,7 @@ def newsletter_form(regions: list[str]):
                 "first_name": first_name,
                 "last_name": last_name,
                 "phone": phone,
-                "email": email,
-                "region": region,
-                "postcode": postcode
+                "email": email
             })
             if result:
                 st.success("You're subscribed! 🎉")
@@ -105,7 +101,7 @@ def main(conn: connection):
     regions += db_regions
 
     with tab1:
-        newsletter_form(regions)
+        newsletter_form()
 
     with tab2:
         alert_form(regions)
