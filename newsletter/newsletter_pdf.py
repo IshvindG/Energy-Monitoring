@@ -16,52 +16,27 @@ def convert_html_to_pdf(source_html, output_filename):
     return pisa_status.err == 0
 
 
-def create_html_report(data: dict):
-    """Generate an HTML report based on the data."""
+def create_html_report(data: dict, template_path: str) -> str:
+    """Generate an HTML report by replacing placeholders in the HTML template."""
+    try:
+        with open(template_path, "r", encoding="utf-8") as file:
+            html_template = file.read()
 
-    highest_price, highest_price_date = data.get(
-        "Highest Price", ("N/A", "N/A"))
+        for key, value in data.items():
+            placeholder = f"{{{{{key}}}}}"
+            html_template = html_template.replace(placeholder, str(
+                round(value, 2)) if isinstance(value, float) else str(value))
 
-    report_html = f"""
-    <html>
-        <head><title>Monthly Energy Report</title></head>
-        <body>
-            <h1>Monthly Energy Report</h1>
-            <div style="margin-bottom: 20px;">
-                <h3>KPI - Highest Price</h3>
-                <p><strong>Price:</strong> £{highest_price}</p>
-                <p><strong>Date:</strong> {highest_price_date}</p>
-            </div>
-            <div style="margin-bottom: 20px;">
-                <h3>KPI - Lowest Price</h3>
-                <p><strong>Price:</strong> £{data.get("Lowest Price", "N/A")}</p>
-            </div>
-            <div style="margin-bottom: 20px;">
-                <h3>KPI - Total Demand</h3>
-                <p><strong>Total Demand:</strong> {data.get("Total Demand", "N/A")} MWh</p>
-            </div>
-            <div style="margin-bottom: 20px;">
-                <h3>KPI - Avg Daily Demand</h3>
-                <p><strong>Avg Daily Demand:</strong> {data.get("Avg Daily Demand", "N/A")} MWh</p>
-            </div>
-            <div style="margin-bottom: 20px;">
-                <h3>KPI - Highest Demand</h3>
-                <p><strong>Highest Demand:</strong> {data.get("Highest Demand", "N/A")} MWh</p>
-            </div>
-            <div style="margin-bottom: 20px;">
-                <h3>KPI - Lowest Demand</h3>
-                <p><strong>Lowest Demand:</strong> {data.get("Lowest Demand", "N/A")} MWh</p>
-            </div>
-        </body>
-    </html>
-"""
+        return html_template
 
-    return report_html
+    except FileNotFoundError:
+        print(f"Error: Template file '{template_path}' not found.")
+        return ""
 
 
-def create_pdf_report(data: dict, filename: str):
+def create_pdf_report(data: dict, filename: str, template_path: str):
     """Create a PDF report from the HTML data."""
-    html_content = create_html_report(data)
+    html_content = create_html_report(data, template_path)
     convert_html_to_pdf(html_content, filename)
 
 
@@ -75,20 +50,37 @@ def create_report_data():
 
     highest_price, highest_price_date = newsletter.get_highest_price_over_past_month(
         curr, date_today, date_last_month)
+    lowest_price, lowest_price_date = newsletter.get_lowest_price_over_past_month(
+        curr, date_today, date_last_month)
+    highest_demand, highest_demand_date = newsletter.get_highest_demand(
+        curr, date_today, date_last_month)
+    lowest_demand, lowest_demand_date = newsletter.get_lowest_demand(
+        curr, date_today, date_last_month)
 
     report_data = {
-        "Highest Price": (highest_price, highest_price_date),
-        "Lowest Price": newsletter.get_lowest_price_over_past_month(curr,
-                                                                    date_today,
-                                                                    date_last_month),
+        "Highest Price": highest_price,
+        "Highest Price Date": highest_price_date,
+        "Lowest Price": lowest_price,
+        "Lowest Price Date": lowest_price_date,
         "Total Demand": newsletter.get_total_demand_over_past_month(curr,
                                                                     date_today,
                                                                     date_last_month),
         "Avg Daily Demand": newsletter.get_average_demand_per_day_over_past_month(curr,
                                                                                   date_today,
                                                                                   date_last_month),
-        "Highest Demand": newsletter.get_highest_demand(curr, date_today, date_last_month),
-        "Lowest Demand": newsletter.get_lowest_demand(curr, date_today, date_last_month),
+        "Highest Demand": highest_demand,
+        "Highest Demand Date": highest_demand_date,
+        "Lowest Demand": lowest_demand,
+        "Lowest Demand Date": lowest_demand_date,
+        "Total Generation": newsletter.get_total_generation(curr, date_today, date_last_month),
+        "Total Renewable": newsletter.get_total_renewable(curr, date_today, date_last_month),
+        "Avg Price": newsletter.get_average_price_over_past_month(curr, date_today, date_last_month),
+        "Avg Carbon Intensity": newsletter.get_average_carbon_intensity(curr, date_today, date_last_month),
+        "Best Region": newsletter.get_region_with_best_avg_carbon_intensity(curr, date_today, date_last_month),
+        "Worst Region": newsletter.get_region_with_worst_avg_carbon_intensity(curr, date_today, date_last_month),
+        "Best Hour": newsletter.get_hour_with_best_avg_carbon_intensity(curr, date_today, date_last_month),
+        "Worst Hour": newsletter.get_hour_with_worst_avg_carbon_intensity(curr, date_today, date_last_month),
+        "percentage": (newsletter.get_total_renewable(curr, date_today, date_last_month) / newsletter.get_total_generation(curr, date_today, date_last_month)) * 100
     }
 
     return report_data
@@ -98,4 +90,4 @@ if __name__ == "__main__":
     load_dotenv()
 
     report_info = create_report_data()
-    create_pdf_report(report_info, "monthly_report.pdf")
+    create_pdf_report(report_info, "monthly_report.pdf", "newsletter.html")
