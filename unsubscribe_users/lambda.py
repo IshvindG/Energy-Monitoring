@@ -67,24 +67,6 @@ def check_user_exists(cursor: 'Cursor', user: dict):
     return user_id
 
 
-# def check_if_user_is_subscribed_one_region(cursor: 'Cursor', user: dict, user_id: int) -> bool:
-#     """Checking is a user is already subscribed to the newsletter for a region, returning true/false"""
-#     logging.info("Checking if user is subscribed to newsletter...")
-#     region = user.get('region')
-
-#     query = """SELECT * FROM subscriptions WHERE user_id = %s AND region_id = (
-#                     SELECT region_id FROM regions WHERE region_name = %s
-#                 )"""
-#     cursor.execute(query, (user_id, region))
-#     result = cursor.fetchall()
-#     if result:
-#         logging.info("User already subscribed to newsletter")
-#         return True
-
-#     logging.info("User not subscribed to newsletter")
-#     return False
-
-
 def check_if_user_is_subscribed(cursor: 'Cursor', user_id: int) -> bool:
     """Checking is a user is already subscribed to the newsletter, returning true/false"""
     logging.info("Checking if user is subscribed to newsletter...")
@@ -98,17 +80,6 @@ def check_if_user_is_subscribed(cursor: 'Cursor', user_id: int) -> bool:
 
     logging.info("User not subscribed to newsletter")
     return False
-
-
-# def unsubscribe_user_to_newsletter_one_region(cursor: 'Cursor', user: dict, user_id: int):
-#     """Unsubscribing user from newsletter and removing details from subscriptions table"""
-#     logging.info("Unsubscribing user from newsletter...")
-#     region = user.get("region")
-#     query = """DELETE FROM subscriptions
-#                 WHERE user_id = %s
-#                 AND region_id = (SELECT region_id FROM regions WHERE region_name = %s)"""
-#     cursor.execute(query, (user_id, region))
-#     logging.info("User unsubscribed from newsletter successfully!")
 
 
 def unsubscribe_user_from_newsletter(cursor: 'Cursor', user_id: int):
@@ -178,11 +149,12 @@ def handle_alerts(cursor: 'Cursor', user_id: int, user: dict):
     """Combining alert checks and unsubscribing"""
     region = user.get('region')
     postcode = user.get('postcode')
-    if check_if_user_has_alert_one_region(cursor, region, user_id, postcode):
-        if region == 'All':
-            unsubscribe_user_from_alerts_all(cursor, user_id)
-        unsubscribe_user_from_alerts_one_region(
-            cursor, region, user_id, postcode)
+    if region == 'All':
+        unsubscribe_user_from_alerts_all(cursor, user_id)
+    else:
+        if check_if_user_has_alert_one_region(cursor, region, user_id, postcode):
+            unsubscribe_user_from_alerts_one_region(
+                cursor, region, user_id, postcode)
 
 
 def unsubscribe_user(cursor: 'Cursor', user_id: int, user_info: dict):
