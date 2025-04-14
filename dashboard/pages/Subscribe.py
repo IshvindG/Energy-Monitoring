@@ -40,19 +40,6 @@ def get_region_data(conn: connection) -> list[str]:
     return region_data
 
 
-def get_provider_data(conn: connection) -> list[str]:
-    """Get Provider data from the database"""
-    cursor = conn.cursor()
-
-    query = """SELECT provider_name FROM providers;"""
-    cursor.execute(query)
-    result = cursor.fetchall()
-    provider_data = []
-    for provider in result:
-        provider_data.append(provider[0])
-    return provider_data
-
-
 def newsletter_form(regions: list[str]):
     """Display Newsletter subscription form"""
 
@@ -62,8 +49,8 @@ def newsletter_form(regions: list[str]):
         last_name = st.text_input("Last Name")
         phone = st.text_input("Phone Number")
         email = st.text_input("Email")
-        # region = st.selectbox("Region", regions)
-        # postcode = st.text_input("Postcode")
+        region = st.selectbox("Region", regions)
+        postcode = st.text_input("Postcode")
         submitted = st.form_submit_button("Submit")
 
         if submitted:
@@ -72,9 +59,9 @@ def newsletter_form(regions: list[str]):
                 "first_name": first_name,
                 "last_name": last_name,
                 "phone": phone,
-                "email": email
-                # "region": region,
-                # "postcode": postcode
+                "email": email,
+                "region": region,
+                "postcode": postcode
             })
             if result:
                 st.success("You're subscribed! 🎉")
@@ -91,7 +78,6 @@ def alert_form(regions: list[str]):
         email = st.text_input("Email")
         region = st.selectbox("Region", regions, key="r2")
         postcode = st.text_input("Postcode", key="pc2")
-        # provider = st.selectbox("Provider", providers, key="pr2")
         submitted = st.form_submit_button("Submit")
 
         if submitted:
@@ -102,8 +88,7 @@ def alert_form(regions: list[str]):
                 "phone": phone,
                 "email": email,
                 "region": region,
-                "postcode": postcode,
-                # "provider": provider
+                "postcode": postcode
             })
             if result:
                 st.success("Alert subscription saved!")
@@ -115,15 +100,15 @@ def main(conn: connection):
     st.title("Subscribe")
 
     tab1, tab2 = st.tabs(["Newsletter", "Outage Alerts"])
-
+    regions = ['--']
     db_regions = get_region_data(conn)
-    # providers = get_provider_data(conn)
+    regions += db_regions
 
     with tab1:
-        newsletter_form(db_regions)
+        newsletter_form(regions)
 
     with tab2:
-        alert_form(db_regions)
+        alert_form(regions)
 
 
 if __name__ == "__main__":
