@@ -149,10 +149,21 @@ def unsubscribe_user_from_alerts_all(cursor: 'Cursor', user_id: int):
 def unsubscribe_user_from_alerts_one_region(cursor: 'Cursor', region: str, user_id: int, postcode: str):
     """Unsubscribing user from alert based on chosen region, updating alerts table"""
     logging.info("Unsubscribing user from all alerts...")
-    query = """DELETE FROM alerts WHERE user_id = %s
-                AND region_id = (SELECT region_id FROM regions WHERE region_name = %s
-                ) AND postcode = %s"""
-    cursor.execute(query, (user_id, region, postcode))
+
+    if region and postcode:
+        query = """DELETE FROM alerts WHERE user_id = %s
+                    AND region_id = (SELECT region_id FROM regions WHERE region_name = %s
+                    ) AND postcode = %s"""
+        cursor.execute(query, (user_id, region, postcode))
+    elif region and not postcode:
+        query = """DELETE FROM alerts WHERE user_id = %s
+                    AND region_id = (SELECT region_id FROM regions WHERE region_name = %s
+                    ) AND postcode IS NULL"""
+        cursor.execute(query, (user_id, region))
+    elif not region and postcode:
+        query = """DELETE FROM alerts WHERE user_id = %s
+                    AND region_id IS NULL AND postcode = %s"""
+        cursor.execute(query, (user_id, postcode))
 
 
 def handle_alerts(cursor: 'Cursor', user_id: int, user: dict):
