@@ -132,4 +132,4 @@ ALTER SEQUENCE users_user_id_seq RESTART WITH 1;
 ALTER SEQUENCE subscriptions_subscription_id_seq RESTART WITH 1;
 ALTER SEQUENCE alerts_alert_id_seq RESTART WITH 1;
 ALTER SEQUENCE demands_demand_id_seq RESTART WITH 1;
-ALTER SEQUENCE fuel_categories RESTART WITH 1;
+ALTER SEQUENCE fuel_categories_fuel_category_id_seq RESTART WITH 1;
