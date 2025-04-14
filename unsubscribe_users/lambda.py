@@ -103,10 +103,19 @@ def check_if_user_has_alert_one_region(cursor: 'Cursor', region: str, user_id: i
     true/false"""
 
     logging.info("Checking if user has alert for region...")
-    query = """SELECT * FROM alerts WHERE user_id = %s AND region_id = (
+    if region and postcode:
+        query = """SELECT * FROM alerts WHERE user_id = %s AND region_id = (
                     SELECT region_id FROM regions WHERE region_name = %s
-                ) AND postcode = %s"""
-    cursor.execute(query, (user_id, region, postcode))
+                  ) AND postcode = %s"""
+        cursor.execute(query, (user_id, region, postcode))
+    elif region and not postcode:
+        query = """SELECT * FROM alerts WHERE user_id = %s AND region_id = (
+                    SELECT region_id FROM regions WHERE region_name = %s
+                  ) AND postcode IS NULL"""
+        cursor.execute(query, (user_id, region))
+    elif not region and postcode:
+        query = """SELECT * FROM alerts WHERE user_id = %s AND region_id IS NULL AND postcode = %s"""
+        cursor.execute(query, (user_id, postcode))
     result = cursor.fetchone()
     if result:
         logging.info("User subscribed to this alert")
