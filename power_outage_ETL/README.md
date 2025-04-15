@@ -62,3 +62,7 @@ DB_PORT= db_port
 DB_USER= db_use
 DB_NAME= db_name
 ```
+
+- To install required dependencies run:
+
+    `pip3 install -r requirements.txt`
