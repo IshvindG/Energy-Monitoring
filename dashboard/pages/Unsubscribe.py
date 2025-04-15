@@ -4,7 +4,8 @@ import streamlit as st
 from utils.unsub_api import submit_form
 import psycopg2
 from dotenv import load_dotenv
-from Subscribe import verify_email_address, validate_phone_number
+from validate_email_address import validate_email
+import phonenumbers
 
 
 def get_connection_to_db():
@@ -38,6 +39,16 @@ def get_region_data(conn: 'Connection') -> list[str]:
         region_data.append(region[0])
 
     return region_data
+
+
+def verify_email_address(email: str) -> bool:
+
+    return validate_email(email)
+
+
+def validate_phone_number(phone: str) -> bool:
+    phone_number = phonenumbers.parse(phone, "GB")
+    return phonenumbers.is_valid_number(phone_number)
 
 
 def newsletter_form():
