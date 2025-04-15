@@ -6,6 +6,7 @@ from utils.database import get_connection_to_db
 from psycopg2.extras import RealDictCursor
 import plotly.express as px
 import plotly.graph_objects as go
+import plotly.figure_factory as ff
 
 
 def retrieve_generation_mix_data(db_cursor) -> pd.DataFrame:
@@ -50,14 +51,24 @@ def format_generation_data(generation_data: list[dict]):
     generation_mix['updated_at'] = pd.to_datetime(
         generation_mix['updated_at'], utc=True)
 
+    generation_mix.drop_duplicates(inplace=True)
     generation_mix['Energy_Gen'] = generation_mix["mw_generated"] / 1000
-    generation_mix['Energy_Gen'] = generation_mix['Energy_Gen'].map(
-        "{:,.2f}GW".format)
+    generation_mix['Energy_Gen'] = generation_mix['Energy_Gen'].map(lambda x:
+                                                                    f"{x:,.2f}GW")
     return generation_mix
 
 
-def generate_demand_graph(demand_df):
+def generate_demand_graph(db_cursor, demand_range):
     """Generate demand"""
+    duration = get_duration(demand_range)
+
+    db_cursor.execute(
+        f"SELECT total_demand, demand_at FROM demands WHERE updated_at >= NOW() - '{duration}'::INTERVAL")
+    demands = db_cursor.fetchall()
+
+    demand_df = pd.DataFrame(demands)
+    demand_df = format_demand_data(demand_df)
+
     demand_chart = alt.Chart(demand_df).mark_area().encode(
         x=alt.X('demand_at:T', title="Time"),
         y=alt.Y('Energy Demand:Q', title="Demand (GW)"),
@@ -69,8 +80,16 @@ def generate_demand_graph(demand_df):
     return demand_chart
 
 
-def generate_price_graph(price_df):
+def generate_price_graph(db_cursor, price_range):
     """Generate price"""
+    duration = get_duration(price_range)
+
+    db_cursor.execute(
+        f"SELECT * FROM prices WHERE updated_at >= NOW() - '{duration}'::INTERVAL")
+    prices = db_cursor.fetchall()
+
+    price_df = pd.DataFrame(prices)
+    price_df = format_price_data(price_df)
 
     hover = alt.selection_point(
         fields=["price_at"],
@@ -114,6 +133,7 @@ def generate_price_graph(price_df):
 
 def generate_energy_generation_mix_graph(generation_mix: pd.DataFrame):
     """Generate price"""
+
     generation_mix = generation_mix.loc[generation_mix['fuel_category']
                                         != 'Interconnectors']
     # Create sunburst chart using Plotly
@@ -136,19 +156,22 @@ def show_generation_stats(generation_mix: pd.DataFrame):
                  'fuel_type', 'mw_generated', 'updated_at'], inplace=True)
 
 
-def generate_24h_energy_generation_graph(db_cursor):
+def generate_24h_energy_generation_graph(db_cursor, generation_range):
     """Generate 24h generation mix"""
+    duration = get_duration(generation_range)
+
     db_cursor.execute(
-        """
-        SELECT * FROM generations 
-        JOIN fuel_types USING(fuel_type_id) 
-        WHERE generation_at >= NOW() - '24 hours'::INTERVAL 
-        AND fuel_type NOT LIKE 'INT%' 
+        f"""
+        SELECT * FROM generations
+        JOIN fuel_types USING(fuel_type_id)
+        WHERE generation_at >= NOW() - '{duration}'::INTERVAL
+        AND fuel_type NOT LIKE 'INT%'
         AND mw_generated > 0
         """)
     energy_mix = db_cursor.fetchall()
     energy_mix_df = pd.DataFrame(energy_mix)
-    energy_mix_df.to_csv('thingy.csv', index=False)
+
+    energy_mix_df = format_generation_data(energy_mix_df)
     energy_mix_df['updated_at'] = pd.to_datetime(
         energy_mix_df['updated_at'], utc=True)
     energy_mix_df['updated_at'] = energy_mix_df['updated_at'].dt.round('min')
@@ -168,18 +191,34 @@ def generate_24h_energy_generation_graph(db_cursor):
     return fig
 
 
+def get_duration(generation_range):
+    duration = '24 hours'
+    match(generation_range):
+        case '24h':
+            duration = '24 hours'
+        case '1 week':
+            duration = '1 week'
+        case '1 month':
+            duration = '1 month'
+        case _:
+            duration = '24 hours'
+    return duration
+
+
 def format_demand_data(demand_data):
+    """Format demand data"""
     demand_df = pd.DataFrame(demand_data)
     demand_df.drop_duplicates(inplace=True)
     demand_df['demand_at'] = pd.to_datetime(
         demand_df['demand_at'], utc=True)
     demand_df['Energy Demand'] = demand_df["total_demand"] / 1000
-    demand_df['Energy Demand'] = demand_df['Energy Demand'].map(
-        "{:,.2f}".format)
+    demand_df['Energy Demand'] = demand_df['Energy Demand'].map(lambda x:
+                                                                f"{x:,.2f}")
     return demand_df
 
 
 def format_price_data(price_data):
+    """Format price"""
     price_df = pd.DataFrame(price_data)
     price_df.drop(columns=['price_id'], inplace=True)
     price_df['price_at'] = pd.to_datetime(
@@ -187,8 +226,8 @@ def format_price_data(price_data):
 
     price_df['price_per_mwh'] = pd.to_numeric(
         price_df['price_per_mwh'])
-    price_df['Price per MWH'] = price_df['price_per_mwh'].map(
-        "£{:,.2f}".format)
+    price_df['Price per MWH'] = price_df['price_per_mwh'].map(lambda x:
+                                                              f"£{x:,.2f}")
     return price_df
 
 
@@ -211,7 +250,7 @@ def latest_generation_metric(generation_df):
     generation = df.sum()
     generation = generation/1000
 
-    return "{:,.2f}GW".format(generation)
+    return f"{generation:,.2f}GW"
 
 
 def latest_imports_metric(generation_df):
@@ -226,17 +265,29 @@ def latest_imports_metric(generation_df):
     imports = df.sum()
     imports = imports/1000
 
-    return "{:,.2f}GW".format(imports)
+    return f"{imports:,.2f}GW"
 
 
 def add_table(data, filter_type):
-    st.title(filter_type)
+    """Creates tables at the bottom"""
     data_copy = data.copy()
     data_copy = data_copy.loc[data_copy['fuel_category']
                               == filter_type]
     data_copy.drop(columns=['fuel_category'], inplace=True)
-    # data_copy.sort_values('mw_generated')
-    st.table(data_copy)
+    data_copy.drop(
+        columns=['fuel_category_id', 'fuel_type_id',
+                 'fuel_type', 'updated_at'], inplace=True)
+    data_copy.sort_values(by=['mw_generated'], inplace=True, ascending=False)
+
+    data_copy.drop(columns=['mw_generated'], inplace=True)
+
+    data_copy.rename(
+        columns={"fuel_type_name": "Fuel Name", "Energy_Gen": "Power Generated"}, inplace=True)
+
+    table = ff.create_table(
+        data_copy, index_title=filter_type)
+    # st.write(table)
+    return table
 
 
 def main():
@@ -252,8 +303,11 @@ def main():
     demand_data = format_demand_data(demand_data)
     price_data = format_price_data(price_data)
 
-    st.set_page_config(layout="wide")
-    st.title("Energize Dashboard")
+    st.set_page_config(
+        layout="wide", page_title="Energy Dashboard", page_icon="icon.png")
+
+    st.logo("icon.png")
+    st.title("WattWatch Dashboard")
     st.write("Welcome! Use the sidebar to navigate between dashboards.")
 
     col1, col2, col3 = st.columns(3)
@@ -270,27 +324,43 @@ def main():
     positive_mix_data = generation_mix_data.copy()
     positive_mix_data = positive_mix_data.loc[positive_mix_data['mw_generated'] > 0]
 
-    col2.write(alt.Chart(positive_mix_data).mark_bar().encode(
-        x=alt.X('fuel_category', axis=alt.Axis(labels=False)),
-        y=alt.Y('mw_generated'),
-        color=alt.Color('fuel_type_name', legend=alt.Legend(
-        ))
-    ).properties(
-        height=600
+    fig = px.bar(positive_mix_data, x='fuel_category',
+                 y='mw_generated', color='fuel_type_name')
+    col2.write(fig)
 
+    demand_range = st.selectbox(
+        "Demand Data Range",
+        ("24h", "1 week", "1 month"), key="demand"
     )
+    st.write(generate_demand_graph(db_cursor, demand_range))
+
+    price_range = st.selectbox(
+        "Price Data Range",
+        ("24h", "1 week", "1 month"), key="price"
     )
+    st.write(generate_price_graph(db_cursor, price_range))
 
-    st.write(generate_demand_graph(demand_data))
-    st.write(generate_price_graph(price_data))
+    generation_range = st.selectbox(
+        "Generation Data Range",
+        ("24h", "1 week", "1 month"), key="generation"
+    )
+    st.write(generate_24h_energy_generation_graph(db_cursor, generation_range))
 
-    st.write(generate_24h_energy_generation_graph(db_cursor))
+    # show_generation_stats(generation_mix_data)
 
-    show_generation_stats(generation_mix_data)
+    tab1, tab2 = st.columns(2)
+    tab3, tab4 = st.columns(2)
 
-    for fuel_category in ['Fossil Fuels', 'Renewables', 'Interconnectors', 'Other']:
+    tab1.title('Fossil Fuels')
+    tab1.plotly_chart(add_table(generation_mix_data, 'Fossil Fuels'), key=1)
+    tab2.title('Renewables')
+    tab2.plotly_chart(add_table(generation_mix_data, 'Renewables'), key=2)
+    tab3.title('Interconnectors')
+    tab3.plotly_chart(add_table(generation_mix_data, 'Interconnectors'), key=3)
+    tab4.title('Others')
+    tab4.plotly_chart(add_table(generation_mix_data, 'Other'), key=4)
 
-        add_table(generation_mix_data, fuel_category)
+    db_conn.close()
 
 
 if __name__ == '__main__':
