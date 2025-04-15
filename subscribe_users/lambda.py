@@ -38,7 +38,6 @@ def define_user_info(response: dict) -> dict:
         "phone": body.get("phone"),
         "postcode": body.get("postcode"),
         "region": body.get("region"),
-        "provider": body.get("provider"),
         "email": body.get("email"),
         "type": body.get("type")
     }
@@ -52,13 +51,14 @@ def user_details(user_info: dict) -> str:
     phone = user_info["phone"]
     email = user_info["email"]
     postcode = user_info["postcode"]
-    return first_name, last_name, phone, email, postcode
+    region = user_info["region"]
+    return first_name, last_name, phone, email, postcode, region
 
 
 def check_user_exists(cursor: 'Cursor', user: dict):
     """Querying database to check if the user submitted already exists, if so returning
     their user_id"""
-    first_name, last_name, phone, email, postcode = user_details(user)
+    first_name, last_name, phone, email, postcode, region = user_details(user)
     query = """SELECT user_id FROM users
                 WHERE phone_number = %s
                 OR email = %s"""
@@ -110,25 +110,22 @@ def check_user_exists(cursor: 'Cursor', user: dict):
 def upload_user_to_db(cursor: 'Cursor', user: dict) -> int:
     """Uploading user to database if user doesn't exist, returning user_id"""
     logging.info("Uploading user to database...")
-    first_name, last_name, phone, email, postcode = user_details(user)
-    query = """INSERT INTO users (first_name, last_name, phone_number, email, postcode)
-                VALUES (%s, %s, %s, %s, %s)
+    first_name, last_name, phone, email, postcode, region = user_details(user)
+    query = """INSERT INTO users (first_name, last_name, phone_number, email)
+                VALUES (%s, %s, %s, %s)
                 RETURNING user_id"""
-    cursor.execute(query, (first_name, last_name, phone, email, postcode))
+    cursor.execute(query, (first_name, last_name, phone, email))
     user_id = cursor.fetchone()[0]
     logging.info("User successfully added to database")
     return int(user_id)
 
 
-def check_if_user_is_subscribed(cursor: 'Cursor', user: dict, user_id: int) -> bool:
+def check_if_user_is_subscribed(cursor: 'Cursor', user_id: int) -> bool:
     """Checking is a user is already subscribed to the newsletter, returning true/false"""
     logging.info("Checking if user is subscribed to newsletter...")
-    region = user.get('region')
 
-    query = """SELECT * FROM subscriptions WHERE user_id = %s AND region_id = (
-                    SELECT region_id FROM regions WHERE region_name = %s
-                )"""
-    cursor.execute(query, (user_id, region))
+    query = """SELECT * FROM subscriptions WHERE user_id = %s"""
+    cursor.execute(query, (user_id, ))
     result = cursor.fetchall()
     if result:
         logging.info("User already subscribed to newsletter")
@@ -138,21 +135,19 @@ def check_if_user_is_subscribed(cursor: 'Cursor', user: dict, user_id: int) -> b
     return False
 
 
-def subscribe_user_to_newsletter(cursor: 'Cursor', user: dict, user_id: int):
+def subscribe_user_to_newsletter(cursor: 'Cursor', user_id: int):
     """Subscribing user to newsletter and adding details to subscriptions table"""
     logging.info("Subscribing user to newsletter...")
-    region = user.get("region")
-    query = """INSERT INTO subscriptions (user_id, region_id)
-                VALUES (%s,
-                        (SELECT region_id FROM regions WHERE region_name = %s))"""
-    cursor.execute(query, (user_id, region))
+    query = """INSERT INTO subscriptions (user_id)
+                VALUES (%s)"""
+    cursor.execute(query, (user_id, ))
     logging.info("User subscribed to newsletter successfully!")
 
 
 def handle_newsletter(cursor: 'Cursor', user_id: int, user: dict):
     """Combining newsletter check and subscription"""
-    if not check_if_user_is_subscribed(cursor, user, user_id):
-        subscribe_user_to_newsletter(cursor, user, user_id)
+    if not check_if_user_is_subscribed(cursor, user_id):
+        subscribe_user_to_newsletter(cursor, user_id)
 
 
 def check_if_user_has_alert(cursor: 'Cursor', user: dict, user_id: int) -> bool:
@@ -161,10 +156,12 @@ def check_if_user_has_alert(cursor: 'Cursor', user: dict, user_id: int) -> bool:
 
     logging.info("Checking if user has alert for region...")
     region = user.get("region")
+    postcode = user.get("postcode")
     query = """SELECT * FROM alerts WHERE user_id = %s AND region_id = (
                     SELECT region_id FROM regions WHERE region_name = %s
-                )"""
-    cursor.execute(query, (user_id, region))
+                ) AND postcode = %s"""
+
+    cursor.execute(query, (user_id, region, postcode))
     result = cursor.fetchone()
     if result:
         logging.info("User already subscribed to this alert")
@@ -173,17 +170,19 @@ def check_if_user_has_alert(cursor: 'Cursor', user: dict, user_id: int) -> bool:
     return False
 
 
-def subscribe_user_to_alert(cursor: 'Cursor', region: str, user_id: int):
+def subscribe_user_to_alert(cursor: 'Cursor', user_id: int, user: dict):
     """Subscribing user to alert based on chosen region, updating alerts table"""
+    region = user.get("region")
+    postcode = user.get("postcode")
     logging.info("Subscribing user to alert...")
-    query = """INSERT INTO alerts (user_id, region_id)
+
+    query = """INSERT INTO alerts (user_id, region_id, postcode)
                     VALUES (
                         %s,
-                        (SELECT region_id FROM regions WHERE region_name = %s)
+                        (SELECT region_id FROM regions WHERE region_name = %s),
+                        %s
                     )"""
-    cursor.execute(query, (user_id, region))
-    # send_phone_verification(phone)
-    logging.info("User subscribed to alert and verification sent!")
+    cursor.execute(query, (user_id, region, postcode))
 
 
 def handle_alerts(cursor: 'Cursor', user_id: int, user: dict):
@@ -191,7 +190,7 @@ def handle_alerts(cursor: 'Cursor', user_id: int, user: dict):
     region = user["region"]
     phone = user["phone"]
     if not check_if_user_has_alert(cursor, user, user_id):
-        subscribe_user_to_alert(cursor, region, user_id)
+        subscribe_user_to_alert(cursor, user_id, user)
         logging.info("User subscribed to alert successfully")
 
 
@@ -257,6 +256,7 @@ def send_verifications(user_response: dict):
 def lambda_handler(event, context):
     """Combining all functions into a single lambda handler"""
     enable_logging()
+    logging.info("Event: %s, Context: %s", event, context)
     try:
         logging.info("Starting lambda_handler...")
         connection = connect_to_db()
@@ -275,7 +275,6 @@ def lambda_handler(event, context):
             user_id = upload_user_to_db(cursor, user_response)
             connection.commit()
             send_verifications(user_response)
-            new_user = True
 
         if user_response["type"] == "newsletter":
             handle_newsletter(cursor, user_id, user_response)

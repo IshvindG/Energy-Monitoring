@@ -34,7 +34,8 @@ def define_user_info(response: dict) -> dict:
         "phone": body.get("phone"),
         "email": body.get("email"),
         "type": body.get("type"),
-        "region": body.get("region")
+        "region": body.get("region") if body.get("region") and body.get("region") != "--" else None,
+        "postcode": body.get("postcode") or None
     }
     return user_info
 
@@ -67,24 +68,6 @@ def check_user_exists(cursor: 'Cursor', user: dict):
     return user_id
 
 
-def check_if_user_is_subscribed_one_region(cursor: 'Cursor', user: dict, user_id: int) -> bool:
-    """Checking is a user is already subscribed to the newsletter for a region, returning true/false"""
-    logging.info("Checking if user is subscribed to newsletter...")
-    region = user.get('region')
-
-    query = """SELECT * FROM subscriptions WHERE user_id = %s AND region_id = (
-                    SELECT region_id FROM regions WHERE region_name = %s
-                )"""
-    cursor.execute(query, (user_id, region))
-    result = cursor.fetchall()
-    if result:
-        logging.info("User already subscribed to newsletter")
-        return True
-
-    logging.info("User not subscribed to newsletter")
-    return False
-
-
 def check_if_user_is_subscribed(cursor: 'Cursor', user_id: int) -> bool:
     """Checking is a user is already subscribed to the newsletter, returning true/false"""
     logging.info("Checking if user is subscribed to newsletter...")
@@ -100,18 +83,7 @@ def check_if_user_is_subscribed(cursor: 'Cursor', user_id: int) -> bool:
     return False
 
 
-def unsubscribe_user_to_newsletter_one_region(cursor: 'Cursor', user: dict, user_id: int):
-    """Unsubscribing user from newsletter and removing details from subscriptions table"""
-    logging.info("Unsubscribing user from newsletter...")
-    region = user.get("region")
-    query = """DELETE FROM subscriptions
-                WHERE user_id = %s
-                AND region_id = (SELECT region_id FROM regions WHERE region_name = %s)"""
-    cursor.execute(query, (user_id, region))
-    logging.info("User unsubscribed from newsletter successfully!")
-
-
-def unsubscribe_user_to_newsletter_all(cursor: 'Cursor', user_id: int):
+def unsubscribe_user_from_newsletter(cursor: 'Cursor', user_id: int):
     """Unsubscribing user from all newsletters and removing all details from subscriptions table"""
     logging.info("Unsubscribing user from all newsletters...")
     query = """DELETE FROM subscriptions
@@ -120,45 +92,41 @@ def unsubscribe_user_to_newsletter_all(cursor: 'Cursor', user_id: int):
     logging.info("User unsubscribed from all newsletters successfully!")
 
 
-def handle_newsletter_unsubscribe(cursor: 'Cursor', user_id: int, user: dict):
+def handle_newsletter_unsubscribe(cursor: 'Cursor', user_id: int):
     """Combining newsletter check and unsubscribe"""
-    region = user['region']
     if check_if_user_is_subscribed(cursor, user_id):
-        if region == 'All':
-            unsubscribe_user_to_newsletter_all(cursor, user_id)
-        unsubscribe_user_to_newsletter_one_region(cursor, user, user_id)
+        unsubscribe_user_from_newsletter(cursor, user_id)
 
 
-def check_if_user_has_alert_one_region(cursor: 'Cursor', user: dict, user_id: int) -> bool:
+def check_if_user_has_alert_one_region(cursor: 'Cursor', region: str, user_id: int, postcode: str) -> bool:
     """Checking is a user already has an alert for the specified region, returning
     true/false"""
 
+    if postcode == "":
+        postcode = None
+
     logging.info("Checking if user has alert for region...")
-    region = user.get("region")
-    query = """SELECT * FROM alerts WHERE user_id = %s AND region_id = (
+    if region and postcode:
+        query = """SELECT * FROM alerts WHERE user_id = %s AND region_id = (
                     SELECT region_id FROM regions WHERE region_name = %s
-                )"""
-    cursor.execute(query, (user_id, region))
+                  ) AND postcode = %s"""
+        cursor.execute(query, (user_id, region, postcode))
+    elif region and not postcode:
+        query = """SELECT * FROM alerts WHERE user_id = %s AND region_id = (
+                    SELECT region_id FROM regions WHERE region_name = %s
+                  ) AND postcode IS NULL"""
+        cursor.execute(query, (user_id, region))
+    elif not region and postcode:
+        query = """SELECT * FROM alerts WHERE user_id = %s AND region_id IS NULL AND postcode = %s"""
+        cursor.execute(query, (user_id, postcode))
+    else:
+        query = """SELECT * FROM alerts WHERE user_id = %s AND region_id IS NULL AND postcode IS NULL"""
+        cursor.execute(query, (user_id, ))
     result = cursor.fetchone()
     if result:
         logging.info("User subscribed to this alert")
         return True
     logging.info("User not subscribed to this alert")
-    return False
-
-
-def check_if_user_has_alert_any(cursor: 'Cursor', user_id: int) -> bool:
-    """Checking is a user already has an alert for the specified region, returning
-    true/false"""
-
-    logging.info("Checking if user has alert for region...")
-    query = """SELECT * FROM alerts WHERE user_id = %s"""
-    cursor.execute(query, (user_id, ))
-    result = cursor.fetchone()
-    if result:
-        logging.info("User subscribed to alerts")
-        return True
-    logging.info("User not subscribed to any alerts")
     return False
 
 
@@ -169,22 +137,39 @@ def unsubscribe_user_from_alerts_all(cursor: 'Cursor', user_id: int):
     cursor.execute(query, (user_id, ))
 
 
-def unsubscribe_user_from_alerts_one_region(cursor: 'Cursor', region: str, user_id: int):
+def unsubscribe_user_from_alerts_one_region(cursor: 'Cursor', region: str, user_id: int, postcode: str):
     """Unsubscribing user from alert based on chosen region, updating alerts table"""
     logging.info("Unsubscribing user from all alerts...")
-    query = """DELETE FROM alerts WHERE user_id = %s
-                AND region_id = (SELECT region_id FROM regions WHERE region_name = %s
-                )"""
-    cursor.execute(query, (user_id, region))
+
+    if postcode == "":
+        postcode = None
+
+    if region and postcode:
+        query = """DELETE FROM alerts WHERE user_id = %s
+                    AND region_id = (SELECT region_id FROM regions WHERE region_name = %s
+                    ) AND postcode = %s"""
+        cursor.execute(query, (user_id, region, postcode))
+    elif region and not postcode:
+        query = """DELETE FROM alerts WHERE user_id = %s
+                    AND region_id = (SELECT region_id FROM regions WHERE region_name = %s
+                    ) AND postcode IS NULL"""
+        cursor.execute(query, (user_id, region))
+    elif not region and postcode:
+        query = """DELETE FROM alerts WHERE user_id = %s
+                    AND region_id IS NULL AND postcode = %s"""
+        cursor.execute(query, (user_id, postcode))
 
 
 def handle_alerts(cursor: 'Cursor', user_id: int, user: dict):
     """Combining alert checks and unsubscribing"""
-    region = user['region']
-    if check_if_user_has_alert_any(cursor, user_id):
-        if region == 'All':
-            unsubscribe_user_from_alerts_all(cursor, user_id)
-        unsubscribe_user_from_alerts_one_region(cursor, region, user_id)
+    region = user.get('region')
+    postcode = user.get('postcode')
+    if region == 'All':
+        unsubscribe_user_from_alerts_all(cursor, user_id)
+    else:
+        if check_if_user_has_alert_one_region(cursor, region, user_id, postcode):
+            unsubscribe_user_from_alerts_one_region(
+                cursor, region, user_id, postcode)
 
 
 def unsubscribe_user(cursor: 'Cursor', user_id: int, user_info: dict):
@@ -192,7 +177,7 @@ def unsubscribe_user(cursor: 'Cursor', user_id: int, user_info: dict):
 
     if user_info["type"] == "newsletter":
         logging.info("User opted to unsubscribe from the newsletter")
-        handle_newsletter_unsubscribe(cursor, user_id, user_info)
+        handle_newsletter_unsubscribe(cursor, user_id)
 
     if user_info["type"] == "alert":
         logging.info("User opted to unsubscribe from alerts")
@@ -221,7 +206,7 @@ def send_email_verification(email: str):
             "Body": {
                 "Text": {
                     "Data": f"Hello, you have successfully unsubscribed from\
-                    the chosen newsleter!"
+                    the newsleter!"
                 }
             },
         }

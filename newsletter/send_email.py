@@ -11,10 +11,11 @@ def generate_email_body(user_name: str) -> str:
     """Generate a well-formatted email body."""
     return f"""Dear {user_name},
 
-Please find attached a PDF containing your monthly energy report.
+It's that exciting time of the month again! Check out the attached newsletter for an exclusive
+insight into recent energy prices, demands and more!
 
-Regards,
-Energize"""
+Your favourite energy team,
+WattWatch"""
 
 
 def send_email_with_attachment(filename: str, recipient_email: str, user_name: str):
