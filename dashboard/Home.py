@@ -360,6 +360,8 @@ def main():
     tab4.title('Others')
     tab4.plotly_chart(add_table(generation_mix_data, 'Other'), key=4)
 
+    db_conn.close()
+
 
 if __name__ == '__main__':
     main()
