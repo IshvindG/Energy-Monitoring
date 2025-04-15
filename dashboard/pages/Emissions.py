@@ -286,6 +286,7 @@ def build_map(df, label, geojson, geo_to_db_region_map):
 
 def main():
     '''Main function to display all visualisations'''
+    st.set_page_config(page_title="CO₂ Emissions")
     st.title("Energy Trends: CO₂ Emissions vs Electricity Demand")
 
     df_carbon, df_demand = get_recent_data()
