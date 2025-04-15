@@ -27,7 +27,7 @@ CREATE TABLE regions(
 );
 
 CREATE TABLE outages(
-    outage_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
+    outage_id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY,
     outage_start TIMESTAMP,
     outage_end TIMESTAMP,
     region_id SMALLINT,
@@ -39,7 +39,7 @@ CREATE TABLE outages(
 
 
 CREATE TABLE prices(
-    price_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
+    price_id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY,
     price_per_mwh DECIMAL(5,2),
     price_at TIMESTAMP,
     updated_at TIMESTAMP DEFAULT NOW(),
@@ -48,7 +48,7 @@ CREATE TABLE prices(
 
 
 CREATE TABLE carbon_intensities(
-    carbon_intensity_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
+    carbon_intensity_id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY,
     index VARCHAR(10),
     forecast_measure SMALLINT,
     measure_at TIMESTAMP,
@@ -74,7 +74,7 @@ CREATE TABLE fuel_types(
 );
 
 CREATE TABLE generations(
-    generation_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
+    generation_id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY,
     mw_generated SMALLINT,
     fuel_type_id SMALLINT,
     generation_at TIMESTAMP,
@@ -84,7 +84,7 @@ CREATE TABLE generations(
 );
 
 CREATE TABLE users(
-    user_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
+    user_id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY,
     first_name VARCHAR(50),
     last_name VARCHAR(50),
     email VARCHAR(254),
@@ -93,7 +93,7 @@ CREATE TABLE users(
 );
 
 CREATE TABLE subscriptions(
-    subscription_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
+    subscription_id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY,
     user_id SMALLINT,
     region_id SMALLINT,
     PRIMARY KEY (subscription_id),
@@ -102,7 +102,7 @@ CREATE TABLE subscriptions(
 );
 
 CREATE TABLE alerts(
-    alert_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
+    alert_id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY,
     user_id SMALLINT,
     last_alert_sent TIMESTAMP,
     region_id SMALLINT,
@@ -114,7 +114,7 @@ CREATE TABLE alerts(
 );
 
 CREATE TABLE demands(
-    demand_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
+    demand_id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY,
     demand_at TIMESTAMP,
     total_demand BIGINT,
     updated_at TIMESTAMP DEFAULT NOW(),
