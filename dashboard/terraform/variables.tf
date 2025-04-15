@@ -28,3 +28,8 @@ variable "existing_vpc_name" {
   type = string
   description = "VPC Name"
 }
+
+variable "SENDER_EMAIL" {
+  type = string
+  description = "Sender email"
+}

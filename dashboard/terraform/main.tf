@@ -49,8 +49,7 @@ resource "aws_ecs_task_definition" "service" {
   container_definitions = jsonencode([
     {
         name = "energy-dashboard"
-        # image = "${data.aws_ecr_image.energy-dashboard-image.image_uri}"
-        image = "amazonlinux:latest"
+        image = "${data.aws_ecr_image.energy-dashboard-image.image_uri}"
         cpu = 0
         essential = true
         environment = [
@@ -73,6 +72,10 @@ resource "aws_ecs_task_definition" "service" {
             {
                 name = "DB_PASSWORD",
                 value =  var.DB_PASSWORD
+            },
+            {
+                name = "SENDER_EMAIL",
+                value = var.SENDER_EMAIL
             }
         ]
         logConfiguration = {
