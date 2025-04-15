@@ -58,8 +58,8 @@ resource "aws_ecs_task_definition" "service" {
                 value = var.DB_NAME
             },
             {
-                name = "DB_USERNAME",
-                value =  var.DB_USERNAME
+                name = "DB_USER",
+                value =  var.DB_USER
             },
             {
                 name = "DB_HOST",

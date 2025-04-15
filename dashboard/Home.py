@@ -5,7 +5,6 @@ import pandas as pd
 from utils.database import get_connection_to_db
 from psycopg2.extras import RealDictCursor
 import plotly.express as px
-import plotly.graph_objects as go
 import plotly.figure_factory as ff
 
 
@@ -304,9 +303,9 @@ def main():
     price_data = format_price_data(price_data)
 
     st.set_page_config(
-        layout="wide", page_title="Energy Dashboard", page_icon="icon.png")
+        layout="wide", page_title="Energy Dashboard", page_icon="assets/icon.png")
 
-    st.logo("icon.png")
+    st.logo("assets/icon.png")
     st.title("WattWatch Dashboard")
     st.write("Welcome! Use the sidebar to navigate between dashboards.")
 

@@ -7,5 +7,5 @@ seaborn
 folium
 matplotlib
 streamlit_folium
-verify_email_address
+validate-email-address
 phonenumbers
