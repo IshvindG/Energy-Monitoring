@@ -4,6 +4,7 @@ import streamlit as st
 from utils.unsub_api import submit_form
 import psycopg2
 from dotenv import load_dotenv
+from Subscribe import verify_email_address, validate_phone_number
 
 
 def get_connection_to_db():
@@ -48,16 +49,27 @@ def newsletter_form():
         email = st.text_input("Email")
         submitted = st.form_submit_button("Submit")
 
+        valid_email = True
+        valid_number = True
+
+        if email:
+            valid_email = verify_email_address(email)
+        if phone:
+            valid_number = validate_phone_number(phone)
+
         if submitted:
-            result = submit_form({
-                "type": "newsletter",
-                "first_name": first_name,
-                "last_name": last_name,
-                "phone": phone,
-                "email": email
-            })
-            if result:
-                st.success("You've successfully unsubscribed! ")
+            if valid_email and valid_number:
+                result = submit_form({
+                    "type": "newsletter",
+                    "first_name": first_name,
+                    "last_name": last_name,
+                    "phone": phone,
+                    "email": email
+                })
+                if result:
+                    st.success("You've successfully unsubscribed! ")
+            else:
+                st.error("Invalid email address or phone number")
 
 
 def alert_form(regions: list[str]):
@@ -72,19 +84,30 @@ def alert_form(regions: list[str]):
         postcode = st.text_input("Postcode", key="pc2")
         submitted = st.form_submit_button("Submit")
 
-        if submitted:
-            result = submit_form({
-                "type": "alert",
-                "first_name": first_name,
-                "last_name": last_name,
-                "phone": phone,
-                "email": email,
-                "region": region,
-                "postcode": postcode,
+        valid_email = True
+        valid_number = True
 
-            })
-            if result:
-                st.success("Unsubscribed from alert!")
+        if email:
+            valid_email = verify_email_address(email)
+        if phone:
+            valid_number = validate_phone_number(phone)
+
+        if submitted:
+            if valid_number and valid_email:
+                result = submit_form({
+                    "type": "alert",
+                    "first_name": first_name,
+                    "last_name": last_name,
+                    "phone": phone,
+                    "email": email,
+                    "region": region,
+                    "postcode": postcode,
+
+                })
+                if result:
+                    st.success("Unsubscribed from alert!")
+            else:
+                st.error("Invalid email address or phone number")
 
 
 def main(conn: 'Connection'):
