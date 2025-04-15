@@ -8,6 +8,10 @@ RUN pip install -r requirements.txt
 
 COPY newsletter.py .
 
+COPY newsletter.html .
+
+COPY turbines.jpg .
+
 COPY newsletter_pdf.py .
 
 COPY send_email.py .
