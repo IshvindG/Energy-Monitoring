@@ -1,0 +1,11 @@
+streamlit
+requests
+psycopg2
+python-dotenv
+plotly
+seaborn
+folium
+matplotlib
+streamlit_folium
+validate-email-address
+phonenumbers
