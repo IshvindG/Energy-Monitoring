@@ -43,7 +43,7 @@ def get_average_price_over_past_month(cursor: 'Cursor', today: str, last_month: 
     """Retrieving average price of energy over the past month from database"""
     query = """SELECT AVG(price_per_mwh) AS price_average
                 FROM prices
-                WHERE price_at BETWEEN %s AND %s
+                WHERE updated_at BETWEEN %s AND %s
             """
 
     cursor.execute(query, (last_month, today))
@@ -57,7 +57,7 @@ def get_highest_price_over_past_month(cursor: 'Cursor', today: str, last_month: 
     from database"""
     query = """SELECT price_per_mwh, price_at
                 FROM prices
-                WHERE price_at BETWEEN %s AND %s
+                WHERE updated_at BETWEEN %s AND %s
                 ORDER BY price_per_mwh DESC
                 LIMIT 1"""
 
@@ -74,7 +74,7 @@ def get_lowest_price_over_past_month(cursor: 'Cursor', today: str, last_month: s
 
     query = """SELECT price_per_mwh, price_at
                 FROM prices
-                WHERE price_at BETWEEN %s AND %s
+                WHERE updated_at BETWEEN %s AND %s
                 ORDER BY price_per_mwh ASC
                 LIMIT 1"""
 
@@ -89,7 +89,7 @@ def get_total_demand_over_past_month(cursor: 'Cursor', today: str, last_month: s
     """Retrieving total demand for energy over the past month from database"""
     query = """SELECT SUM(total_demand)
                 FROM demands
-                WHERE demand_at BETWEEN %s AND %s"""
+                WHERE updated_at BETWEEN %s AND %s"""
 
     cursor.execute(query, (last_month, today))
     result = cursor.fetchone()[0]
@@ -102,7 +102,7 @@ def get_average_demand_per_day_over_past_month(cursor: 'Cursor',
     """Retrieving average demand per day for energy over the past month from database"""
     query = """SELECT AVG(total_demand)
                 FROM demands
-                WHERE demand_at BETWEEN %s AND %s"""
+                WHERE updated_at BETWEEN %s AND %s"""
 
     cursor.execute(query, (last_month, today))
     result = cursor.fetchone()[0]
@@ -115,7 +115,7 @@ def get_highest_demand(cursor: 'Cursor', today: str, last_month: str):
     month from database"""
     query = """SELECT total_demand, demand_at
                 FROM demands
-                WHERE demand_at BETWEEN %s AND %s
+                WHERE updated_at BETWEEN %s AND %s
                 ORDER BY total_demand DESC
                 LIMIT 1"""
 
@@ -132,7 +132,7 @@ def get_lowest_demand(cursor: 'Cursor', today: str, last_month: str):
     from database"""
     query = """SELECT total_demand, demand_at
                 FROM demands
-                WHERE demand_at BETWEEN %s AND %s
+                WHERE updated_at BETWEEN %s AND %s
                 ORDER BY total_demand ASC
                 LIMIT 1"""
 
@@ -153,3 +153,124 @@ def get_average_demand_historical(cursor: 'Cursor'):
     result = cursor.fetchone()[0]
 
     return round(result, 2)
+
+
+def get_total_generation(cursor: 'Cursor', today: str, last_month: str) -> int:
+    """Retrieving total energy generated"""
+
+    query = """SELECT SUM(mw_generated)
+                FROM generations
+                WHERE updated_at BETWEEN %s AND %s"""
+
+    cursor.execute(query, (last_month, today))
+    result = cursor.fetchone()[0]
+
+    return result
+
+
+def get_total_renewable(cursor: 'Cursor', today: str, last_month: str) -> int:
+    """Retrieving total renewable energy generated"""
+
+    query = """SELECT SUM(mw_generated)
+                FROM generations g
+                JOIN fuel_types ft ON ft.fuel_type_id = g.fuel_type_id
+                JOIN fuel_categories fc ON fc.fuel_category_id = ft.fuel_category_id
+                WHERE g.updated_at BETWEEN %s AND %s
+                AND fc.fuel_category = 'Renewables'"""
+
+    cursor.execute(query, (last_month, today))
+    result = cursor.fetchone()[0]
+
+    return result
+
+
+def get_average_carbon_intensity(cursor: 'Cursor', today: str, last_month: str) -> float:
+    """Retrieving average carbon emissions over the past month"""
+
+    query = """SELECT AVG(forecast_measure)
+                FROM carbon_intensities
+                WHERE measure_at BETWEEN %s AND %s"""
+
+    cursor.execute(query, (last_month, today))
+    result = cursor.fetchone()[0]
+
+    return round(result, 2)
+
+
+def get_region_with_best_avg_carbon_intensity(cursor: 'Cursor', today: str, last_month: str) -> str:
+    """Retrieving region with the least carbon emissions"""
+
+    query = """SELECT region_name, AVG(forecast_measure) AS avg_measure
+                FROM carbon_intensities c
+                JOIN regions r ON r.region_id = c.region_id
+                WHERE measure_at BETWEEN %s AND %s
+                GROUP BY region_name
+                ORDER BY avg_measure ASC
+                LIMIT 1"""
+
+    cursor.execute(query, (last_month, today))
+
+    result = cursor.fetchone()[0]
+
+    return result
+
+
+def get_region_with_worst_avg_carbon_intensity(cursor: 'Cursor', today: str, last_month: str) -> str:
+    """Retrieving region with the most carbon emissions"""
+
+    query = """SELECT region_name, AVG(forecast_measure) AS avg_measure
+                FROM carbon_intensities c
+                JOIN regions r ON r.region_id = c.region_id
+                WHERE measure_at BETWEEN %s AND %s
+                GROUP BY region_name
+                ORDER BY avg_measure DESC
+                LIMIT 1"""
+
+    cursor.execute(query, (last_month, today))
+
+    result = cursor.fetchone()[0]
+
+    return result
+
+
+def get_hour_with_best_avg_carbon_intensity(cursor: 'Cursor', today: str, last_month: str) -> datetime:
+    """Retrieving the hour with the least carbon emissions"""
+
+    query = """SELECT EXTRACT(HOUR FROM measure_at) AS hour_of_day, AVG(forecast_measure) AS avg_measure
+                FROM carbon_intensities
+                WHERE measure_at BETWEEN %s AND %s
+                GROUP BY hour_of_day
+                ORDER BY avg_measure ASC
+                LIMIT 1"""
+
+    cursor.execute(query, (last_month, today))
+    result = cursor.fetchone()[0]
+
+    return result
+
+
+def get_hour_with_worst_avg_carbon_intensity(cursor: 'Cursor', today: str, last_month: str) -> datetime:
+    """Retrieving the hour with the most carbon emissions"""
+
+    query = """SELECT EXTRACT(HOUR FROM measure_at) AS hour_of_day, AVG(forecast_measure) AS avg_measure
+                FROM carbon_intensities
+                WHERE measure_at BETWEEN %s AND %s
+                GROUP BY hour_of_day
+                ORDER BY avg_measure DESC
+                LIMIT 1"""
+
+    cursor.execute(query, (last_month, today))
+    result = cursor.fetchone()[0]
+
+    return result
+
+
+if __name__ == "__main__":
+
+    db_connection = get_connection_to_db()
+    curr = db_connection.cursor()
+    date_today, date_last_month = get_dates()
+    date_today = format_dates(date_today)
+    date_last_month = format_dates(date_last_month)
+    print(get_hour_with_worst_avg_carbon_intensity(
+        curr, date_today, date_last_month))

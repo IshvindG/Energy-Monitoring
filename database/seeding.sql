@@ -26,3 +26,9 @@ INSERT INTO regions (region_name, provider_id) VALUES
 ('England', 5),
 ('Scotland', 1),
 ('Wales', 2);
+
+INSERT INTO fuel_categories (fuel_category) VALUES
+('Fossil Fuels'),
+('Renewables'),
+('Other'),
+('Interconnectors');

@@ -43,7 +43,7 @@ def lambda_handler(event, context):
         logging.info("Found users")
         logging.info("Creating newsletter")
         report_data = create_report_data()
-        create_pdf_report(report_data, pdf_filename)
+        create_pdf_report(report_data, pdf_filename, "newsletter.html")
         logging.info("Report created")
         logging.info("Sending emails to subscribers")
         send_emails_to_users(subscribed_users, pdf_filename)
