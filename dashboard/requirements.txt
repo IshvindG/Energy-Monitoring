@@ -3,3 +3,5 @@ requests
 psycopg2
 python-dotenv
 plotly
+verify_email_address
+phonenumbers
