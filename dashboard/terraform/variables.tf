@@ -1,4 +1,4 @@
-variable "DB_USERNAME" {
+variable "DB_USER" {
   type = string
   description = "SQL Server Database username"
 }
@@ -27,4 +27,9 @@ variable "DB_PORT" {
 variable "existing_vpc_name" {
   type = string
   description = "VPC Name"
+}
+
+variable "SENDER_EMAIL" {
+  type = string
+  description = "Send email"
 }
