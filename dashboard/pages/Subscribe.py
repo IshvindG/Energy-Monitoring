@@ -5,6 +5,8 @@ import psycopg2
 from psycopg2.extensions import connection
 from dotenv import load_dotenv
 from utils.api import submit_form
+from validate_email_address import validate_email
+import phonenumbers
 
 
 def get_connection_to_db() -> connection:
@@ -40,6 +42,16 @@ def get_region_data(conn: connection) -> list[str]:
     return region_data
 
 
+def verify_email_address(email: str) -> bool:
+
+    return validate_email(email)
+
+
+def validate_phone_number(phone: str) -> bool:
+    phone_number = phonenumbers.parse(phone, "GB")
+    return phonenumbers.is_valid_number(phone_number)
+
+
 def newsletter_form():
     """Display Newsletter subscription form"""
 
@@ -51,16 +63,27 @@ def newsletter_form():
         email = st.text_input("Email")
         submitted = st.form_submit_button("Submit")
 
+        valid_email = True
+        valid_number = True
+
+        if email:
+            valid_email = verify_email_address(email)
+        if phone:
+            valid_number = validate_phone_number(phone)
+
         if submitted:
-            result = submit_form({
-                "type": "newsletter",
-                "first_name": first_name,
-                "last_name": last_name,
-                "phone": phone,
-                "email": email
-            })
-            if result:
-                st.success("You're subscribed! 🎉")
+            if valid_email and valid_number:
+                result = submit_form({
+                    "type": "newsletter",
+                    "first_name": first_name,
+                    "last_name": last_name,
+                    "phone": phone,
+                    "email": email
+                })
+                if result:
+                    st.success("You're subscribed! 🎉")
+            else:
+                st.error("Invalid email address or phone number")
 
 
 def alert_form(regions: list[str]):
@@ -76,18 +99,30 @@ def alert_form(regions: list[str]):
         postcode = st.text_input("Postcode", key="pc2")
         submitted = st.form_submit_button("Submit")
 
+        valid_email = True
+        valid_number = True
+
+        if email:
+            valid_email = verify_email_address(email)
+        if phone:
+            valid_number = validate_phone_number(phone)
+
         if submitted:
-            result = submit_form({
-                "type": "alert",
-                "first_name": first_name,
-                "last_name": last_name,
-                "phone": phone,
-                "email": email,
-                "region": region,
-                "postcode": postcode
-            })
+            if valid_email and valid_number:
+                result = submit_form({
+                    "type": "alert",
+                    "first_name": first_name,
+                    "last_name": last_name,
+                    "phone": phone,
+                    "email": email,
+                    "region": region,
+                    "postcode": postcode
+                })
             if result:
                 st.success("Alert subscription saved!")
+
+        else:
+            st.error("Invalid email address or phone number")
 
 
 def main(conn: connection):
