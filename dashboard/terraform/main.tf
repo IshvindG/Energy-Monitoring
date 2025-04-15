@@ -12,10 +12,10 @@ provider "aws" {
 }
 
 
-# data "aws_ecr_image" "energy-dashboard-image" {
-#   repository_name = "c16-energy-dashboard"
-#   image_tag = "latest"
-# }
+data "aws_ecr_image" "energy-dashboard-image" {
+  repository_name = "c16-energy-dashboard"
+  image_tag = "latest"
+}
 
 data "aws_vpc" "c16-vpc"{
     filter {
