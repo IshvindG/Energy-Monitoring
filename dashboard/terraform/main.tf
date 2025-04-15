@@ -73,6 +73,14 @@ resource "aws_ecs_task_definition" "service" {
             {
                 name = "DB_PASSWORD",
                 value =  var.DB_PASSWORD
+            },
+            {
+              name = "SUB_LINK",
+              value = var.SUB_LINK
+            },
+            {
+              name = "UNSUB_LINK",
+              value = var.UNSUB_LINK
             }
         ]
         logConfiguration = {

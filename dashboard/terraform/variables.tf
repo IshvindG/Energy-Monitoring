@@ -33,3 +33,13 @@ variable "SENDER_EMAIL" {
   type = string
   description = "Send email"
 }
+
+variable "SUB_LINK" {
+  type = string
+  description = "Link to submit subscribe form"
+}
+
+variable "UNSUB_LINK" {
+  type = string
+  description = "Link to submit subscribe form"
+}
