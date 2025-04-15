@@ -4,7 +4,7 @@
 
 Project for collecting, analyzing & visualising data related to energy generation in the UK.
 
-Our main goals are to collect data on energy generation, usage, carbon emissions, price and power outages and display them either via an interactable dashboard, as a report, or as a notification.
+Our main goals are to collect data on energy generation, usage, carbon emissions, price and power outages and display them either via an interactable dashboard, as a newsletter, or as a notification.
 
 The brief can be found [here](https://docs.google.com/document/d/1KE8viDVxvyAZMGVWNXFbP0jxCQOOtVfl6sn49-VA2rk/edit?tab=t.0#heading=h.ufu7imi2qzpo)
 ---
@@ -18,4 +18,6 @@ The brief can be found [here](https://docs.google.com/document/d/1KE8viDVxvyAZMG
 
 ---
 
-Feel free to updated as needed.
+## Further Information
+
+- See inside each folder for its respective README.md and extra guidance and information

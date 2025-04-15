@@ -30,10 +30,10 @@ CREATE TABLE outages(
     outage_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
     outage_start TIMESTAMP,
     outage_end TIMESTAMP,
-    region_id SMALLINT,
+    provider_id SMALLINT,
     planned BOOL,
     PRIMARY KEY (outage_id),
-    CONSTRAINT fk_region_id_outage FOREIGN KEY (region_id) REFERENCES regions (region_id)
+    CONSTRAINT fk_provider_id_outage FOREIGN KEY (provider_id) REFERENCES providers (provider_id)
 );
 
 CREATE TABLE outage_postcodes(
@@ -56,7 +56,6 @@ CREATE TABLE prices(
 CREATE TABLE carbon_intensities(
     carbon_intensity_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
     index VARCHAR(10),
-    current_measure SMALLINT,
     forecast_measure SMALLINT,
     measure_at TIMESTAMP,
     region_id SMALLINT,
@@ -70,7 +69,7 @@ CREATE TABLE fuel_types(
     fuel_type VARCHAR(20),
     fuel_type_name VARCHAR(50),
     PRIMARY KEY (fuel_type_id)
-);
+); 
 
 CREATE TABLE generations(
     generation_id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
