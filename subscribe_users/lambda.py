@@ -218,7 +218,6 @@ def lambda_handler(event, context):
 
         if not user_id:
             user_id = upload_user_to_db(cursor, user_response)
-            connection.commit()
             send_verifications(user_response)
 
         if user_response["type"] == "newsletter":
@@ -227,6 +226,15 @@ def lambda_handler(event, context):
         if user_response["type"] == "alert":
 
             handle_alerts(cursor, user_id, user_response)
+        # else:
+
+        #     if user_response["type"] == "newsletter":
+        #         handle_newsletter(cursor, user_id, user_response)
+
+        #     if user_response["type"] == "alert":
+
+        #         handle_alerts(cursor, user_id, user_response)
+
         connection.commit()
 
         return {
