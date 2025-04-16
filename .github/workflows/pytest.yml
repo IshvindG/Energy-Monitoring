@@ -7,7 +7,9 @@ on:
 jobs:
     pytest:
         runs-on: ubuntu-latest
-
+        strategy:
+            matrix:
+                project: [energy-generation]
         steps:
             - name: checkout
               uses: actions/checkout@v4
@@ -24,9 +26,10 @@ jobs:
 
             - name: Combine and install all requirements
               run: |
-                find . -name "requirements.txt" -exec sh -c 'cat "$1"; echo' _ {} \; > all-requirements.txt
-                pip install -r all-requirements.txt
+                cd ${{ matrix.project }}
+                pip install -r requirements.txt
 
             - name: Analyse Code
               run: |
-                pytest
+                cd ${{ matrix.project }}
+                pytest tests
