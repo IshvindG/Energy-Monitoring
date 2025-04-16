@@ -1,0 +1,84 @@
+name: AWS ECR Image Builder
+on:
+    workflow_dispatch:
+
+jobs:
+    read_config:
+        runs-on: ubuntu-latest
+        outputs:
+            matrix: ${{ steps.read.outputs.matrix }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+            
+            - name: Make sure .docker-config exists
+              id: check
+              if: ${{ hashFiles('.docker-config.yaml') != '' }}
+              run: echo Docker Config File Found!
+
+            - name: Read YAML and parse to JSON
+              id: read
+              run: |
+                MATRIX=$(yq -o=json '.images' .docker-config.yaml | jq -c '.')
+                echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
+
+    
+    build:
+        needs: read_config
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                include: ${{ fromJson(needs.read_config.outputs.matrix) }}
+            fail-fast: false
+        steps:
+
+            - name: Validate matrix variables are not empty
+              if: ${{ matrix.disabled != true }}
+              run: |
+                if [ -z "${{ matrix.image }}" ]; then
+                  echo "Image is empty. Stopping the workflow."
+                  exit 1
+                fi
+                if [ -z "${{ matrix.path }}" ]; then
+                  echo "Path is empty. Stopping the workflow."
+                  exit 1
+                fi
+                if [ -z "${{ matrix.ecr-repo }}" ]; then
+                  echo "Ecr-repo is empty. Stopping the workflow."
+                  exit 1
+                fi
+
+            - name: Checkout
+              if: ${{ matrix.disabled != true }}
+              uses: actions/checkout@v3
+
+            - name: Run ECS Build
+              if: ${{ matrix.disabled != true }}
+              run: |
+                echo "${{ matrix.image }}"
+                echo "${{ matrix.path }}"
+                echo "${{ matrix.ecr-repo }}"
+
+            - name: Configure AWS credentials
+              uses: aws-actions/configure-aws-credentials@v3
+              if: ${{ matrix.disabled != true }}
+              with:
+                aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                aws-region: eu-west-2
+
+            - name: Amazon ECR "Login" Action for GitHub Actions
+              id: login-ecr
+              if: ${{ matrix.disabled != true }}
+              uses: aws-actions/amazon-ecr-login@v2.0.1
+
+            - name: Build, tag and push Docker image to Amazon ECR  #This workflow is intended for private ECR Repositories
+              if: ${{ matrix.disabled != true }}
+              env: 
+                  REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+                  REPOSITORY: ${{ matrix.ecr-repo }}
+                  IMAGE_TAG: latest
+              run: |    #Line below can be changed as needed
+                cd ${{ matrix.path }}
+                docker build --platform "linux/amd64" --provenance=false -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+                docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG

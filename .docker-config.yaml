@@ -1,0 +1,8 @@
+images:
+  - image: dashboard
+    path: dashboard/
+    ecr-repo: c16-energy-dashboard
+
+  - image: energy-generation
+    path: energy-generation
+    ecr-repo: c16-energy-generation-pipeline
