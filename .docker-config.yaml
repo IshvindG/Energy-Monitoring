@@ -6,3 +6,4 @@ images:
   - image: energy-generation
     path: energy-generation
     ecr-repo: c16-energy-generation-pipeline
+    disabled: true
