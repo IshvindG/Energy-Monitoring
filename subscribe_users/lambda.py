@@ -273,7 +273,6 @@ def lambda_handler(event, context):
         new_user = False
         if not user_id:
             user_id = upload_user_to_db(cursor, user_response)
-            connection.commit()
             send_verifications(user_response)
 
         if user_response["type"] == "newsletter":
