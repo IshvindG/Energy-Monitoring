@@ -6,67 +6,8 @@ from dotenv import load_dotenv
 import psycopg2
 import boto3
 from botocore.exceptions import ClientError
-from ..subscribe_users.subscribe_lambda import enable_logging, connect_to_db, define_user_info, user_details, check_user_exists, check_if_user_is_subscribed
-
-
-def enable_logging() -> None:
-    """Enables logging at INFO level"""
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    )
-
-
-def connect_to_db():
-    """Gets a psycopg2 connection to the energy database"""
-    load_dotenv()
-    logging.info("Connecting to the database...")
-    return psycopg2.connect(host=os.getenv("DB_HOST"),
-                            database=os.getenv("DB_NAME"),
-                            user=os.getenv("DB_USER"),
-                            password=os.getenv("DB_PASSWORD"),
-                            port=os.getenv("DB_PORT"))
-
-
-def define_user_info(response: dict) -> dict:
-    """Creating user information based on POST data from API gateway"""
-    body = json.loads(response['body'])
-    user_info = {
-        "phone": body.get("phone"),
-        "email": body.get("email"),
-        "type": body.get("type"),
-        "region": body.get("region") if body.get("region") and body.get("region") != "--" else None,
-        "postcode": body.get("postcode") or None
-    }
-    return user_info
-
-
-def user_details(user_info: dict) -> str:
-    """Extracting user details from the user_info dict to reduce redundancy"""
-    phone = user_info["phone"]
-    email = user_info["email"]
-    return phone, email
-
-
-def check_user_exists(cursor: 'Cursor', user: dict):
-    """Querying database to check if the user submitted already exists, if so returning
-    their user_id"""
-    phone, email = user_details(user)
-    query = """SELECT user_id FROM users
-                WHERE phone_number = %s
-                OR email = %s"""
-
-    logging.info("Checking if user exists...")
-
-    cursor.execute(query, (phone, email))
-    result = cursor.fetchall()
-
-    if not result:
-        logging.info("No user found with the given details.")
-        return None
-
-    user_id = result[0][0]
-    return user_id
+from ..subscribe_users.subscribe_lambda import (enable_logging, connect_to_db,
+                                                define_user_info, check_user_exists)
 
 
 def check_if_user_is_subscribed(cursor: 'Cursor', user_id: int) -> bool:
@@ -99,12 +40,26 @@ def handle_newsletter_unsubscribe(cursor: 'Cursor', user_id: int):
         unsubscribe_user_from_newsletter(cursor, user_id)
 
 
+def check_if_user_has_alert(cursor: 'Cursor', user_id: int) -> bool:
+    """Checking is a user is already subscribed to the alert, returning true/false"""
+    logging.info("Checking if user is subscribed to newsletter...")
+
+    query = """SELECT * FROM alerts WHERE user_id = %s"""
+    cursor.execute(query, (user_id, ))
+    result = cursor.fetchall()
+    if result:
+        logging.info("User is subscribed to alert")
+        return True
+
+    logging.info("User not subscribed to alert")
+    return False
+
+
 def check_if_user_has_alert_one_region(cursor: 'Cursor', region: str, user_id: int, postcode: str) -> bool:
     """Checking is a user already has an alert for the specified region, returning
     true/false"""
-
-    if postcode == "":
-        postcode = None
+    if not postcode:
+        postcode = ''
 
     logging.info("Checking if user has alert for region...")
     if region and postcode:
@@ -115,13 +70,13 @@ def check_if_user_has_alert_one_region(cursor: 'Cursor', region: str, user_id: i
     elif region and not postcode:
         query = """SELECT * FROM alerts WHERE user_id = %s AND region_id = (
                     SELECT region_id FROM regions WHERE region_name = %s
-                  ) AND postcode IS NULL"""
+                  ) AND postcode = ''"""
         cursor.execute(query, (user_id, region))
     elif not region and postcode:
         query = """SELECT * FROM alerts WHERE user_id = %s AND region_id IS NULL AND postcode = %s"""
         cursor.execute(query, (user_id, postcode))
     else:
-        query = """SELECT * FROM alerts WHERE user_id = %s AND region_id IS NULL AND postcode IS NULL"""
+        query = """SELECT * FROM alerts WHERE user_id = %s AND region_id IS NULL AND postcode = ''"""
         cursor.execute(query, (user_id, ))
     result = cursor.fetchone()
     if result:
@@ -142,8 +97,11 @@ def unsubscribe_user_from_alerts_one_region(cursor: 'Cursor', region: str, user_
     """Unsubscribing user from alert based on chosen region, updating alerts table"""
     logging.info("Unsubscribing user from all alerts...")
 
-    if postcode == "":
-        postcode = None
+    if region == "--":
+        region = None
+
+    if not postcode:
+        postcode = ''
 
     if region and postcode:
         query = """DELETE FROM alerts WHERE user_id = %s
@@ -153,7 +111,7 @@ def unsubscribe_user_from_alerts_one_region(cursor: 'Cursor', region: str, user_
     elif region and not postcode:
         query = """DELETE FROM alerts WHERE user_id = %s
                     AND region_id = (SELECT region_id FROM regions WHERE region_name = %s
-                    ) AND postcode IS NULL"""
+                    ) AND postcode = ''"""
         cursor.execute(query, (user_id, region))
     elif not region and postcode:
         query = """DELETE FROM alerts WHERE user_id = %s
@@ -165,12 +123,14 @@ def handle_alerts(cursor: 'Cursor', user_id: int, user: dict):
     """Combining alert checks and unsubscribing"""
     region = user.get('region')
     postcode = user.get('postcode')
-    if region == 'All':
-        unsubscribe_user_from_alerts_all(cursor, user_id)
-    else:
-        if check_if_user_has_alert_one_region(cursor, region, user_id, postcode):
-            unsubscribe_user_from_alerts_one_region(
-                cursor, region, user_id, postcode)
+
+    if check_if_user_has_alert(cursor, user_id):
+        if region == 'All':
+            unsubscribe_user_from_alerts_all(cursor, user_id)
+        else:
+            if check_if_user_has_alert_one_region(cursor, region, user_id, postcode):
+                unsubscribe_user_from_alerts_one_region(
+                    cursor, region, user_id, postcode)
 
 
 def unsubscribe_user(cursor: 'Cursor', user_id: int, user_info: dict):
@@ -234,6 +194,7 @@ def lambda_handler(event, context):
     """Combining all functions into a single lambda handler"""
     enable_logging()
     try:
+        logging.info("Event: %s, Context: %s", event, context)
         logging.info("Starting lambda_handler...")
         connection = connect_to_db()
         cursor = connection.cursor()
@@ -251,6 +212,7 @@ def lambda_handler(event, context):
         unsubscribe_user(cursor, user_id, user_response)
 
         connection.commit()
+        connection.close()
 
         send_verifications(user_response)
 
