@@ -82,37 +82,6 @@ def check_user_exists(cursor: 'Cursor', user: dict):
     return user_id
 
 
-# def validate_user_info(user: dict) -> bool:
-#     """Validates email, phone, and name fields."""
-
-#     email = user.get("email")
-#     phone = user.get("phone")
-#     first_name = user.get("first_name")
-#     last_name = user.get("last_name")
-
-#     email_regex = r"^[\w\.-]+@[\w\.-]+\.\w{2,}$"
-#     phone_regex = r"^\+\d{7,15}$"
-#     name_regex = r"^[A-Za-zÀ-ÿ'`’\- ]{1,50}$"
-
-#     if not re.match(email_regex, email or ""):
-#         logging.error("Invalid email format: %s", email)
-#         return False
-
-#     if not re.match(phone_regex, phone or ""):
-#         logging.error("Invalid phone number format: %s", phone)
-#         return False
-
-#     if not re.match(name_regex, first_name or ""):
-#         logging.error("Invalid first name: %s", first_name)
-#         return False
-
-#     if not re.match(name_regex, last_name or ""):
-#         logging.error("Invalid last name: %s", last_name)
-#         return False
-
-#     return True
-
-
 def upload_user_to_db(cursor: 'Cursor', user: dict) -> int:
     """Uploading user to database if user doesn't exist, returning user_id"""
     logging.info("Uploading user to database...")
@@ -150,7 +119,7 @@ def subscribe_user_to_newsletter(cursor: 'Cursor', user_id: int):
     logging.info("User subscribed to newsletter successfully!")
 
 
-def handle_newsletter(cursor: 'Cursor', user_id: int, user: dict):
+def handle_newsletter(cursor: 'Cursor', user_id: int):
     """Combining newsletter check and subscription"""
     if not check_if_user_is_subscribed(cursor, user_id):
         subscribe_user_to_newsletter(cursor, user_id)
@@ -193,21 +162,9 @@ def subscribe_user_to_alert(cursor: 'Cursor', user_id: int, user: dict):
 
 def handle_alerts(cursor: 'Cursor', user_id: int, user: dict):
     """Combining alert checks and subscription"""
-    region = user["region"]
-    phone = user["phone"]
     if not check_if_user_has_alert(cursor, user, user_id):
         subscribe_user_to_alert(cursor, user_id, user)
         logging.info("User subscribed to alert successfully")
-
-
-# def send_phone_verification(phone: str):
-#     """Sending a phone verification text when a new user subscribes"""
-#     logging.info("Sending phone verification to: %s", phone)
-#     sns = boto3.client('sns', region_name='eu-west-2')
-#     sns.publish(
-#         PhoneNumber=phone,
-#         Message="You've been subscribed to Energy Monitor alerts.",
-#     )
 
 
 def send_phone_verification(phone: str):
@@ -269,12 +226,6 @@ def lambda_handler(event, context):
         cursor = connection.cursor()
         user_response = define_user_info(event)
 
-        # if not validate_user_info(user_response):
-        #     return {
-        #         "statusCode": 400,
-        #         "body": json.dumps({"error": "Invalid input format"})
-        #     }
-
         user_id = check_user_exists(cursor, user_response)
         new_user = False
         if not user_id:
@@ -283,7 +234,7 @@ def lambda_handler(event, context):
             send_verifications(user_response)
 
         if user_response["type"] == "newsletter":
-            handle_newsletter(cursor, user_id, user_response)
+            handle_newsletter(cursor, user_id)
 
         elif user_response["type"] == "alert":
             handle_alerts(cursor, user_id, user_response)
