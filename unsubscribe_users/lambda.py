@@ -41,9 +41,6 @@ def define_user_info(response: dict) -> dict:
     if user_info['region'] == '--':
         user_info['region'] == None
 
-    if user_info['postcode'] == "":
-        user_info['postcode'] == None
-
     return user_info
 
 
@@ -123,11 +120,8 @@ def check_if_user_has_alert(cursor: 'Cursor', user_id: int) -> bool:
 def check_if_user_has_alert_one_region(cursor: 'Cursor', region: str, user_id: int, postcode: str) -> bool:
     """Checking is a user already has an alert for the specified region, returning
     true/false"""
-
-    if postcode == "":
-        postcode = None
-    if region == "":
-        region = None
+    if not postcode:
+        postcode = ''
 
     logging.info("Checking if user has alert for region...")
     if region and postcode:
@@ -138,13 +132,13 @@ def check_if_user_has_alert_one_region(cursor: 'Cursor', region: str, user_id: i
     elif region and not postcode:
         query = """SELECT * FROM alerts WHERE user_id = %s AND region_id = (
                     SELECT region_id FROM regions WHERE region_name = %s
-                  ) AND postcode IS NULL"""
+                  ) AND postcode = ''"""
         cursor.execute(query, (user_id, region))
     elif not region and postcode:
         query = """SELECT * FROM alerts WHERE user_id = %s AND region_id IS NULL AND postcode = %s"""
         cursor.execute(query, (user_id, postcode))
     else:
-        query = """SELECT * FROM alerts WHERE user_id = %s AND region_id IS NULL AND postcode IS NULL"""
+        query = """SELECT * FROM alerts WHERE user_id = %s AND region_id IS NULL AND postcode = ''"""
         cursor.execute(query, (user_id, ))
     result = cursor.fetchone()
     if result:
@@ -165,11 +159,11 @@ def unsubscribe_user_from_alerts_one_region(cursor: 'Cursor', region: str, user_
     """Unsubscribing user from alert based on chosen region, updating alerts table"""
     logging.info("Unsubscribing user from all alerts...")
 
-    if postcode == "":
-        postcode = None
-
     if region == "--":
         region = None
+
+    if not postcode:
+        postcode = ''
 
     if region and postcode:
         query = """DELETE FROM alerts WHERE user_id = %s
@@ -179,7 +173,7 @@ def unsubscribe_user_from_alerts_one_region(cursor: 'Cursor', region: str, user_
     elif region and not postcode:
         query = """DELETE FROM alerts WHERE user_id = %s
                     AND region_id = (SELECT region_id FROM regions WHERE region_name = %s
-                    ) AND postcode IS NULL"""
+                    ) AND postcode = ''"""
         cursor.execute(query, (user_id, region))
     elif not region and postcode:
         query = """DELETE FROM alerts WHERE user_id = %s
