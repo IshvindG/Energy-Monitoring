@@ -34,6 +34,7 @@ def get_db_connection():
     )
 
 
+@st.cache_data
 def get_recent_data():
     '''Gets recent data for up to date visualisations'''
     conn = get_db_connection()
@@ -286,8 +287,10 @@ def build_map(df, label, geojson, geo_to_db_region_map):
 
 def main():
     '''Main function to display all visualisations'''
-    st.set_page_config(page_title="CO₂ Emissions")
+    st.set_page_config(page_title="CO₂ Emissions",
+                       page_icon="assets/icon.png")
     st.title("Energy Trends: CO₂ Emissions vs Electricity Demand")
+    st.logo("assets/icon.png")
 
     df_carbon, df_demand = get_recent_data()
 

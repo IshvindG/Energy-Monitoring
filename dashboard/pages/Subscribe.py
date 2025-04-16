@@ -127,7 +127,8 @@ def alert_form(regions: list[str]):
 
 def main(conn: connection):
     """Start Dashboard"""
-
+    st.logo("assets/icon.png")
+    st.set_page_config(page_icon="assets/icon.png")
     st.title("Subscribe")
 
     tab1, tab2 = st.tabs(["Newsletter", "Outage Alerts"])

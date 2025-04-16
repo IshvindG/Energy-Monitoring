@@ -6,11 +6,11 @@ COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
-COPY pages/ ./pages/
+COPY pages ./pages/
 
-COPY assets/ ./assets/
+COPY assets ./assets/
 
-COPY utils/ ./utils/
+COPY utils ./utils/
 
 COPY Home.py .
 

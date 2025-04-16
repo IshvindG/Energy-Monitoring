@@ -9,9 +9,10 @@ import plotly.graph_objects as go
 import plotly.figure_factory as ff
 
 
-def retrieve_generation_mix_data(db_cursor) -> pd.DataFrame:
+@st.cache_data
+def retrieve_generation_mix_data(_db_cursor) -> pd.DataFrame:
     """Retrieve Generation Data from DB"""
-    db_cursor.execute(
+    _db_cursor.execute(
         """
         WITH Latest_gen_data AS (
             SELECT gd.fuel_type_id, gd.mw_generated, gd.updated_at
@@ -21,27 +22,28 @@ def retrieve_generation_mix_data(db_cursor) -> pd.DataFrame:
                 FROM generations
                 GROUP BY fuel_type_id
             ) latest ON gd.fuel_type_id = latest.fuel_type_id AND gd.updated_at = latest.latest_time
-
         )
         SELECT * FROM Latest_gen_data JOIN fuel_types USING(fuel_type_id) JOIN fuel_categories USING(fuel_category_id);
         """)
 
-    generation_data = db_cursor.fetchall()
+    generation_data = _db_cursor.fetchall()
     return generation_data
 
 
-def retrieve_price_data(db_cursor):
+@st.cache_data
+def retrieve_price_data(_db_cursor):
     """Retrieve Pricing Data from DB"""
-    db_cursor.execute(
+    _db_cursor.execute(
         "SELECT * FROM prices WHERE updated_at >= NOW() - '1 day'::INTERVAL")
-    return db_cursor.fetchall()
+    return _db_cursor.fetchall()
 
 
-def retrieve_demand_data(db_cursor):
+@st.cache_data
+def retrieve_demand_data(_db_cursor):
     """Retrieve Demand Data from DB"""
-    db_cursor.execute(
+    _db_cursor.execute(
         "SELECT total_demand, demand_at FROM demands WHERE updated_at >= NOW() - '1 day'::INTERVAL")
-    demand = db_cursor.fetchall()
+    demand = _db_cursor.fetchall()
     return demand
 
 
@@ -58,13 +60,14 @@ def format_generation_data(generation_data: list[dict]):
     return generation_mix
 
 
-def generate_demand_graph(db_cursor, demand_range):
+@st.cache_data
+def generate_demand_graph(_db_cursor, demand_range):
     """Generate demand"""
     duration = get_duration(demand_range)
 
-    db_cursor.execute(
+    _db_cursor.execute(
         f"SELECT total_demand, demand_at FROM demands WHERE updated_at >= NOW() - '{duration}'::INTERVAL")
-    demands = db_cursor.fetchall()
+    demands = _db_cursor.fetchall()
 
     demand_df = pd.DataFrame(demands)
     demand_df = format_demand_data(demand_df)
@@ -80,13 +83,14 @@ def generate_demand_graph(db_cursor, demand_range):
     return demand_chart
 
 
-def generate_price_graph(db_cursor, price_range):
+@st.cache_data
+def generate_price_graph(_db_cursor, price_range):
     """Generate price"""
     duration = get_duration(price_range)
 
-    db_cursor.execute(
+    _db_cursor.execute(
         f"SELECT * FROM prices WHERE updated_at >= NOW() - '{duration}'::INTERVAL")
-    prices = db_cursor.fetchall()
+    prices = _db_cursor.fetchall()
 
     price_df = pd.DataFrame(prices)
     price_df = format_price_data(price_df)
@@ -136,6 +140,8 @@ def generate_energy_generation_mix_graph(generation_mix: pd.DataFrame):
 
     generation_mix = generation_mix.loc[generation_mix['fuel_category']
                                         != 'Interconnectors']
+    generation_mix = generation_mix.loc[generation_mix['mw_generated']
+                                        > 0]
     # Create sunburst chart using Plotly
     fig = px.sunburst(
         generation_mix,
@@ -143,6 +149,7 @@ def generate_energy_generation_mix_graph(generation_mix: pd.DataFrame):
         path=['fuel_category', 'fuel_type_name'],
         values='mw_generated',
         title="Energy Generation"
+
     )
 
     # Show it in Streamlit
@@ -156,11 +163,12 @@ def show_generation_stats(generation_mix: pd.DataFrame):
                  'fuel_type', 'mw_generated', 'updated_at'], inplace=True)
 
 
-def generate_24h_energy_generation_graph(db_cursor, generation_range):
+@st.cache_data
+def generate_24h_energy_generation_graph(_db_cursor, generation_range):
     """Generate 24h generation mix"""
     duration = get_duration(generation_range)
 
-    db_cursor.execute(
+    _db_cursor.execute(
         f"""
         SELECT * FROM generations
         JOIN fuel_types USING(fuel_type_id)
@@ -168,7 +176,7 @@ def generate_24h_energy_generation_graph(db_cursor, generation_range):
         AND fuel_type NOT LIKE 'INT%'
         AND mw_generated > 0
         """)
-    energy_mix = db_cursor.fetchall()
+    energy_mix = _db_cursor.fetchall()
     energy_mix_df = pd.DataFrame(energy_mix)
 
     energy_mix_df = format_generation_data(energy_mix_df)
@@ -279,6 +287,10 @@ def add_table(data, filter_type):
                  'fuel_type', 'updated_at'], inplace=True)
     data_copy.sort_values(by=['mw_generated'], inplace=True, ascending=False)
 
+    if filter_type == 'Interconnectors':
+        data_copy['Status'] = data_copy['mw_generated'].apply(
+            lambda x: 'Importing' if x > 0 else 'N/A' if x == 0 else 'Exporting')
+
     data_copy.drop(columns=['mw_generated'], inplace=True)
 
     data_copy.rename(
@@ -307,7 +319,7 @@ def main():
         layout="wide", page_title="Energy Dashboard", page_icon="assets/icon.png")
 
     st.logo("assets/icon.png")
-    st.title("WattWatch Dashboard")
+    st.title("⚡️WattWatch Dashboard⚡️")
     st.write("Welcome! Use the sidebar to navigate between dashboards.")
 
     col1, col2, col3 = st.columns(3)
