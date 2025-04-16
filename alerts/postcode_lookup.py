@@ -17,7 +17,9 @@ REGION_MAPPINGS = {
     "London": "London",
     "South East": "South East England",
     "South West": "South West England",
-    "Wales": "South Wales",
+    "South Wales": "Wales",
+    "North Wales": "Wales",
+    "Wales": "Wales"
 }
 
 
@@ -62,13 +64,15 @@ def find_provider_from_region(cursor: 'Cursor', region: str) -> int:
     query = """SELECT provider_id
                 FROM region_provider
                 WHERE region_name = %s"""
+    try:
+        cursor.execute(query, (region, ))
+        result = cursor.fetchall()
 
-    cursor.execute(query, (region, ))
-    result = cursor.fetchall()
+        provider_id = result[0][0]
 
-    provider_id = result[0][0]
-
-    return provider_id
+        return provider_id
+    except:
+        raise ValueError('Provider not found')
 
 
 def find_provider_from_region_id(cursor: 'Cursor', region_id: int) -> int:
@@ -76,14 +80,16 @@ def find_provider_from_region_id(cursor: 'Cursor', region_id: int) -> int:
     query = """SELECT provider_id, region_name
                 FROM region_provider
                 WHERE region_id = %s"""
+    try:
+        cursor.execute(query, (region_id, ))
+        result = cursor.fetchall()
 
-    cursor.execute(query, (region_id, ))
-    result = cursor.fetchall()
+        provider_id = result[0][0]
+        region_name = result[0][1]
 
-    provider_id = result[0][0]
-    region_name = result[0][1]
-
-    return provider_id, region_name
+        return provider_id, region_name
+    except:
+        raise ValueError('Provider not found')
 
 
 if __name__ == "__main__":
