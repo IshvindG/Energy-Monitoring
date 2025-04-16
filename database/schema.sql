@@ -30,11 +30,11 @@ CREATE TABLE outages(
     outage_id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY,
     outage_start TIMESTAMP,
     outage_end TIMESTAMP,
-    region_id SMALLINT,
+    provider_id SMALLINT,
     planned BOOL,
     reference_id VARCHAR(30),
     PRIMARY KEY (outage_id),
-    CONSTRAINT fk_region_id_outage FOREIGN KEY (region_id) REFERENCES regions (region_id)
+    CONSTRAINT fk_provider_id_outage FOREIGN KEY (provider_id) REFERENCES providers (provider_id)
 );
 
 
