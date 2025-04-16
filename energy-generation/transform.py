@@ -15,13 +15,6 @@ def filter_by_largest(filter_column_name: str, df: pd.DataFrame) -> pd.DataFrame
     return df
 
 
-def add_update_time(df: pd.DataFrame) -> pd.DataFrame:
-    """Add timestamp to the dataframe"""
-    df = df.copy()
-    df['updated_at'] = pd.Timestamp.now(tz='UTC')
-    return df
-
-
 def transform_energy_generation(df: pd.DataFrame) -> pd.DataFrame:
     """Read and transform energy generation"""
     logger.info("Working on energy generation dataframe")
@@ -29,7 +22,6 @@ def transform_energy_generation(df: pd.DataFrame) -> pd.DataFrame:
         columns=['settlementDate', 'settlementPeriod', 'dataset', 'startTime'], inplace=True)
     df['publishTime'] = pd.to_datetime(df['publishTime'], utc=True)
     df = filter_by_largest('publishTime', df)
-    df = add_update_time(df)
     return df
 
 
@@ -40,7 +32,6 @@ def transform_energy_demand(df: pd.DataFrame) -> pd.DataFrame:
     df['startTime'] = pd.to_datetime(
         df['startTime'], utc=True, format='ISO8601')
     df = filter_by_largest('startTime', df)
-    df = add_update_time(df)
     return df
 
 
@@ -53,7 +44,6 @@ def transform_interconnect_data(df: pd.DataFrame) -> pd.DataFrame:
     df['publishTime'] = pd.to_datetime(
         df['publishTime'], utc=True, format='ISO8601')
     df = filter_by_largest('publishTime', df)
-    df = add_update_time(df)
     return df
 
 
@@ -66,17 +56,6 @@ def transform_market_price(df: pd.DataFrame) -> pd.DataFrame:
     df['startTime'] = pd.to_datetime(
         df['startTime'], utc=True, format='ISO8601')
     df = filter_by_largest('startTime', df)
-    df = add_update_time(df)
-    return df
-
-
-def transform_solar_generation(df: pd.DataFrame) -> pd.DataFrame:
-    """Read and transform energy generation"""
-    logger.info("Working on energy generation dataframe")
-    df.drop(columns=['gsp_id'], inplace=True)
-    df.rename(columns={"datetime_gmt": "publishTime"}, inplace=True)
-    df['fuelType'] = 'SOLAR'
-    df = add_update_time(df)
     return df
 
 
