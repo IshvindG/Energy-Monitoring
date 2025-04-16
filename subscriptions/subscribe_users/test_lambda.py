@@ -1,3 +1,4 @@
+# pylint: skip-file
 from subscribe_lambda import user_details, define_user_info
 import json
 import pytest

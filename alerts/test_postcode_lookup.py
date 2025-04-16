@@ -1,7 +1,6 @@
+# pylint: skip-file
 from postcode_lookup import get_region_from_postcode, find_provider_from_region, get_connection_to_db, find_provider_from_region_id
 import pytest
-from dotenv import load_dotenv
-import os
 
 
 def test_get_region_from_postcode():
