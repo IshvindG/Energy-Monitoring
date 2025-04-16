@@ -2,7 +2,7 @@
 import pytest
 import pandas as pd
 
-from transform import filter_by_largest, transform_energy_generation, transform_energy_demand, transform_market_price
+from transform import filter_by_largest, transform_energy_generation, transform_energy_demand, transform_market_price, transform_interconnect_data, transform_solar_generation
 
 
 def test_filter_by_largest():
@@ -107,3 +107,46 @@ def test_transform_market_price():
         expected_df['price'])
     assert list(transformed_data['volume']) == list(
         expected_df['volume'])
+
+
+def test_transform_interconnect_data():
+    data = {
+        'dataset': ['a', 'b', 'c'],
+        'startTime': ['2024-01-01T00:00:00Z'] * 3,
+        'settlementDate': ['2024-01-01'] * 3,
+        'settlementDateTimezone': ['UTC'] * 3,
+        'settlementPeriod': [1, 2, 3],
+        'publishTime': ['2024-01-01T01:00:00Z', '2024-01-01T02:00:00Z', '2024-01-01T02:00:00Z'],
+        'value': [10, 20, 30]
+    }
+    df = pd.DataFrame(data)
+    result_df = transform_interconnect_data(df)
+
+    assert 'dataset' not in result_df.columns
+    assert 'startTime' not in result_df.columns
+    assert 'settlementDate' not in result_df.columns
+    assert 'settlementDateTimezone' not in result_df.columns
+    assert 'settlementPeriod' not in result_df.columns
+
+    expected_publish_time = pd.to_datetime('2024-01-01T02:00:00Z')
+    assert all(result_df['publishTime'] == expected_publish_time)
+    assert len(result_df) == 2
+    assert set(result_df['value']) == {20, 30}
+
+
+def test_transform_solar_generation():
+    data = {
+        'gsp_id': [1, 2],
+        'datetime_gmt': ['2024-01-01T00:00:00Z', '2024-01-01T01:00:00Z'],
+        'generation_mw': [100.5, 200.7]
+    }
+    df = pd.DataFrame(data)
+    result_df = transform_solar_generation(df)
+
+    assert 'gsp_id' not in result_df.columns
+    assert 'datetime_gmt' not in result_df.columns
+    assert 'publishTime' in result_df.columns
+    assert all(result_df['fuelType'] == 'SOLAR')
+    assert list(result_df['generation_mw']) == [100.5, 200.7]
+    assert list(result_df['publishTime']) == [
+        '2024-01-01T00:00:00Z', '2024-01-01T01:00:00Z']
