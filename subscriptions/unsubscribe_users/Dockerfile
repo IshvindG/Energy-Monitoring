@@ -6,6 +6,6 @@ COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
-COPY lambda.py .
+COPY unsubscribe_lambda.py .
 
-CMD [ "lambda.lambda_handler" ]
+CMD [ "unsubscribe_lambda.lambda_handler" ]

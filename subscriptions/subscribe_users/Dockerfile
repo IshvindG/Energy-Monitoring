@@ -6,6 +6,6 @@ COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
-COPY lambda.py .
+COPY subscribe_lambda.py .
 
-CMD [ "lambda.lambda_handler" ]
+CMD [ "subscribe_lambda.lambda_handler" ]
