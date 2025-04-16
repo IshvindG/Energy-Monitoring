@@ -23,3 +23,8 @@ variable "DB_PORT" {
   type = string
   description = "RDS port"
 }
+
+variable "SENDER_EMAIL" {
+  type = string
+  description = "sender email for report"
+}
