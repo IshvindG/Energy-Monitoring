@@ -59,6 +59,15 @@ def transform_market_price(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+def transform_solar_generation(df: pd.DataFrame) -> pd.DataFrame:
+    """Read and transform energy generation"""
+    logger.info("Working on energy generation dataframe")
+    df.drop(columns=['gsp_id'], inplace=True)
+    df.rename(columns={"datetime_gmt": "publishTime"}, inplace=True)
+    df['fuelType'] = 'SOLAR'
+    return df
+
+
 if __name__ == '__main__':
     # When run standalone will attempt to read data and transform, saving to csv files
     energy_gen_df = pd.read_csv('data/energy_generation.csv')
