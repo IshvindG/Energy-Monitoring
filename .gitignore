@@ -97,3 +97,4 @@ venv/
 .terraform.lock.hcl
 *.log
 energy-generation/data/*.csv
+.coverage
