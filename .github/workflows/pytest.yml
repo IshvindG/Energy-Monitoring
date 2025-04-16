@@ -24,7 +24,7 @@ jobs:
 
             - name: Combine and install all requirements
               run: |
-                find . -name "requirements.txt" -exec cat {} + | awk NF > all-requirements.txt
+                find . -name "requirements.txt" -exec sh -c 'cat "$1"; echo' _ {} \; > all-requirements.txt
                 pip install -r all-requirements.txt
 
             - name: Analyse Code
