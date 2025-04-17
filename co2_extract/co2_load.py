@@ -1,8 +1,9 @@
+'''This script loads the cleaned co2 emission data to an RDS'''
 import os
 import logging
+from typing import Tuple
 import pandas as pd
 import psycopg2
-from typing import Dict, Tuple
 from dotenv import load_dotenv
 from psycopg2.extensions import connection as Connection, cursor as Cursor
 
@@ -27,18 +28,18 @@ def connect_to_db() -> Tuple[Connection, Cursor]:
     """
 
     try:
-        connection = psycopg2.connect(
+        conn = psycopg2.connect(
             host=DB_HOST,
             port=DB_PORT,
             dbname=DB_NAME,
             user=DB_USER,
             password=DB_PASSWORD
         )
-        cursor = connection.cursor()
+        cur = conn.cursor()
         logging.info("Successfully connected to the database.")
-        return connection, cursor
+        return conn, cur
     except Exception as e:
-        logging.error(f"Error connecting to the database: {e}")
+        logging.error("Error connecting to the database: %s", e)
         raise
 
 
@@ -46,7 +47,7 @@ def load_csv(file_path: str) -> pd.DataFrame:
     """
     Load the cleaned csv for upload
     """
-    logging.info(f"Loading data from {file_path}.")
+    logging.info("Loading data from %s.", file_path)
     return pd.read_csv(file_path)
 
 
@@ -68,7 +69,7 @@ def insert_carbon_intensities(df: pd.DataFrame, conn: Connection, cur: Cursor):
 
             if result is None:
                 logging.warning(
-                    f"Region not found in database: {row['region_name']}")
+                    "Region not found in database: %s", row['region_name'])
                 continue
 
             region_id = result[0]
@@ -84,16 +85,17 @@ def insert_carbon_intensities(df: pd.DataFrame, conn: Connection, cur: Cursor):
             ))
 
         except Exception as e:
-            logging.error(f"Error inserting row: {row.to_dict()}, Error: {e}")
+            logging.error("Error inserting row: %s, Error: %s",
+                          row.to_dict(), e)
 
     conn.commit()
     logging.info("All data inserted into carbon_intensities table.")
 
 
 if __name__ == "__main__":
-    file_path = "/tmp/clean_live_co2.csv"
-    df = load_csv(file_path)
-    conn, cur = connect_to_db()
-    insert_carbon_intensities(df, conn, cur)
-    cur.close()
-    conn.close()
+    CLEAN_FILE_PATH = "/tmp/clean_live_co2.csv"
+    co2_df = load_csv(CLEAN_FILE_PATH)
+    connection, cursor = connect_to_db()
+    insert_carbon_intensities(co2_df, connection, cursor)
+    cursor.close()
+    connection.close()

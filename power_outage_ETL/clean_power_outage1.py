@@ -1,3 +1,5 @@
+# pylint: disable=C0301
+'''Modules required to clean the ectracted power outage details and upload to a cleaned CSV'''
 import os
 import logging
 import pandas as pd
@@ -34,7 +36,7 @@ def clean_electric_nw():
         'planned': np.nan
     })
 
-    cleaned_df = cleaned_df.applymap(
+    cleaned_df = cleaned_df.map(
         lambda x: np.nan if pd.isna(x) or x == '' else x)
 
     existing_df = pd.read_csv('clean_power_outage_data.csv')
@@ -61,10 +63,10 @@ def clean_national_grid():
         'outage_start': pd.to_datetime(df['outage_start'], errors='coerce'),
         'outage_end': pd.to_datetime(df['outage_end'], errors='coerce'),
         'Provider_name': 'National Grid',
-        'planned': df['planned'].apply(lambda x: True if x == 'true' else False)
+        'planned': df['planned'].apply(lambda x: x == 'Planned')
     })
 
-    cleaned_df = cleaned_df.applymap(
+    cleaned_df = cleaned_df.map(
         lambda x: np.nan if pd.isna(x) or x == '' else x)
 
     existing_df = pd.read_csv('clean_power_outage_data.csv')
@@ -110,7 +112,7 @@ def clean_northern_power():
             'planned': df['Category'].apply(infer_planned)
         })
 
-        cleaned_df = cleaned_df.applymap(
+        cleaned_df = cleaned_df.map(
             lambda x: np.nan if pd.isna(x) or x == '' else x)
 
         if not os.path.exists('clean_power_outage_data.csv'):
@@ -151,7 +153,7 @@ def clean_sp():
             status = status.strip().lower()
             if status == 'live':
                 return 'false'
-            elif status == 'restored':
+            if status == 'restored':
                 return 'false'
         return 'NA'
 
@@ -166,7 +168,7 @@ def clean_sp():
     cleaned_df.loc[cleaned_df['planned'] == 'false', 'outage_end'] = np.nan
     cleaned_df.loc[cleaned_df['planned'] == 'false', 'planned'] = np.nan
 
-    cleaned_df = cleaned_df.applymap(
+    cleaned_df = cleaned_df.map(
         lambda x: np.nan if pd.isna(x) or x == '' else x)
 
     existing_df = pd.read_csv('clean_power_outage_data.csv')
@@ -192,7 +194,7 @@ def clean_ssen():
         if isinstance(val, str):
             if 'LV' in val:
                 return False
-            elif 'PSI' in val or 'HV' in val:
+            if 'PSI' in val or 'HV' in val:
                 return True
         return 'NA'
 
@@ -204,7 +206,7 @@ def clean_ssen():
         'planned': df['planned'].apply(infer_planned)
     })
 
-    cleaned_df = cleaned_df.applymap(
+    cleaned_df = cleaned_df.map(
         lambda x: np.nan if pd.isna(x) or x == '' else x)
 
     existing_df = pd.read_csv('clean_power_outage_data.csv')
@@ -231,10 +233,10 @@ def clean_uk_power():
         'outage_start': pd.to_datetime(df['outage_start'], errors='coerce'),
         'outage_end': pd.to_datetime(df['outage_end'], errors='coerce'),
         'Provider_name': 'UK Power Networks',
-        'planned': df['planned'].apply(lambda x: True if x == 'Planned' else False)
+        'planned': df['planned'].apply(lambda x: x == 'Planned')
     })
 
-    cleaned_df = cleaned_df.applymap(
+    cleaned_df = cleaned_df.map(
         lambda x: np.nan if pd.isna(x) or x == '' else x)
 
     existing_df = pd.read_csv('clean_power_outage_data.csv')
