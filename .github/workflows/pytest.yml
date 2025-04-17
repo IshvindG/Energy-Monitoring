@@ -9,7 +9,7 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                project: [energy-generation, dashboard]
+                project: [energy-generation, dashboard, alerts, co2_extract, newsletter, power_outage_ETL]
         steps:
             - name: checkout
               uses: actions/checkout@v4
