@@ -5,7 +5,6 @@ import pandas as pd
 from utils.database import get_connection_to_db
 from psycopg2.extras import RealDictCursor
 import plotly.express as px
-import plotly.graph_objects as go
 import plotly.figure_factory as ff
 
 
@@ -37,7 +36,7 @@ def retrieve_price_data(_db_cursor):
     return _db_cursor.fetchall()
 
 
-@st.cache_data
+@st.cache_data(ttl=360)
 def retrieve_demand_data(_db_cursor):
     """Retrieve Demand Data from DB"""
     _db_cursor.execute(
@@ -151,9 +150,7 @@ def generate_energy_generation_mix_graph(generation_mix: pd.DataFrame):
         color='fuel_category',
         color_discrete_map={
             '(?)': 'black', 'Renewables': 'green', 'Fossil Fuels': 'red', 'Other': 'darkblue'}
-
     )
-
     # Show it in Streamlit
     return fig
 

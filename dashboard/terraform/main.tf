@@ -52,6 +52,12 @@ resource "aws_ecs_task_definition" "service" {
         image = "${data.aws_ecr_image.energy-dashboard-image.image_uri}"
         cpu = 0
         essential = true
+        portMappings = [
+          {
+            containerPort = 8501,
+            hostPort = 8501
+          }
+        ]
         environment = [
             {
                 name = "DB_NAME",
@@ -131,6 +137,7 @@ resource "aws_vpc_security_group_egress_rule" "all_traffic" {
   cidr_ipv4 = "0.0.0.0/0"
 }
 
+
 resource "aws_ecs_service" "c16-energy-dashboard" {
   name = "c16-energy-dashboard"
   cluster = data.aws_ecs_cluster.c16-ecs-cluster.id
@@ -142,6 +149,12 @@ resource "aws_ecs_service" "c16-energy-dashboard" {
     security_groups = [ aws_security_group.energy-dashboard-sg.id ]
     subnets = data.aws_subnets.c16-subnets.ids
   }
+  load_balancer {
+    target_group_arn                    = "arn:aws:elasticloadbalancing:eu-west-2:129033205317:targetgroup/alb-tg/d60f943e251db745"
+    container_name                      = "energy-dashboard"
+    container_port                      = 8501
+  }
+
 }
 
 output "ip" {
