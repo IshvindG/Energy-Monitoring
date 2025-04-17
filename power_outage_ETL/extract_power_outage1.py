@@ -1,3 +1,5 @@
+# pylint: disable=C0301
+'''This script extracts data from various API's and scrapes website for Power outage data.'''
 import csv
 import logging
 import os

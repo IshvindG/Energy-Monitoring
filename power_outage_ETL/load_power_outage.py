@@ -1,3 +1,4 @@
+'''This script loads the cleaned power outages data to an RDS'''
 import os
 import logging
 from typing import Tuple, Optional, Any
@@ -85,14 +86,13 @@ def convert_planned_to_bool(planned: Any) -> Optional[bool]:
     """
     if isinstance(planned, bool):
         return planned
-    elif pd.isnull(planned) or planned.lower() == 'na':
+    if pd.isnull(planned) or planned.lower() == 'na':
         return None
-    elif planned.lower() == 'true':
+    if planned.lower() == 'true':
         return True
-    elif planned.lower() == 'false':
+    if planned.lower() == 'false':
         return False
-    else:
-        return None
+    return None
 
 
 def upload_data_from_csv(csv_file: str) -> None:

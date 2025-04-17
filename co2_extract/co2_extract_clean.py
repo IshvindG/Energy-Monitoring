@@ -1,15 +1,16 @@
+'''This script extracts and cleans data about co2 emissions'''
+from urllib import parse
+from datetime import datetime, timedelta, timezone
+from typing import List, Dict
 import requests
 import pandas as pd
-from urllib import parse
-from datetime import datetime, timedelta
-from typing import List, Dict
 
 
 def get_time_range(hours_back: int = 0.5) -> tuple[str, str]:
     """
     Returns the current UTC time and a past time offset by `hours_back` hours, both in ISO format.
     """
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
     past = now - timedelta(hours=hours_back)
     return past.strftime('%Y-%m-%dT%H:%M:%S.000Z'), now.strftime('%Y-%m-%dT%H:%M:%S.000Z')
 
@@ -34,10 +35,9 @@ def fetch_data(sql: str) -> List[Dict]:
     """
     params = {'sql': sql}
     try:
-        response = requests.get(
-            'https://api.neso.energy/api/3/action/datastore_search_sql',
-            params=parse.urlencode(params)
-        )
+        response = requests.get('https://api.neso.energy/api/3/action/datastore_search_sql',
+                                params=parse.urlencode(params))
+
         response.raise_for_status()
         return response.json()["result"]["records"]
     except (requests.RequestException, ValueError, KeyError) as e:
@@ -51,12 +51,11 @@ def classify_intensity(value: float) -> str:
     """
     if pd.isna(value):
         return 'unknown'
-    elif value <= 150:
+    if value <= 150:
         return 'Low'
-    elif 150 < value <= 300:
+    if 150 < value <= 300:
         return 'Medium'
-    else:
-        return 'High'
+    return 'High'
 
 
 def clean_data(records: List[Dict]) -> pd.DataFrame:
