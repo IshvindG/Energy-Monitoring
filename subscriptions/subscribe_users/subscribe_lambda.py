@@ -1,6 +1,6 @@
 """Script to create users if they don't already exist, and subscribe them to 
 newsletter/alerts within a lambda"""
-import re
+
 import json
 import os
 import logging
@@ -31,28 +31,34 @@ def connect_to_db():
 
 def define_user_info(response: dict) -> dict:
     """Creating user information based on POST data from API gateway"""
-    body = json.loads(response['body'])
-    user_info = {
-        "first_name": body.get("first_name"),
-        "last_name": body.get("last_name"),
-        "phone": body.get("phone"),
-        "postcode": body.get("postcode"),
-        "region": body.get("region"),
-        "email": body.get("email"),
-        "type": body.get("type")
-    }
-    return user_info
+    try:
+        body = json.loads(response['body'])
+        user_info = {
+            "first_name": body.get("first_name"),
+            "last_name": body.get("last_name"),
+            "phone": body.get("phone"),
+            "postcode": body.get("postcode"),
+            "region": body.get("region"),
+            "email": body.get("email"),
+            "type": body.get("type")
+        }
+        return user_info
+    except:
+        raise ValueError('Response invalid')
 
 
 def user_details(user_info: dict) -> str:
     """Extracting user details from the user_info dict to reduce redundancy"""
-    first_name = user_info["first_name"]
-    last_name = user_info["last_name"]
-    phone = user_info["phone"]
-    email = user_info["email"]
-    postcode = user_info["postcode"]
-    region = user_info["region"]
-    return first_name, last_name, phone, email, postcode, region
+    try:
+        first_name = user_info["first_name"]
+        last_name = user_info["last_name"]
+        phone = user_info["phone"]
+        email = user_info["email"]
+        postcode = user_info["postcode"]
+        region = user_info["region"]
+        return first_name, last_name, phone, email, postcode, region
+    except:
+        raise ValueError("User details not found")
 
 
 def check_user_exists(cursor: 'Cursor', user: dict):
