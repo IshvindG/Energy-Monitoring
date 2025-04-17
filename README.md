@@ -21,3 +21,4 @@ The brief can be found [here](https://docs.google.com/document/d/1KE8viDVxvyAZMG
 ## Further Information
 
 - See inside each folder for its respective README.md and extra guidance and information
+- To run tests, go to each folder and run ```pytest tests```
