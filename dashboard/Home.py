@@ -30,11 +30,10 @@ def retrieve_generation_mix_data(_db_cursor) -> pd.DataFrame:
     return generation_data
 
 
-@st.cache_data
 def retrieve_price_data(_db_cursor):
     """Retrieve Pricing Data from DB"""
     _db_cursor.execute(
-        "SELECT * FROM prices WHERE updated_at >= NOW() - '1 day'::INTERVAL")
+        "SELECT * FROM prices WHERE updated_at >= NOW() - '1 day'::INTERVAL ORDER  BY price_at DESC LIMIT 100")
     return _db_cursor.fetchall()
 
 
@@ -148,7 +147,10 @@ def generate_energy_generation_mix_graph(generation_mix: pd.DataFrame):
         # This defines the hierarchy
         path=['fuel_category', 'fuel_type_name'],
         values='mw_generated',
-        title="Energy Generation"
+        title="Energy Generation",
+        color='fuel_category',
+        color_discrete_map={
+            '(?)': 'black', 'Renewables': 'green', 'Fossil Fuels': 'red', 'Other': 'darkblue'}
 
     )
 
@@ -200,6 +202,7 @@ def generate_24h_energy_generation_graph(_db_cursor, generation_range):
 
 
 def get_duration(generation_range):
+    """Convert list to interval metric"""
     duration = '24 hours'
     match(generation_range):
         case '24h':
@@ -228,25 +231,35 @@ def format_demand_data(demand_data):
 def format_price_data(price_data):
     """Format price"""
     price_df = pd.DataFrame(price_data)
-    price_df.drop(columns=['price_id'], inplace=True)
+    price_df.drop(columns=['price_id', 'updated_at'], inplace=True)
     price_df['price_at'] = pd.to_datetime(
         price_df['price_at'], utc=True)
+
+    price_df.drop_duplicates(inplace=True)
 
     price_df['price_per_mwh'] = pd.to_numeric(
         price_df['price_per_mwh'])
     price_df['Price per MWH'] = price_df['price_per_mwh'].map(lambda x:
-                                                              f"£{x:,.2f}")
+                                                              f"{x:,.2f}")
     return price_df
 
 
 def latest_demand_metric(demand_df):
     """Get latest demand metric"""
-    return f"{demand_df.iloc[-1]['Energy Demand']}GW"
+    latest = float(demand_df.iloc[-1]['Energy Demand'])
+    prev = float(demand_df.iloc[-2]['Energy Demand'])
+    diff = latest - prev
+
+    return f"{latest}GW", f"{diff:.2}"
 
 
 def latest_price_metric(price_df):
     """Get latest pricing metric"""
-    return f"{price_df.iloc[-1]['Price per MWH']}"
+    latest = float(price_df.iloc[0]['Price per MWH'])
+    prev = float(price_df.iloc[1]['Price per MWH'])
+    diff = latest - prev
+
+    return f"£{latest}", f"{diff:.4}"
 
 
 def latest_generation_metric(generation_df):
@@ -296,14 +309,25 @@ def add_table(data, filter_type):
     data_copy.rename(
         columns={"fuel_type_name": "Fuel Name", "Energy_Gen": "Power Generated"}, inplace=True)
 
+    colors = {
+        "Fossil Fuels": [[0, 'red'], [.5, '#ff8c8c'], [1, '#ffffff']],
+        "Renewables": [[0, 'green'], [.5, '#a7fc9a'], [1, '#ffffff']],
+        "Interconnectors": [[0, 'blue'], [.5, '#a8b4ff'], [1, '#ffffff']],
+        "Other": [[0, 'orange'], [.5, '#fcf0b3'], [1, '#ffffff']]
+    }
+
     table = ff.create_table(
-        data_copy, index_title=filter_type)
+        data_copy, index_title=filter_type, colorscale=colors[filter_type])
+
     # st.write(table)
     return table
 
 
 def main():
     """Main method for running dashboard"""
+    st.set_page_config(
+        layout="wide", page_title="Energy Dashboard", page_icon="assets/icon.png")
+
     db_conn = get_connection_to_db()
     db_cursor = db_conn.cursor(cursor_factory=RealDictCursor)
 
@@ -315,21 +339,22 @@ def main():
     demand_data = format_demand_data(demand_data)
     price_data = format_price_data(price_data)
 
-    st.set_page_config(
-        layout="wide", page_title="Energy Dashboard", page_icon="assets/icon.png")
+    st.logo("assets/icon.png", size="large")
+    st.image("assets/icon.png", width=100)
 
-    st.logo("assets/icon.png")
     st.title("⚡️WattWatch Dashboard⚡️")
     st.write("Welcome! Use the sidebar to navigate between dashboards.")
 
     col1, col2, col3 = st.columns(3)
     col1.write(generate_energy_generation_mix_graph(generation_mix_data))
+    lastest_demand, demand_diff = latest_demand_metric(demand_data)
     col3.metric(label="UK Power Demand",
-                value=latest_demand_metric(demand_data))
+                value=lastest_demand, delta=demand_diff, delta_color='inverse')
+    latest_price, price_diff = latest_price_metric(price_data)
+    col3.metric(label="Price per MW",
+                value=latest_price, delta=price_diff, delta_color='inverse')
     col3.metric(label="UK Power Generation",
                 value=latest_generation_metric(generation_mix_data))
-    col3.metric(label="Price per MW",
-                value=latest_price_metric(price_data))
     col3.metric(label="Power Imports",
                 value=latest_imports_metric(generation_mix_data))
 
@@ -364,7 +389,8 @@ def main():
     tab3, tab4 = st.columns(2)
 
     tab1.title('Fossil Fuels')
-    tab1.plotly_chart(add_table(generation_mix_data, 'Fossil Fuels'), key=1)
+    tab1.plotly_chart(add_table(generation_mix_data, 'Fossil Fuels'),
+                      key=1, fill_color='lightcyan', theme="streamlit")
     tab2.title('Renewables')
     tab2.plotly_chart(add_table(generation_mix_data, 'Renewables'), key=2)
     tab3.title('Interconnectors')

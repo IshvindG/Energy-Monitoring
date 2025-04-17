@@ -290,7 +290,7 @@ def main():
     st.set_page_config(page_title="CO₂ Emissions",
                        page_icon="assets/icon.png")
     st.title("Energy Trends: CO₂ Emissions vs Electricity Demand")
-    st.logo("assets/icon.png")
+    st.logo("assets/icon.png", size="large")
 
     df_carbon, df_demand = get_recent_data()
 

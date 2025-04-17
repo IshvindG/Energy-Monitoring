@@ -111,8 +111,8 @@ resource "aws_security_group" "energy-dashboard-sg" {
 resource "aws_vpc_security_group_ingress_rule" "ssh" {
   security_group_id = aws_security_group.energy-dashboard-sg.id
   ip_protocol = "tcp"
-  from_port = 5432
-  to_port = 5432
+  from_port = 0
+  to_port = 0
   cidr_ipv4 = "0.0.0.0/0"
 }
 
