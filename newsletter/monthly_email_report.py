@@ -1,9 +1,10 @@
 """Script to get users and send them the monthly report"""
 import logging
 from dotenv import load_dotenv
+import botocore
 from send_email import send_email_with_attachment
 from newsletter_pdf import create_report_data, create_pdf_report
-from newsletter import get_connection_to_db, enable_logging
+from newsletter.newsletter import get_connection_to_db, enable_logging
 
 
 def get_subscribed_users(cursor: 'Cursor') -> list[tuple]:
@@ -53,7 +54,7 @@ def lambda_handler(event, context):
             "statusCode": 200,
             "body": "Emails sent successfully."
         }
-    except Exception as e:
+    except botocore.exceptions.ClientError as e:
         logging.error("Error in monthly_email_report Lambda: %s", e)
         return {
             "statusCode": 500,

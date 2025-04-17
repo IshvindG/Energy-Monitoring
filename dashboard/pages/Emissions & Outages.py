@@ -1,10 +1,11 @@
+"""Dashboard page for emissions and outages metrics"""
+import os
+from datetime import datetime, timedelta
 import streamlit as st
 import pandas as pd
 import psycopg2
-from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
 import seaborn as sns
-import os
 from dotenv import load_dotenv
 import plotly.graph_objects as go
 import plotly.express as px
@@ -67,14 +68,16 @@ def plot_recent_carbon_and_demand(df_carbon, df_demand):
     fig, ax1 = plt.subplots(figsize=(18, 8))
 
     sns.lineplot(
-        data=df_carbon, x='measure_at', y='forecast_measure', ax=ax1, color='green', label='CO₂ Intensity (gCO₂/kWh)'
+        data=df_carbon, x='measure_at', y='forecast_measure', ax=ax1,
+        color='green', label='CO₂ Intensity (gCO₂/kWh)'
     )
     ax1.set_ylabel('CO₂ Intensity (gCO₂/kWh)', color='green')
     ax1.tick_params(axis='y', labelcolor='green')
 
     ax2 = ax1.twinx()
     sns.lineplot(
-        data=df_demand, x='demand_at', y='total_demand', ax=ax2, color='blue', label='Electricity Demand (MW)'
+        data=df_demand, x='demand_at', y='total_demand', ax=ax2,
+        color='blue', label='Electricity Demand (MW)'
     )
     ax2.set_ylabel('Electricity Demand (MW)', color='blue')
     ax2.tick_params(axis='y', labelcolor='blue')
@@ -215,7 +218,7 @@ def show_outages_by_provider():
 
 
 def fetch_data(conn, option):
-
+    """Function to get data from database"""
     if option == "Outages":
         query = """
         SELECT r.region_name, COUNT(*) as value
@@ -243,7 +246,7 @@ def fetch_data(conn, option):
 def load_geojson():
     '''Load map api'''
     geo_url = "https://sdgdata.gov.uk/sdg-data/en/geojson/regions/indicator_8-10-1.geojson"
-    return requests.get(geo_url).json()
+    return requests.get(geo_url, timeout=10).json()
 
 
 def build_map(df, label, geojson, geo_to_db_region_map):
