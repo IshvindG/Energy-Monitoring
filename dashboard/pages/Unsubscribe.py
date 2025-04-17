@@ -8,7 +8,6 @@ from validate_email_address import validate_email
 import phonenumbers
 
 
-@st.cache_resource
 def get_connection_to_db():
     """Gets a psycopg2 connection to the energy database"""
     load_dotenv()
@@ -123,7 +122,6 @@ def alert_form(regions: list[str]):
 
 
 def main(conn: 'Connection'):
-    st.set_page_config(page_icon="assets/icon.png")
     st.logo("assets/icon.png", size="large")
     st.title("Unsubscribe :(")
 
@@ -140,5 +138,6 @@ def main(conn: 'Connection'):
 
 
 if __name__ == "__main__":
+    st.set_page_config(page_icon="assets/icon.png")
     connection = get_connection_to_db()
     main(connection)
