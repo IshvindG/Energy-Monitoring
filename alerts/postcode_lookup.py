@@ -71,8 +71,8 @@ def find_provider_from_region(cursor: 'Cursor', region: str) -> int:
         provider_id = result[0][0]
 
         return provider_id
-    except:
-        raise ValueError('Provider not found')
+    except Exception as e:
+        raise ValueError('Provider not found') from e
 
 
 def find_provider_from_region_id(cursor: 'Cursor', region_id: int) -> int:
@@ -88,8 +88,8 @@ def find_provider_from_region_id(cursor: 'Cursor', region_id: int) -> int:
         region_name = result[0][1]
 
         return provider_id, region_name
-    except:
-        raise ValueError('Provider not found')
+    except Exception as e:
+        raise ValueError('Provider not found') from e
 
 
 if __name__ == "__main__":

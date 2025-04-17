@@ -1,4 +1,5 @@
 """Script to unsubscribe users if they exist, and remove them from the database"""
+
 import json
 import os
 import logging
@@ -6,8 +7,78 @@ from dotenv import load_dotenv
 import psycopg2
 import boto3
 from botocore.exceptions import ClientError
-from ..subscribe_users.subscribe_lambda import (enable_logging, connect_to_db,
-                                                define_user_info, check_user_exists)
+
+
+def enable_logging() -> None:
+    """Enables logging at INFO level"""
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    )
+
+
+def connect_to_db():
+    """Gets a psycopg2 connection to the energy database"""
+    load_dotenv()
+    logging.info("Connecting to the database...")
+    return psycopg2.connect(host=os.getenv("DB_HOST"),
+                            database=os.getenv("DB_NAME"),
+                            user=os.getenv("DB_USER"),
+                            password=os.getenv("DB_PASSWORD"),
+                            port=os.getenv("DB_PORT"))
+
+
+def define_user_info(response: dict) -> dict:
+    """Creating user information based on POST data from API gateway"""
+    try:
+        body = json.loads(response['body'])
+        user_info = {
+            "first_name": body.get("first_name"),
+            "last_name": body.get("last_name"),
+            "phone": body.get("phone"),
+            "postcode": body.get("postcode"),
+            "region": body.get("region"),
+            "email": body.get("email"),
+            "type": body.get("type")
+        }
+        return user_info
+    except Exception as e:
+        raise ValueError('Response invalid') from e
+
+
+def user_details(user_info: dict) -> str:
+    """Extracting user details from the user_info dict to reduce redundancy"""
+    try:
+        first_name = user_info["first_name"]
+        last_name = user_info["last_name"]
+        phone = user_info["phone"]
+        email = user_info["email"]
+        postcode = user_info["postcode"]
+        region = user_info["region"]
+        return first_name, last_name, phone, email, postcode, region
+    except Exception as e:
+        raise ValueError("User details not found") from e
+
+
+def check_user_exists(cursor: 'Cursor', user: dict):
+    """Querying database to check if the user submitted already exists, if so returning
+    their user_id"""
+    _, _, phone, email, _, _ = user_details(user)
+    query = """SELECT user_id FROM users
+                WHERE phone_number = %s
+                OR email = %s"""
+
+    logging.info("Checking if user exists...")
+
+    cursor.execute(query, (phone, email))
+    result = cursor.fetchall()
+
+    if not result:
+        logging.info("No user found with the given details.")
+        return None
+
+    user_id = result[0][0]
+    return user_id
 
 
 def check_if_user_is_subscribed(cursor: 'Cursor', user_id: int) -> bool:
@@ -18,7 +89,7 @@ def check_if_user_is_subscribed(cursor: 'Cursor', user_id: int) -> bool:
     cursor.execute(query, (user_id, ))
     result = cursor.fetchall()
     if result:
-        logging.info("User is subscribed to newsletter")
+        logging.info("User already subscribed to newsletter")
         return True
 
     logging.info("User not subscribed to newsletter")
@@ -55,7 +126,9 @@ def check_if_user_has_alert(cursor: 'Cursor', user_id: int) -> bool:
     return False
 
 
-def check_if_user_has_alert_one_region(cursor: 'Cursor', region: str, user_id: int, postcode: str) -> bool:
+def check_if_user_has_alert_one_region(cursor: 'Cursor',
+                                       region: str, user_id: int,
+                                       postcode: str) -> bool:
     """Checking is a user already has an alert for the specified region, returning
     true/false"""
     if not postcode:
@@ -73,10 +146,12 @@ def check_if_user_has_alert_one_region(cursor: 'Cursor', region: str, user_id: i
                   ) AND postcode = ''"""
         cursor.execute(query, (user_id, region))
     elif not region and postcode:
-        query = """SELECT * FROM alerts WHERE user_id = %s AND region_id IS NULL AND postcode = %s"""
+        query = """SELECT * FROM alerts WHERE user_id = %s
+                    AND region_id IS NULL AND postcode = %s"""
         cursor.execute(query, (user_id, postcode))
     else:
-        query = """SELECT * FROM alerts WHERE user_id = %s AND region_id IS NULL AND postcode = ''"""
+        query = """SELECT * FROM alerts WHERE user_id = %s
+                    AND region_id IS NULL AND postcode = ''"""
         cursor.execute(query, (user_id, ))
     result = cursor.fetchone()
     if result:
@@ -93,7 +168,9 @@ def unsubscribe_user_from_alerts_all(cursor: 'Cursor', user_id: int):
     cursor.execute(query, (user_id, ))
 
 
-def unsubscribe_user_from_alerts_one_region(cursor: 'Cursor', region: str, user_id: int, postcode: str):
+def unsubscribe_user_from_alerts_one_region(cursor: 'Cursor',
+                                            region: str,
+                                            user_id: int, postcode: str):
     """Unsubscribing user from alert based on chosen region, updating alerts table"""
     logging.info("Unsubscribing user from all alerts...")
 
@@ -166,7 +243,7 @@ def send_email_verification(email: str):
             "Subject": {"Data": "Successfully Unsubscribed"},
             "Body": {
                 "Text": {
-                    "Data": f"Hello, you have successfully unsubscribed from\
+                    "Data": "Hello, you have successfully unsubscribed from\
                     the newsleter!"
                 }
             },
@@ -221,7 +298,7 @@ def lambda_handler(event, context):
             "body": json.dumps({"message": "User unsubscribed successfully"})
         }
 
-    except Exception as e:
+    except ClientError as e:
         logging.error("Error in lambda_handler: %s", str(e))
         return {
             "statusCode": 500,

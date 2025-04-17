@@ -1,13 +1,15 @@
 """Script to send email alerts to subscribed users about recent outages"""
+
+
 import logging
 import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from datetime import datetime, timedelta
+import pytz
 from dotenv import load_dotenv
 import boto3
-import pytz
-
+import botocore
 from alerts.postcode_lookup import (get_connection_to_db, enable_logging,
                                     get_region_from_postcode, find_provider_from_region,
                                     find_provider_from_region_id)
@@ -145,9 +147,9 @@ def send_alert(user: dict):
             Destinations=[message["To"]],
             RawMessage={"Data": message.as_string()}
         )
-        logging.info(f"Email sent to {user['email']} successfully")
-    except Exception as e:
-        logging.info(f"Failed to send email to {user['email']}: {e}")
+        logging.info("Email sent to %s successfully", user['email'])
+    except botocore.exceptions.ClientError as error:
+        logging.info("Failed to send email to %s: %s", user['email'], error)
 
 
 def send_alert_pipeline():
@@ -168,7 +170,7 @@ def send_alert_pipeline():
                 logging.info("failed to send")
         except ValueError as e:
             logging.info(
-                f"Failed to process user {user.get('email', 'unknown')}: {e}")
+                "Failed to process user %s: %s", user.get('email', 'unknown'), e)
     db_connection.close()
 
 

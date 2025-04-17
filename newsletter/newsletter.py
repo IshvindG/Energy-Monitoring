@@ -26,10 +26,10 @@ def get_connection_to_db():
 
 def get_dates() -> datetime:
     """Returns dates for today and a month ago"""
-    date_today = datetime.now()
-    last_month_date = date_today - timedelta(days=30)
+    date = datetime.now()
+    last_month_date = date - timedelta(days=30)
 
-    return date_today, last_month_date
+    return date, last_month_date
 
 
 def format_dates(date: datetime) -> str:
@@ -215,7 +215,9 @@ def get_region_with_best_avg_carbon_intensity(cursor: 'Cursor', today: str, last
     return result
 
 
-def get_region_with_worst_avg_carbon_intensity(cursor: 'Cursor', today: str, last_month: str) -> str:
+def get_region_with_worst_avg_carbon_intensity(cursor: 'Cursor',
+                                               today: str,
+                                               last_month: str) -> str:
     """Retrieving region with the most carbon emissions"""
 
     query = """SELECT region_name, AVG(forecast_measure) AS avg_measure
@@ -233,10 +235,13 @@ def get_region_with_worst_avg_carbon_intensity(cursor: 'Cursor', today: str, las
     return result
 
 
-def get_hour_with_best_avg_carbon_intensity(cursor: 'Cursor', today: str, last_month: str) -> datetime:
+def get_hour_with_best_avg_carbon_intensity(cursor: 'Cursor',
+                                            today: str,
+                                            last_month: str) -> datetime:
     """Retrieving the hour with the least carbon emissions"""
 
-    query = """SELECT EXTRACT(HOUR FROM measure_at) AS hour_of_day, AVG(forecast_measure) AS avg_measure
+    query = """SELECT EXTRACT(HOUR FROM measure_at) AS hour_of_day,
+                AVG(forecast_measure) AS avg_measure
                 FROM carbon_intensities
                 WHERE measure_at BETWEEN %s AND %s
                 GROUP BY hour_of_day
@@ -249,10 +254,13 @@ def get_hour_with_best_avg_carbon_intensity(cursor: 'Cursor', today: str, last_m
     return result
 
 
-def get_hour_with_worst_avg_carbon_intensity(cursor: 'Cursor', today: str, last_month: str) -> datetime:
+def get_hour_with_worst_avg_carbon_intensity(cursor: 'Cursor',
+                                             today: str,
+                                             last_month: str) -> datetime:
     """Retrieving the hour with the most carbon emissions"""
 
-    query = """SELECT EXTRACT(HOUR FROM measure_at) AS hour_of_day, AVG(forecast_measure) AS avg_measure
+    query = """SELECT EXTRACT(HOUR FROM measure_at) AS hour_of_day,
+                AVG(forecast_measure) AS avg_measure
                 FROM carbon_intensities
                 WHERE measure_at BETWEEN %s AND %s
                 GROUP BY hour_of_day

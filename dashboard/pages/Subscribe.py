@@ -43,11 +43,12 @@ def get_region_data(conn: connection) -> list[str]:
 
 
 def verify_email_address(email: str) -> bool:
-
+    """Function to validate a given email"""
     return validate_email(email)
 
 
 def validate_phone_number(phone: str) -> bool:
+    """Function to validate a given phone number"""
     phone_number = phonenumbers.parse(phone, "GB")
     return phonenumbers.is_valid_number(phone_number)
 
@@ -118,11 +119,11 @@ def alert_form(regions: list[str]):
                     "region": region,
                     "postcode": postcode
                 })
-            if result:
-                st.success("Alert subscription saved!")
+                if result:
+                    st.success("Alert subscription saved!")
 
-        else:
-            st.error("Invalid email address or phone number")
+            else:
+                st.error("Invalid email address or phone number")
 
 
 def main(conn: connection):

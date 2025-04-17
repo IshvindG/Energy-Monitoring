@@ -2,7 +2,7 @@
 """Script to generate a pdf report for the newsletter"""
 from dotenv import load_dotenv
 from xhtml2pdf import pisa
-import newsletter
+from newsletter import newsletter
 
 
 def convert_html_to_pdf(source_html, output_filename):
@@ -10,7 +10,7 @@ def convert_html_to_pdf(source_html, output_filename):
     try:
         with open(output_filename, "w+b") as result_file:
             pisa_status = pisa.CreatePDF(source_html, dest=result_file)
-    except Exception as e:
+    except (Exception) as e:
         print(f"Error converting HTML to PDF: {e}")
         return False
     return pisa_status.err == 0
@@ -57,6 +57,12 @@ def create_report_data():
     lowest_demand, lowest_demand_date = newsletter.get_lowest_demand(
         curr, date_today, date_last_month)
 
+    total_renewable = newsletter.get_total_renewable(
+        curr, date_today, date_last_month)
+
+    total_generation = newsletter.get_total_generation(
+        curr, date_today, date_last_month)
+
     report_data = {
         "Highest Price": highest_price,
         "Highest Price Date": highest_price_date,
@@ -72,15 +78,31 @@ def create_report_data():
         "Highest Demand Date": highest_demand_date,
         "Lowest Demand": lowest_demand,
         "Lowest Demand Date": lowest_demand_date,
-        "Total Generation": newsletter.get_total_generation(curr, date_today, date_last_month),
-        "Total Renewable": newsletter.get_total_renewable(curr, date_today, date_last_month),
-        "Avg Price": newsletter.get_average_price_over_past_month(curr, date_today, date_last_month),
-        "Avg Carbon Intensity": newsletter.get_average_carbon_intensity(curr, date_today, date_last_month),
-        "Best Region": newsletter.get_region_with_best_avg_carbon_intensity(curr, date_today, date_last_month),
-        "Worst Region": newsletter.get_region_with_worst_avg_carbon_intensity(curr, date_today, date_last_month),
-        "Best Hour": newsletter.get_hour_with_best_avg_carbon_intensity(curr, date_today, date_last_month),
-        "Worst Hour": newsletter.get_hour_with_worst_avg_carbon_intensity(curr, date_today, date_last_month),
-        "percentage": (newsletter.get_total_renewable(curr, date_today, date_last_month) / newsletter.get_total_generation(curr, date_today, date_last_month)) * 100
+        "Total Generation": newsletter.get_total_generation(curr,
+                                                            date_today,
+                                                            date_last_month),
+        "Total Renewable": newsletter.get_total_renewable(curr,
+                                                          date_today,
+                                                          date_last_month),
+        "Avg Price": newsletter.get_average_price_over_past_month(curr,
+                                                                  date_today,
+                                                                  date_last_month),
+        "Avg Carbon Intensity": newsletter.get_average_carbon_intensity(curr,
+                                                                        date_today,
+                                                                        date_last_month),
+        "Best Region": newsletter.get_region_with_best_avg_carbon_intensity(curr,
+                                                                            date_today,
+                                                                            date_last_month),
+        "Worst Region": newsletter.get_region_with_worst_avg_carbon_intensity(curr,
+                                                                              date_today,
+                                                                              date_last_month),
+        "Best Hour": newsletter.get_hour_with_best_avg_carbon_intensity(curr,
+                                                                        date_today,
+                                                                        date_last_month),
+        "Worst Hour": newsletter.get_hour_with_worst_avg_carbon_intensity(curr,
+                                                                          date_today,
+                                                                          date_last_month),
+        "percentage": (total_renewable / total_generation) * 100
     }
 
     return report_data
