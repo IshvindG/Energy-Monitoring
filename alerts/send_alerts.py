@@ -8,9 +8,9 @@ from dotenv import load_dotenv
 import boto3
 import pytz
 
-from postcode_lookup import (get_connection_to_db, enable_logging,
-                             get_region_from_postcode, find_provider_from_region,
-                             find_provider_from_region_id)
+from alerts.postcode_lookup import (get_connection_to_db, enable_logging,
+                                    get_region_from_postcode, find_provider_from_region,
+                                    find_provider_from_region_id)
 
 
 def find_subscribers_from_db(cursor: 'Cursor') -> list[tuple]:
