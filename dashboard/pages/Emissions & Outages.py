@@ -34,7 +34,7 @@ def get_db_connection():
     )
 
 
-@st.cache_data
+@st.cache_data()
 def get_recent_data():
     '''Gets recent data for up to date visualisations'''
     conn = get_db_connection()
@@ -62,6 +62,7 @@ def get_recent_data():
     return df_carbon, df_demand
 
 
+@st.cache_data()
 def plot_recent_carbon_and_demand(df_carbon, df_demand):
     '''Plot line graph of co2 emissions and demand'''
     fig, ax1 = plt.subplots(figsize=(18, 8))
@@ -240,12 +241,14 @@ def fetch_data(conn, option):
     return df, label
 
 
+@st.cache_resource()
 def load_geojson():
     '''Load map api'''
     geo_url = "https://sdgdata.gov.uk/sdg-data/en/geojson/regions/indicator_8-10-1.geojson"
     return requests.get(geo_url).json()
 
 
+@st.cache_resource()
 def build_map(df, label, geojson, geo_to_db_region_map):
     '''Build map to plot data on'''
     min_val = df["value"].min()

@@ -8,7 +8,7 @@ import plotly.express as px
 import plotly.figure_factory as ff
 
 
-@st.cache_data
+@st.cache_data(ttl=360)
 def retrieve_generation_mix_data(_db_cursor) -> pd.DataFrame:
     """Retrieve Generation Data from DB"""
     _db_cursor.execute(
@@ -58,7 +58,7 @@ def format_generation_data(generation_data: list[dict]):
     return generation_mix
 
 
-@st.cache_data
+@st.cache_data(ttl=360)
 def generate_demand_graph(_db_cursor, demand_range):
     """Generate demand"""
     duration = get_duration(demand_range)
@@ -81,7 +81,7 @@ def generate_demand_graph(_db_cursor, demand_range):
     return demand_chart
 
 
-@st.cache_data
+@st.cache_data(ttl=360)
 def generate_price_graph(_db_cursor, price_range):
     """Generate price"""
     duration = get_duration(price_range)
@@ -133,6 +133,7 @@ def generate_price_graph(_db_cursor, price_range):
     return chart
 
 
+@st.cache_data(ttl=360)
 def generate_energy_generation_mix_graph(generation_mix: pd.DataFrame):
     """Generate price"""
 
@@ -162,7 +163,7 @@ def show_generation_stats(generation_mix: pd.DataFrame):
                  'fuel_type', 'mw_generated', 'updated_at'], inplace=True)
 
 
-@st.cache_data
+@st.cache_data(ttl=360)
 def generate_24h_energy_generation_graph(_db_cursor, generation_range):
     """Generate 24h generation mix"""
     duration = get_duration(generation_range)
@@ -394,8 +395,6 @@ def main():
     tab3.plotly_chart(add_table(generation_mix_data, 'Interconnectors'), key=3)
     tab4.title('Others')
     tab4.plotly_chart(add_table(generation_mix_data, 'Other'), key=4)
-
-    db_conn.close()
 
 
 if __name__ == '__main__':
