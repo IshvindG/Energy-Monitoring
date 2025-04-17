@@ -19,7 +19,7 @@ def get_connection_to_db():
 
 
 def execute_query(conn: 'Connection', query: str) -> list[str]:
-    """"""
+    """Function to execute any given query"""
     cursor = conn.cursor()
     cursor.execute(query)
     result = cursor.fetchall()
@@ -27,7 +27,7 @@ def execute_query(conn: 'Connection', query: str) -> list[str]:
 
 
 def get_region_data(conn: 'Connection') -> list[str]:
-
+    """Retrieving all region data to display on dashboard"""
     cursor = conn.cursor()
 
     query = """SELECT region_name FROM regions;"""
@@ -42,16 +42,18 @@ def get_region_data(conn: 'Connection') -> list[str]:
 
 
 def verify_email_address(email: str) -> bool:
-
+    """Function to validate a given email"""
     return validate_email(email)
 
 
 def validate_phone_number(phone: str) -> bool:
+    """Function to validate a given phone number"""
     phone_number = phonenumbers.parse(phone, "GB")
     return phonenumbers.is_valid_number(phone_number)
 
 
 def newsletter_form():
+    """Creating newsletter form for submission"""
     st.header("Unsubscribe from Newsletter")
     with st.form("newsletter_form"):
         first_name = st.text_input("First Name")
@@ -84,6 +86,7 @@ def newsletter_form():
 
 
 def alert_form(regions: list[str]):
+    """Creating alert form for submission"""
     regions.append('All')
     st.header("Unsubscribe from Outage Alerts")
     with st.form("outage_form"):

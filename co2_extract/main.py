@@ -1,3 +1,4 @@
+'''This script is a lamda function for running the CO2 data pipeline'''
 from co2_extract_clean import main as extract_main
 from co2_load import insert_carbon_intensities, connect_to_db, load_csv
 

@@ -43,8 +43,8 @@ def define_user_info(response: dict) -> dict:
             "type": body.get("type")
         }
         return user_info
-    except:
-        raise ValueError('Response invalid')
+    except Exception as e:
+        raise ValueError('Response invalid') from e
 
 
 def user_details(user_info: dict) -> str:
@@ -57,14 +57,14 @@ def user_details(user_info: dict) -> str:
         postcode = user_info["postcode"]
         region = user_info["region"]
         return first_name, last_name, phone, email, postcode, region
-    except:
-        raise ValueError("User details not found")
+    except Exception as e:
+        raise ValueError("User details not found") from e
 
 
 def check_user_exists(cursor: 'Cursor', user: dict):
     """Querying database to check if the user submitted already exists, if so returning
     their user_id"""
-    first_name, last_name, phone, email, postcode, region = user_details(user)
+    _, _, phone, email, _, _ = user_details(user)
     query = """SELECT user_id FROM users
                 WHERE phone_number = %s
                 OR email = %s"""
@@ -85,7 +85,7 @@ def check_user_exists(cursor: 'Cursor', user: dict):
 def upload_user_to_db(cursor: 'Cursor', user: dict) -> int:
     """Uploading user to database if user doesn't exist, returning user_id"""
     logging.info("Uploading user to database...")
-    first_name, last_name, phone, email, postcode, region = user_details(user)
+    first_name, last_name, phone, email, _, _ = user_details(user)
     query = """INSERT INTO users (first_name, last_name, phone_number, email)
                 VALUES (%s, %s, %s, %s)
                 RETURNING user_id"""
@@ -176,9 +176,9 @@ def send_phone_verification(phone: str):
             PhoneNumber=phone
         )
         logging.info(
-            f"Phone verification initiated for {phone}. Response: {response}")
+            "Phone verification initiated for %s. Response: %s", phone, response)
     except ClientError as e:
-        logging.error(f"Error sending verification SMS: {e}")
+        logging.error("Error sending verification SMS: %s", e)
         raise
 
 
@@ -244,10 +244,11 @@ def lambda_handler(event, context):
 
         return {
             "statusCode": 200,
-            "body": json.dumps({"message": "User created and subscribed" if new_user else "User subscribed"})
+            "body": json.dumps({"message": "User created and subscribed"
+                                if new_user else "User subscribed"})
         }
 
-    except Exception as e:
+    except ClientError as e:
         logging.info("Error in lambda_handler: %s", str(e))
         return {
             "statusCode": 500,
