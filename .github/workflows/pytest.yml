@@ -24,7 +24,7 @@ jobs:
                 python -m pip install --upgrade pip
                 pip install pytest
 
-            - name: Combine and install all requirements
+            - name: Install requirements for given folder
               run: |
                 cd ${{ matrix.project }}
                 pip install -r requirements.txt
